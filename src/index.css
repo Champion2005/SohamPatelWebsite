@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* ==========================================================================
+       WINDSOR WARD 9 - SOHAM PATEL CAMPAIGN DESIGN SYSTEM & THEME
+       TYPOGRAPHY: Google Fonts 'Ubuntu' (Weights 300, 400, 500, 700)
+       THEME PALETTE: Neutral Off-White & Slate Base with Subtle Green Highlights
+       RESTRICTION: No traditional primary red (#FF0000), primary blue (#0000FF),
+       or primary orange (#FFA500).
+       ========================================================================== */
+
+    /* Core Page & Nav Backgrounds (Neutral Slate / Charcoal & Off-White) */
+    --theme-bg-page: #FAF9F5;               /* Warm Neutral Off-White */
+    --theme-bg-card: #FFFFFF;               /* Clean Pure White for cards */
+    --theme-bg-nav: #0F172A;                /* Deep Neutral Slate/Charcoal for Sticky Nav */
+    --theme-bg-nav-glass: rgba(15, 23, 42, 0.95); /* Translucent Charcoal Nav */
+    --theme-bg-mobile-drawer: #0F172A;      /* Deep Slate for Mobile Menu Drawer */
+
+    /* Typography & Text Tokens (Neutral Dark Slate & Crisp Off-White) */
+    --theme-text-nav: #0F172A;              /* Dark Slate for Navbar text on light bg */
+    --theme-text-nav-muted: #64748B;        /* Soft Slate Muted Text */
+    --theme-text-primary: #0F172A;          /* Deep Neutral Slate for main body & headings */
+    --theme-text-secondary: #64748B;        /* Neutral Slate Gray for secondary text */
+
+    /* Center Nav Links (Dark text against light background) */
+    --theme-nav-link-color: #1E293B;         /* Dark Slate text */
+    --theme-nav-link-hover: #000000;         /* Black text on hover */
+    --theme-nav-link-hover-bg: rgba(15, 23, 42, 0.08); /* Soft dark background highlight */
+    --theme-nav-link-active: #0F172A;
+
+    /* Green Highlights / Accents (Subtle Emerald) */
+    --theme-accent-green: #059669;          /* Subtle Emerald Green Accent */
+    --theme-accent-green-hover: #047857;    /* Darker Emerald Accent */
+    --theme-accent-green-light: #D1FAE5;    /* Very Soft Mint Tint */
+
+    /* Right Action Pill 1: Request a Lawn Sign */
+    --theme-btn-lawn-bg: #059669;           /* Subtle Emerald Green Accent Fill */
+    --theme-btn-lawn-hover: #047857;        /* Hover Emerald */
+    --theme-btn-lawn-text: #FFFFFF;         /* Pure White Text */
+
+    /* Right Action Pill 2: Volunteer */
+    --theme-btn-volunteer-bg: #0F172A;      /* Deep Slate Fill */
+    --theme-btn-volunteer-hover: #1E293B;  /* Slate 800 Hover Fill */
+    --theme-btn-volunteer-text: #FFFFFF;   /* Pure White Text */
+
+    /* Right Action Pill 3 Container: Social Media Pill Outline */
+    --theme-social-pill-border: rgba(15, 23, 42, 0.25); /* Darker Neutral Border for light bg */
+    --theme-social-pill-bg: rgba(255, 255, 255, 0.4);     /* Soft Light Pill */
+
+    /* Social Media Circle Buttons */
+    --theme-social-icon-bg: rgba(15, 23, 42, 0.08);
+    --theme-social-icon-hover-bg: #059669;   /* Subtle Green Highlight on hover */
+    --theme-social-icon-color: #0F172A;      /* Dark Slate Icon for light bg */
+    --theme-social-icon-hover-color: #FFFFFF;/* Pure White Icon on hover */
+
+    /* Branding & Logo Colors */
+    --theme-logo-badge-bg: #059669;          /* Subtle Emerald Badge Accent */
+    --theme-logo-badge-text: #FFFFFF;
+    --theme-logo-title: #0F172A;             /* Dark Slate Title for light bg */
+    --theme-logo-subtitle: #059669;          /* Emerald Subtitle Highlight */
+  }
+}
+
+/* Base Body Styling with Google Fonts Ubuntu */
+body, button, input, select, textarea {
+  font-family: 'Ubuntu', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--theme-bg-page);
+  color: var(--theme-text-primary);
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   DESKTOP ANIMATIONS (Scroll-Tied with Extended 90%+ Visibility Duration)
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .reveal-left {
+    opacity: var(--scroll-p, 0);
+    transform: translateX(calc(-75px * (1 - var(--scroll-p, 0)))) scale(calc(0.95 + 0.05 * var(--scroll-p, 0)));
+    transition: opacity 0.15s linear, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-right {
+    opacity: var(--scroll-p, 0);
+    transform: translateX(calc(75px * (1 - var(--scroll-p, 0)))) scale(calc(0.95 + 0.05 * var(--scroll-p, 0)));
+    transition: opacity 0.15s linear, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-up {
+    opacity: var(--scroll-p, 0);
+    transform: translateY(calc(45px * (1 - var(--scroll-p, 0))));
+    transition: opacity 0.15s linear, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-zoom {
+    opacity: var(--scroll-p, 0);
+    transform: scale(calc(0.84 + 0.16 * var(--scroll-p, 0))) translateY(calc(35px * (1 - var(--scroll-p, 0))));
+    transition: opacity 0.15s linear, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+}
+
+/* ==========================================================================
+   MOBILE ANIMATIONS (Time-Based, Smooth Vertical Transitions, Zero Layout Overflow)
+   ========================================================================== */
+@media (max-width: 1023px) {
+  .reveal-left,
+  .reveal-right,
+  .reveal-up,
+  .reveal-zoom {
+    opacity: 0.1;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-left.is-visible,
+  .reveal-right.is-visible,
+  .reveal-up.is-visible,
+  .reveal-zoom.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Delay Staggering Utilities */
+.delay-100 { transition-delay: 0.15s; }
+.delay-200 { transition-delay: 0.3s; }
+.delay-300 { transition-delay: 0.45s; }
+.delay-400 { transition-delay: 0.6s; }
+
+/* Custom Animations: Fade & Slide In from Bottom */
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up-fade {
+  opacity: 0;
+  animation: slideUpFade 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-delay-100 {
+  animation-delay: 0.2s;
+}
+
+.animate-delay-200 {
+  animation-delay: 0.4s;
+}
+
+.animate-delay-300 {
+  animation-delay: 0.6s;
+}
+
+/* Micro-interaction Hover Effects */
+.card-hover-lift {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease;
+}
+.card-hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.12), 0 10px 20px -10px rgba(5, 150, 105, 0.15);
+  border-color: rgba(5, 150, 105, 0.4);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0F172A;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}
