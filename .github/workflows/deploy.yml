@@ -35,6 +35,7 @@ jobs:
 
       - name: Build site
         env:
+          VITE_GOOGLE_SHEETS_WEBHOOK_URL: ${{ secrets.VITE_GOOGLE_SHEETS_WEBHOOK_URL }}
           VITE_GOOGLE_SHEETS_WEBAPP_URL: ${{ secrets.VITE_GOOGLE_SHEETS_WEBAPP_URL }}
         run: npm run build
 
