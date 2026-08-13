@@ -11,12 +11,12 @@ import { InstagramIcon, FacebookIcon, WhatsAppIcon } from './components/SocialIc
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 export default function App() {
-  useScrollReveal();
-
   // State-based Page Navigation: 'home' | 'about' | 'media' | 'ward9'
   const [activeSection, setActiveSection] = useState('home');
   const [isLawnSignOpen, setIsLawnSignOpen] = useState(false);
   const [isVolunteerOpen, setIsVolunteerOpen] = useState(false);
+
+  useScrollReveal(activeSection);
 
   const handleNavigate = (pageId, targetElementId = null) => {
     setActiveSection(pageId);

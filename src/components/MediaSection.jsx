@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, Image as ImageIcon, Video, ExternalLink, Calendar, MapPin } from 'lucide-react';
+import { Play, Image as ImageIcon, Video, Calendar, MapPin } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 // Import Campaign Photos
@@ -20,7 +20,7 @@ export const MediaSection = () => {
       category: "Campaign Vision",
       duration: "2:45",
       date: "August 2026",
-      youtubeId: "dQw4w9WgXcQ", // Placeholder video ID
+      youtubeId: "dQw4w9WgXcQ",
       thumbnail: eventPhoto3,
       description: "Soham outlines key priorities for safer streets, modern storm drainage resilience, and transparent leadership at Windsor City Hall."
     },
@@ -46,38 +46,63 @@ export const MediaSection = () => {
     }
   ];
 
-  const photos = [
+  // Organic Bento Grid Photo Blocks (2x2, 1x2, 2x1, and 1x1 Blocks)
+  const photoBlocks = [
     {
       id: 1,
-      title: "Community Meet & Greet",
-      location: "South Windsor Neighborhood",
+      title: "Ward 9 Resident Town Hall",
+      location: "South Windsor Community Center",
       date: "August 2026",
-      image: eventPhoto1,
-      caption: "Connecting with long-time Ward 9 residents to discuss neighborhood safety and city services."
+      image: eventPhoto3,
+      caption: "Answering resident questions and discussing local budget accountability ahead of City Council votes.",
+      gridSpan: "col-span-1 sm:col-span-2 lg:col-span-2 row-span-2", // 2x2 Feature Hero Block
+      isHero: true
     },
     {
       id: 2,
-      title: "Park Walkthrough & Family Discussion",
-      location: "Jackson Park Corridor",
+      title: "Door-to-Door Listening Tour",
+      location: "East Windsor Residential",
       date: "July 2026",
-      image: eventPhoto2,
-      caption: "Listening to parents and seniors regarding accessible walkways and playground improvements."
+      image: eventPhoto4,
+      caption: "Hearing directly from local homeowners about traffic calming.",
+      gridSpan: "col-span-1 row-span-2", // 1x2 Tall Block
+      isTall: true
     },
     {
       id: 3,
-      title: "Ward 9 Resident Town Hall",
-      location: "Community Center",
+      title: "Neighborhood Coffee Meet",
+      location: "Walker Road Area",
       date: "July 2026",
-      image: eventPhoto3,
-      caption: "Answering resident questions and discussing local budget accountability ahead of City Council decisions."
+      image: eventPhoto1,
+      caption: "Connecting with long-time Ward 9 seniors and families.",
+      gridSpan: "col-span-1 row-span-1" // 1x1 Square Block
     },
     {
       id: 4,
-      title: "Door-to-Door Listening Tour",
-      location: "East Windsor Residential",
+      title: "Jackson Park Walkthrough",
+      location: "Jackson Park Corridor",
       date: "June 2026",
-      image: eventPhoto4,
-      caption: "Hearing directly from local homeowners about traffic calming and basement flood prevention."
+      image: eventPhoto2,
+      caption: "Discussing park amenities and accessible green space.",
+      gridSpan: "col-span-1 row-span-1" // 1x1 Square Block
+    },
+    {
+      id: 5,
+      title: "Parks & Greenways Discussion",
+      location: "South Windsor Greenways",
+      date: "June 2026",
+      image: eventPhoto2,
+      caption: "Expanding tree canopy and year-round youth sports programming.",
+      gridSpan: "col-span-1 sm:col-span-2 row-span-1" // 2x1 Wide Banner Block
+    },
+    {
+      id: 6,
+      title: "Active Families & Youth Engagement",
+      location: "Roseland Area",
+      date: "May 2026",
+      image: eventPhoto1,
+      caption: "Proactive community-focused neighborhood initiatives.",
+      gridSpan: "col-span-1 sm:col-span-2 row-span-1" // 2x1 Wide Banner Block
     }
   ];
 
@@ -87,7 +112,7 @@ export const MediaSection = () => {
       {/* =================================================================
          SECTION HEADER & INTRO
          ================================================================= */}
-      <div className="border-l-4 border-[#059669] pl-4 sm:pl-6 space-y-2 reveal-up">
+      <div className="border-l-4 border-[#059669] pl-4 sm:pl-6 space-y-2">
         <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#0F172A]">
           Community & Media
         </h2>
@@ -100,7 +125,7 @@ export const MediaSection = () => {
          1. FEATURED CAMPAIGN VIDEOS & REELS
          ================================================================= */}
       <div className="space-y-6">
-        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#059669] reveal-up">
+        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#059669]">
           <Video className="w-4 h-4" />
           <span>Featured Videos & Reels</span>
         </div>
@@ -109,7 +134,7 @@ export const MediaSection = () => {
           {videos.map((video) => (
             <div 
               key={video.id}
-              className="rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col justify-between reveal-zoom card-hover-lift group"
+              className="rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col justify-between card-hover-lift group"
             >
               {/* Video Thumbnail Container */}
               <div className="relative aspect-video w-full bg-slate-900 overflow-hidden">
@@ -174,46 +199,55 @@ export const MediaSection = () => {
       </div>
 
       {/* =================================================================
-         2. COMMUNITY EVENTS PHOTO GALLERY
+         2. ORGANIC BENTO MASONRY PHOTO GRID (2x2, 1x2, 2x1, 1x1 Blocks)
          ================================================================= */}
-      <div className="space-y-6 pt-6 border-t border-slate-200/80">
-        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#059669] reveal-up">
+      <div className="space-y-6 pt-8 border-t border-slate-200/80">
+        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#059669]">
           <ImageIcon className="w-4 h-4" />
-          <span>Community Events & Action</span>
+          <span>Community Events & Organic Bento Photo Gallery</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {photos.map((photo) => (
+        {/* Organic Bento Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-[240px] sm:auto-rows-[260px]">
+          {photoBlocks.map((block) => (
             <div 
-              key={photo.id}
-              className="rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col reveal-zoom card-hover-lift group"
+              key={block.id}
+              className={`rounded-3xl bg-slate-900 border border-slate-200/80 shadow-md overflow-hidden relative group card-hover-lift flex flex-col justify-end ${block.gridSpan}`}
             >
-              {/* Image Box */}
-              <div className="relative h-56 w-full bg-slate-100 overflow-hidden">
-                <img 
-                  src={photo.image} 
-                  alt={photo.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
+              {/* Background Image */}
+              <img 
+                src={block.image} 
+                alt={block.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90"
+              />
 
-                {/* Location Badge */}
-                <div className="absolute bottom-3 left-3 right-3 flex items-center gap-1.5 text-white text-xs font-bold">
-                  <MapPin className="w-3.5 h-3.5 text-[#059669] shrink-0" />
-                  <span className="truncate">{photo.location}</span>
-                </div>
+              {/* Gradient Overlay for Readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none" />
+
+              {/* Top Date Badge */}
+              <div className="absolute top-4 left-4 z-10">
+                <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#0F172A] text-[10px] font-black tracking-wider uppercase shadow-md">
+                  {block.date}
+                </span>
               </div>
 
-              {/* Photo Caption Box */}
-              <div className="p-4 space-y-1.5 flex-1 bg-white">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-700 block">
-                  {photo.date}
-                </span>
-                <h4 className="text-sm font-bold text-[#0F172A] leading-snug">
-                  {photo.title}
-                </h4>
-                <p className="text-xs text-slate-600 leading-relaxed pt-0.5">
-                  {photo.caption}
+              {/* Content Overlay at Bottom */}
+              <div className="relative z-10 p-5 sm:p-6 space-y-2 text-white">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
+                  <MapPin className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">{block.location}</span>
+                </div>
+
+                <h3 className={`font-extrabold leading-snug tracking-tight text-white ${
+                  block.isHero ? 'text-xl sm:text-2xl lg:text-3xl' : 'text-base sm:text-lg'
+                }`}>
+                  {block.title}
+                </h3>
+
+                <p className={`text-slate-300 leading-relaxed line-clamp-2 ${
+                  block.isHero ? 'text-xs sm:text-sm' : 'text-xs'
+                }`}>
+                  {block.caption}
                 </p>
               </div>
 
