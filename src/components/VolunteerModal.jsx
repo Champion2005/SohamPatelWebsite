@@ -59,7 +59,7 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
-    console.log('[VolunteerModal] Form submission triggered.');
+    console.log('[VolunteerModal] Form submission triggered. Event isTrusted:', e.isTrusted);
 
     const newErrors = {};
     if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
@@ -73,17 +73,9 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
       return;
     }
 
-    if (formData._hp_website) {
-      console.warn('[VolunteerModal] Submission blocked by Honeypot trap.');
-      setIsSubmitted(true);
-      return;
-    }
-
-    const timeTakenSeconds = (Date.now() - renderTimeRef.current) / 1000;
-    console.log('[VolunteerModal] Submission time taken:', timeTakenSeconds.toFixed(2), 'seconds');
-
-    if (timeTakenSeconds < 0.5) {
-      console.warn('[VolunteerModal] Submission blocked by time trap (<0.5s).');
+    // Autofill Safety: Only block if honeypot is filled AND event is NOT trusted (synthetic script bot)
+    if (formData._hp_website && !e.isTrusted) {
+      console.warn('[VolunteerModal] Submission blocked by Honeypot trap (untrusted event).');
       setIsSubmitted(true);
       return;
     }
@@ -212,13 +204,13 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
                 </div>
               )}
 
-              {/* Honeypot Field */}
+              {/* Anti-Bot Honeypot Field (Configured to ignore browser autofill for real humans) */}
               <div style={{ opacity: 0, position: 'absolute', top: 0, left: 0, height: 0, width: 0, zIndex: -1, overflow: 'hidden' }} aria-hidden="true">
                 <input
                   type="text"
-                  name="_hp_website"
+                  name="b_anti_bot_check"
                   tabIndex={-1}
-                  autoComplete="off"
+                  autoComplete="new-password"
                   value={formData._hp_website}
                   onChange={(e) => setFormData({ ...formData, _hp_website: e.target.value })}
                 />
