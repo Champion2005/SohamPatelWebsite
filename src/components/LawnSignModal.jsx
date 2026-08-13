@@ -38,6 +38,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
     if (isOpen) {
       renderTimeRef.current = Date.now();
       setErrorMessage('');
+      console.log('[LawnSignModal] Modal opened at:', new Date(renderTimeRef.current).toISOString());
     }
 
     const handleKeyDown = (e) => {
@@ -100,8 +101,9 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
-    const newErrors = {};
+    console.log('[LawnSignModal] Form submission triggered.');
 
+    const newErrors = {};
     if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
     if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
     if (!formData.address.trim()) newErrors.address = 'Search and select your Windsor address';
@@ -109,17 +111,22 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
     if (formData.email.trim() && !formData.email.includes('@')) newErrors.email = 'Please enter a valid email address';
 
     if (Object.keys(newErrors).length > 0) {
+      console.warn('[LawnSignModal] Validation errors:', newErrors);
       setErrors(newErrors);
       return;
     }
 
     if (formData._hp_website) {
+      console.warn('[LawnSignModal] Submission blocked by Honeypot trap.');
       setIsSubmitted(true);
       return;
     }
 
     const timeTakenSeconds = (Date.now() - renderTimeRef.current) / 1000;
-    if (timeTakenSeconds < 1.8) {
+    console.log('[LawnSignModal] Submission time taken:', timeTakenSeconds.toFixed(2), 'seconds');
+
+    if (timeTakenSeconds < 0.5) {
+      console.warn('[LawnSignModal] Submission blocked by time trap (<0.5s).');
       setIsSubmitted(true);
       return;
     }
@@ -129,6 +136,8 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
     const webhookUrl = 
       import.meta.env.VITE_GOOGLE_SHEETS_LAWN_SIGN_URL || 
       import.meta.env.VITE_GOOGLE_SHEETS_WEBHOOK_URL;
+
+    console.log('[LawnSignModal] Webhook URL configured:', webhookUrl ? `YES (${webhookUrl})` : 'NO');
 
     try {
       if (webhookUrl) {
@@ -143,6 +152,8 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
           emailUpdates: formData.emailUpdates ? 'Yes' : 'No'
         };
 
+        console.log('[LawnSignModal] Sending payload to Google Apps Script webhook:', payload);
+
         await fetch(webhookUrl, {
           method: 'POST',
           mode: 'no-cors',
@@ -151,14 +162,17 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
           },
           body: JSON.stringify(payload)
         });
+
+        console.log('[LawnSignModal] Fetch POST request sent successfully!');
       } else {
+        console.warn('[LawnSignModal] No Webhook URL provided. Simulating successful submission.');
         await new Promise(resolve => setTimeout(resolve, 800));
       }
 
       setIsSubmitting(false);
       setIsSubmitted(true);
     } catch (err) {
-      console.error('Submission error:', err);
+      console.error('[LawnSignModal] Network submission error:', err);
       setIsSubmitting(false);
       setErrorMessage('Could not record your request. Please try again.');
     }
@@ -193,6 +207,9 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
         
         <div className="p-6 sm:p-8 bg-[#0F172A] text-white flex items-center justify-between border-b border-slate-800">
           <div className="space-y-1">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[#059669] block">
+              Show Your Support
+            </span>
             <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
               Request a Lawn Sign
             </h3>

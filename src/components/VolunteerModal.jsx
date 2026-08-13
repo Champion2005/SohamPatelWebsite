@@ -25,6 +25,7 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
     if (isOpen) {
       renderTimeRef.current = Date.now();
       setErrorMessage('');
+      console.log('[VolunteerModal] Modal opened at:', new Date(renderTimeRef.current).toISOString());
     }
 
     const handleKeyDown = (e) => {
@@ -58,25 +59,31 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
-    const newErrors = {};
+    console.log('[VolunteerModal] Form submission triggered.');
 
+    const newErrors = {};
     if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
     if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
     if (!formData.phone.trim() || formData.phone.length < 14) newErrors.phone = 'Complete 10-digit phone number is required';
     if (formData.email.trim() && !formData.email.includes('@')) newErrors.email = 'Please enter a valid email address';
 
     if (Object.keys(newErrors).length > 0) {
+      console.warn('[VolunteerModal] Validation errors:', newErrors);
       setErrors(newErrors);
       return;
     }
 
     if (formData._hp_website) {
+      console.warn('[VolunteerModal] Submission blocked by Honeypot trap.');
       setIsSubmitted(true);
       return;
     }
 
     const timeTakenSeconds = (Date.now() - renderTimeRef.current) / 1000;
-    if (timeTakenSeconds < 1.8) {
+    console.log('[VolunteerModal] Submission time taken:', timeTakenSeconds.toFixed(2), 'seconds');
+
+    if (timeTakenSeconds < 0.5) {
+      console.warn('[VolunteerModal] Submission blocked by time trap (<0.5s).');
       setIsSubmitted(true);
       return;
     }
@@ -86,6 +93,8 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
     const webhookUrl = 
       import.meta.env.VITE_GOOGLE_SHEETS_VOLUNTEER_URL || 
       import.meta.env.VITE_GOOGLE_SHEETS_WEBHOOK_URL;
+
+    console.log('[VolunteerModal] Webhook URL configured:', webhookUrl ? `YES (${webhookUrl})` : 'NO');
 
     try {
       if (webhookUrl) {
@@ -100,6 +109,8 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
           comments: formData.comments.trim()
         };
 
+        console.log('[VolunteerModal] Sending payload to Google Apps Script webhook:', payload);
+
         await fetch(webhookUrl, {
           method: 'POST',
           mode: 'no-cors',
@@ -108,14 +119,17 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
           },
           body: JSON.stringify(payload)
         });
+
+        console.log('[VolunteerModal] Fetch POST request sent successfully!');
       } else {
+        console.warn('[VolunteerModal] No Webhook URL provided. Simulating successful submission.');
         await new Promise(resolve => setTimeout(resolve, 800));
       }
 
       setIsSubmitting(false);
       setIsSubmitted(true);
     } catch (err) {
-      console.error('Submission error:', err);
+      console.error('[VolunteerModal] Network submission error:', err);
       setIsSubmitting(false);
       setErrorMessage('Could not record your volunteer info. Please try again.');
     }
@@ -147,9 +161,12 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
         className="relative z-10 w-full max-w-lg rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
       >
         
-        {/* Modal Top Header (Updated Title to "Support the Campaign") */}
+        {/* Modal Top Header (Title: "Support the Campaign") */}
         <div className="p-6 sm:p-8 bg-[#0F172A] text-white flex items-center justify-between border-b border-slate-800">
           <div className="space-y-1">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[#059669] block">
+              Join The Campaign
+            </span>
             <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
               Support the Campaign
             </h3>
@@ -240,7 +257,7 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Phone & Email (Phone Required, Email Optional, Phone placeholder updated) */}
+              {/* Phone & Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
