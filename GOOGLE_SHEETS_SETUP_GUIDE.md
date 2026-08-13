@@ -14,13 +14,18 @@ This guide explains how to connect the **Request a Lawn Sign** and **Volunteer**
 
 ### Step 2: Add the Google Apps Script
 1. In your Google Sheet menu bar, click **Extensions** $\rightarrow$ **Apps Script**.
-2. Delete any default code in the editor, and paste the complete script below:
+2. Delete any default code in the editor, and paste the complete script below (includes both `doGet` and `doPost` handlers):
 
 ```javascript
 /**
  * Soham Patel Campaign 2026 - Automatic Google Sheets Webhook
  * Handles Lawn Sign requests and Volunteer sign-ups into separate sheet tabs.
  */
+function doGet(e) {
+  return ContentService.createTextOutput(JSON.stringify({ status: "online", message: "Soham Patel Campaign Webhook API is active." }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
@@ -74,24 +79,29 @@ function doPost(e) {
 
 ---
 
-### Step 3: Deploy as a Web App
-1. In the top right of the Apps Script editor, click **Deploy** $\rightarrow$ **New deployment**.
-2. Click the gear icon (**Select type**) and choose **Web app**.
-3. Configure the deployment settings:
-   * **Description**: `Campaign Forms Webhook`
-   * **Execute as**: `Me (your email)`
-   * **Who has access**: `Anyone` *(Important: Select 'Anyone' so the website forms can submit without requiring a Google login)*
-4. Click **Deploy**.
-5. Copy the **Web App URL** provided (e.g. `https://script.google.com/macros/s/AKfycbx.../exec`).
+### Step 3: Deploy / Re-Deploy as a Web App
+1. In the top right of the Apps Script editor, click **Deploy** $\rightarrow$ **Manage deployments** (or **New deployment** if first time).
+2. Click the **Pencil icon (Edit)**.
+3. Under **Version**, select **`New version`** *(Crucial step so Google applies your changes!)*.
+4. Set **Execute as**: `Me (your email)`.
+5. Set **Who has access**: `Anyone` *(Crucial: allows website submissions without requiring Google login)*.
+6. Click **Deploy**.
+7. Copy the **Web App URL** provided (starts with `https://script.google.com/macros/s/.../exec`).
 
 ---
 
-### Step 4: Add the URL to your `.env` File
-In your website project root directory, open the `.env` file and paste your URL:
+### Step 4: Add the URL to your `.env` File & GitHub Secrets
 
-```env
-VITE_GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/AKfycbx.../exec
-```
+* **For Local Testing (`npm run dev`)**:
+  In your project root `.env` file, paste your Web App URL:
+  ```env
+  VITE_GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/AKfycbx.../exec
+  ```
+
+* **For Live GitHub Pages Site**:
+  1. Go to your GitHub repository: `https://github.com/Champion2005/SohamPatelWebsite`
+  2. Go to **Settings** $\rightarrow$ **Secrets and variables** $\rightarrow$ **Actions**.
+  3. Create or update `VITE_GOOGLE_SHEETS_WEBHOOK_URL` with your new Google Web App URL.
 
 ---
 
@@ -110,7 +120,7 @@ Both forms are equipped with a **two-part Layer 1 Spam Filter**:
 ---
 
 ## 🧪 Testing Your Integration
-1. Run `npm run dev` or open your live site.
-2. Click **Request a Lawn Sign** or **Volunteer**.
-3. Fill out the form (with or without an email address) and submit.
-4. Check your Google Sheet: the row will appear in the `Lawn Signs` or `Volunteers` tab with a blank cell in the Email column if omitted!
+1. Open your Web App URL in your browser tab directly. It will return:
+   `{"status":"online","message":"Soham Patel Campaign Webhook API is active."}`
+2. Open your website form, fill it out, and click **Submit**.
+3. Check your Google Sheet: the new row will instantly appear in the `Lawn Signs` or `Volunteers` tab!
