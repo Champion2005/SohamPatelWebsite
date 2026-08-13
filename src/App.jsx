@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
 import { PlatformSection } from './components/PlatformSection';
+import { MediaSection } from './components/MediaSection';
 import { Ward9MapSection } from './components/Ward9MapSection';
 import { LawnSignModal } from './components/LawnSignModal';
 import { VolunteerModal } from './components/VolunteerModal';
@@ -12,14 +13,23 @@ import { useScrollReveal } from './hooks/useScrollReveal';
 export default function App() {
   useScrollReveal();
 
-  // State-based Page Navigation: 'home' | 'about' | 'platform' | 'ward9'
+  // State-based Page Navigation: 'home' | 'about' | 'media' | 'ward9'
   const [activeSection, setActiveSection] = useState('home');
   const [isLawnSignOpen, setIsLawnSignOpen] = useState(false);
   const [isVolunteerOpen, setIsVolunteerOpen] = useState(false);
 
-  const handleNavigate = (pageId) => {
+  const handleNavigate = (pageId, targetElementId = null) => {
     setActiveSection(pageId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (targetElementId) {
+      setTimeout(() => {
+        const elem = document.getElementById(targetElementId);
+        if (elem) {
+          elem.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
   };
 
   return (
@@ -30,7 +40,7 @@ export default function App() {
          ================================================================= */}
       <Navbar 
         activeSection={activeSection} 
-        setActiveSection={handleNavigate} 
+        setActiveSection={(id) => handleNavigate(id)} 
       />
 
       {/* =================================================================
@@ -38,16 +48,27 @@ export default function App() {
          ================================================================= */}
       <main className="flex-1 w-full overflow-x-hidden">
         
-        {/* 1. HOME PAGE VIEW */}
+        {/* 1. HOME PAGE VIEW: Hero Section + Platform Section Directly Underneath */}
         {activeSection === 'home' && (
-          <div 
-            className="h-[calc(100dvh-5rem)] min-h-[580px] flex flex-col justify-between overflow-hidden w-full" 
-            style={{ backgroundColor: '#D2E3DB' }}
-          >
-            <HeroSection 
-              onLawnSignClick={() => setIsLawnSignOpen(true)}
-              onVolunteerClick={() => setIsVolunteerOpen(true)}
-            />
+          <div className="space-y-16 sm:space-y-24 pb-16 sm:pb-24">
+            {/* Hero Banner */}
+            <div 
+              className="h-[calc(100dvh-5rem)] min-h-[580px] flex flex-col justify-between overflow-hidden w-full" 
+              style={{ backgroundColor: '#D2E3DB' }}
+            >
+              <HeroSection 
+                onLawnSignClick={() => setIsLawnSignOpen(true)}
+                onVolunteerClick={() => setIsVolunteerOpen(true)}
+              />
+            </div>
+
+            {/* Platform Priorities directly underneath Hero */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+              <PlatformSection 
+                onLawnSignClick={() => setIsLawnSignOpen(true)}
+                onVolunteerClick={() => setIsVolunteerOpen(true)}
+              />
+            </div>
           </div>
         )}
 
@@ -55,18 +76,15 @@ export default function App() {
         {activeSection === 'about' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
             <AboutSection 
-              onNavigateToPlatform={() => handleNavigate('platform')}
+              onNavigateToPlatform={() => handleNavigate('home', 'platform')}
             />
           </div>
         )}
 
-        {/* 3. PLATFORM PAGE VIEW */}
-        {activeSection === 'platform' && (
+        {/* 3. MEDIA & COMMUNITY PAGE VIEW */}
+        {activeSection === 'media' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
-            <PlatformSection 
-              onLawnSignClick={() => setIsLawnSignOpen(true)}
-              onVolunteerClick={() => setIsVolunteerOpen(true)}
-            />
+            <MediaSection />
           </div>
         )}
 
@@ -80,7 +98,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Call to Action Banner (Shown on About, Platform, and Ward 9 pages) */}
+        {/* Call to Action Banner (Shown on About, Media, and Ward 9 pages) */}
         {activeSection !== 'home' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 w-full">
             <section className="rounded-3xl bg-gradient-to-br from-[#062E2B] via-[#0F172A] to-[#090D16] text-white p-8 sm:p-12 lg:p-16 border border-emerald-800/40 shadow-2xl relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 reveal-zoom card-hover-lift">
@@ -143,10 +161,10 @@ export default function App() {
                 About Soham
               </button>
               <button 
-                onClick={() => handleNavigate('platform')} 
-                className={`hover:text-white transition-colors cursor-pointer ${activeSection === 'platform' ? 'text-emerald-400' : ''}`}
+                onClick={() => handleNavigate('media')} 
+                className={`hover:text-white transition-colors cursor-pointer ${activeSection === 'media' ? 'text-emerald-400' : ''}`}
               >
-                Platform
+                Media
               </button>
               <button 
                 onClick={() => handleNavigate('ward9')} 

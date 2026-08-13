@@ -7,7 +7,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
 
   const navLinks = [
     { id: 'about', label: 'About Soham' },
-    { id: 'platform', label: 'Platform' },
+    { id: 'media', label: 'Media' },
     { id: 'ward9', label: 'Ward 9' },
   ];
 
@@ -28,7 +28,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
         <div className="flex items-center justify-between h-20">
           
           {/* =================================================================
-             LEFT SIDE: Just Text "Soham Patel" (No logo badge/icon)
+             LEFT SIDE: Just Text "Soham Patel"
              ================================================================= */}
           <div className="flex items-center cursor-pointer group" onClick={() => handleNavClick('home')}>
             <span className="font-extrabold text-2xl sm:text-3xl tracking-tight text-[#0F172A] hover:text-[#059669] transition-colors">
@@ -37,7 +37,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
           </div>
 
           {/* =================================================================
-             CENTER: Nav Buttons (Centered with Screen Width)
+             CENTER: Nav Buttons (About Soham, Media, Ward 9)
              ================================================================= */}
           <div className="hidden lg:flex items-center space-x-2 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => {
