@@ -193,9 +193,6 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
         
         <div className="p-6 sm:p-8 bg-[#0F172A] text-white flex items-center justify-between border-b border-slate-800">
           <div className="space-y-1">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[#059669] block">
-              Show Your Support
-            </span>
             <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
               Request a Lawn Sign
             </h3>

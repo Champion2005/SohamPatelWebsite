@@ -101,7 +101,7 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
       clearTimeout(debounceTimerRef.current);
     }
 
-    if (val.trim().length < 3) {
+    if (val.trim().length < 2) {
       setSuggestions([]);
       return;
     }
@@ -113,7 +113,7 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
       } catch (err) {
         console.error('Lookup failed', err);
       }
-    }, 320);
+    }, 200);
   };
 
   const handleLocationCheck = (lat, lng, label, forceInside = null) => {
@@ -266,7 +266,7 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
       </div>
 
       {/* =================================================================
-         INTERACTIVE MAP CONTAINER CARD (Scroll Reveal & Hover Lift)
+         INTERACTIVE MAP CONTAINER CARD
          ================================================================= */}
       <div className="w-full rounded-3xl bg-white border border-slate-200 shadow-xl overflow-hidden relative reveal-zoom card-hover-lift">
         
@@ -284,7 +284,7 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
               type="text"
               value={addressInput}
               onChange={handleInputChange}
-              placeholder="Enter Windsor address (e.g. 3155 Walker Rd)..."
+              placeholder="Enter Windsor address..."
               className="flex-1 min-w-0 bg-transparent border-none outline-none text-xs sm:text-sm font-medium text-slate-800 placeholder-slate-400 py-2.5 px-1"
             />
 

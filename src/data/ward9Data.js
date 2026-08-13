@@ -1,6 +1,6 @@
 /**
- * Windsor Ward 9 GeoJSON Polygon Data & Boundary Utilities
- * Sourced from City of Windsor Open Data & Open North Represent Boundary API
+ * Windsor Ward 9 GeoJSON Polygon Data & High-Speed Geocoding Utilities
+ * Sourced from City of Windsor Open Data, ESRI ArcGIS World Geocoding & Photon OSM
  */
 
 export const WARD9_GEOJSON = {
@@ -85,77 +85,28 @@ export function pointInWard9(lat, lng) {
   return inside;
 }
 
-// Query generator with address variations
-export function queryVariations(raw) {
-  const v = raw.trim().replace(/,.*$/, '');
-  if (!v) return [];
-  const variations = [v];
-  const hasSuffix = /\b(ave|avenue|st|street|rd|road|dr|drive|blvd|boulevard|crt|court|crescent|cres|way|pl|place|ln|lane|hwy|pkwy|terrace|ter)\b\.?/i.test(v);
-  if (!hasSuffix && /\d/.test(v)) {
-    ['Walker Rd', 'Tecumseh Rd', 'Howard Ave', 'Provincial Rd', 'Division Rd', 'Cabana Rd'].forEach(s => variations.push(`${v} ${s}`));
-  }
-  return variations.map(x => `${x}, Windsor, ON, Canada`);
-}
-
-// OpenStreetMap Nominatim lookup (Primary & Most Reliable)
-export async function nominatimSearch(q) {
-  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=5&countrycodes=ca&addressdetails=1`;
-  try {
-    const res = await fetch(url, {
-      headers: {
-        'Accept-Language': 'en'
-      }
-    });
-    if (!res.ok) return [];
-    const data = await res.json();
-    if (!Array.isArray(data)) return [];
-    return data
-      .filter(item => inWindsor(parseFloat(item.lat), parseFloat(item.lon)))
-      .map(item => {
-        const addr = item.address || {};
-        let primary = '';
-        if (addr.house_number && addr.road) primary = `${addr.house_number} ${addr.road}`;
-        else if (addr.road) primary = addr.road;
-        else if (addr.pedestrian) primary = addr.pedestrian;
-        else if (addr.building) primary = addr.building;
-        else if (addr.amenity) primary = addr.amenity;
-        else primary = (item.display_name || '').split(',')[0].trim();
-        const quality = addr.house_number ? 'address' : (addr.road ? 'street' : 'place');
-        return {
-          label: `${primary || 'Windsor'}, Windsor, ON`,
-          lat: parseFloat(item.lat),
-          lng: parseFloat(item.lon),
-          quality,
-          source: 'nominatim'
-        };
-      });
-  } catch {
-    return [];
-  }
-}
-
-// Canada Geolocation API lookup (Safe secondary fallback)
-export async function geogratisSearch(q) {
-  // Only query GeoGratis if query contains letters (not pure numbers like "1234" which break GeoGratis)
-  if (!/[a-zA-Z]/.test(q.split(',')[0])) return [];
-  const url = `https://www.geolocator.api.geo.ca/geolocation/en/locate?q=${encodeURIComponent(q)}`;
+// 1. ESRI ArcGIS World Geocoding (Primary - Ultra Fast & Precise for Canadian Addresses)
+export async function arcgisSearch(input) {
+  const q = input.trim();
+  if (!q) return [];
+  const query = q.toLowerCase().includes('windsor') ? q : `${q}, Windsor, ON`;
+  const url = `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?f=json&singleLine=${encodeURIComponent(query)}&location=-82.9485,42.2682&distance=30000&maxLocations=5&outFields=Match_addr,Addr_type,StAddr,City`;
   try {
     const res = await fetch(url);
     if (!res.ok) return [];
     const data = await res.json();
-    if (!Array.isArray(data)) return [];
-    return data
-      .filter(item => item.geometry?.coordinates && inWindsor(item.geometry.coordinates[1], item.geometry.coordinates[0]))
-      .map(item => {
-        const type = (item.type || '').toLowerCase();
-        const quality = type.includes('address') ? 'address' : (type.includes('street') ? 'street' : 'place');
-        const primary = (item.title || '').split(',')[0].trim();
+    if (!data.candidates || !Array.isArray(data.candidates)) return [];
+    return data.candidates
+      .filter(c => c.location && inWindsor(c.location.y, c.location.x))
+      .map(c => {
+        const addr = c.address || c.attributes?.Match_addr || '';
+        const cleanLabel = addr.includes('Windsor') ? addr : `${addr}, Windsor, ON`;
         return {
-          label: `${primary || 'Windsor'}, Windsor, ON`,
-          lat: item.geometry.coordinates[1],
-          lng: item.geometry.coordinates[0],
-          quality,
-          source: 'geogratis'
+          label: cleanLabel,
+          lat: c.location.y,
+          lng: c.location.x,
+          quality: (c.attributes?.Addr_type || '').toLowerCase().includes('point') ? 'address' : 'street',
+          source: 'arcgis'
         };
       });
   } catch {
@@ -163,32 +114,53 @@ export async function geogratisSearch(q) {
   }
 }
 
-// Combined search with ranking and deduplication
+// 2. Photon OSM (Secondary - High speed, no rate limit)
+export async function photonSearch(input) {
+  const q = input.trim();
+  if (!q) return [];
+  const url = `https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&lat=42.2682&lon=-82.9485&limit=5`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return [];
+    const data = await res.json();
+    if (!data.features || !Array.isArray(data.features)) return [];
+    return data.features
+      .filter(f => f.geometry?.coordinates && inWindsor(f.geometry.coordinates[1], f.geometry.coordinates[0]))
+      .map(f => {
+        const props = f.properties || {};
+        const house = props.housenumber ? `${props.housenumber} ` : '';
+        const street = props.name || props.street || '';
+        const primary = (house || street) ? `${house}${street}`.trim() : (props.city || 'Windsor');
+        return {
+          label: `${primary}, Windsor, ON`,
+          lat: f.geometry.coordinates[1],
+          lng: f.geometry.coordinates[0],
+          quality: props.housenumber ? 'address' : 'street',
+          source: 'photon'
+        };
+      });
+  } catch {
+    return [];
+  }
+}
+
+// Fast parallel search engine
 export async function searchWindsorAddress(input) {
-  const variations = queryVariations(input);
-  if (!variations.length) return [];
+  if (!input || input.trim().length < 2) return [];
 
   try {
-    // Query Nominatim first as primary provider
-    const nomResults = await nominatimSearch(variations[0]);
-    let combined = [...nomResults];
+    // Run ESRI ArcGIS and Photon in parallel for maximum speed
+    const [arcResults, photonResults] = await Promise.allSettled([
+      arcgisSearch(input),
+      photonSearch(input)
+    ]);
 
-    // If Nominatim returns few results and input has street names, query GeoGratis in background
-    if (combined.length < 3 && /[a-zA-Z]/.test(input)) {
-      const geoResults = await geogratisSearch(variations[0]);
-      combined = [...combined, ...geoResults];
-    }
+    const arcList = arcResults.status === 'fulfilled' ? arcResults.value : [];
+    const photonList = photonResults.status === 'fulfilled' ? photonResults.value : [];
+
+    const combined = [...arcList, ...photonList];
 
     // Deduplicate and rank
-    const qRank = { address: 0, street: 1, place: 2 };
-    const sRank = { nominatim: 0, geogratis: 1 };
-    combined.sort((a, b) => {
-      const qa = qRank[a.quality] ?? 9;
-      const qb = qRank[b.quality] ?? 9;
-      if (qa !== qb) return qa - qb;
-      return (sRank[a.source] ?? 9) - (sRank[b.source] ?? 9);
-    });
-
     const seen = {};
     const unique = [];
     for (const r of combined) {
