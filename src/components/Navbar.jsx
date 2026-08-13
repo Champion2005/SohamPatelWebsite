@@ -21,17 +21,17 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
     <nav 
       className="sticky top-0 z-50 w-full backdrop-blur-md border-b transition-all duration-300 bg-transparent" 
       style={{ 
-        borderColor: 'rgba(15, 23, 42, 0.15)'
+        borderColor: 'rgba(11, 27, 61, 0.12)'
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-20">
           
           {/* =================================================================
-             LEFT SIDE: Just Text "Soham Patel"
+             LEFT SIDE: Just Text "Soham Patel" (Navy Blue & Crimson Red)
              ================================================================= */}
           <div className="flex items-center cursor-pointer group" onClick={() => handleNavClick('home')}>
-            <span className="font-extrabold text-2xl sm:text-3xl tracking-tight text-[#0F172A] hover:text-[#059669] transition-colors">
+            <span className="font-extrabold text-2xl sm:text-3xl tracking-tight text-[var(--theme-navy-main)] group-hover:text-[var(--theme-red-main)] transition-colors">
               Soham Patel
             </span>
           </div>
@@ -48,8 +48,8 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
                   onClick={() => handleNavClick(link.id)}
                   className={`px-4 py-2 rounded-lg text-base font-bold transition-all duration-200 cursor-pointer relative group ${
                     isActive 
-                      ? 'text-[#0F172A] bg-[rgba(15,23,42,0.08)]' 
-                      : 'text-[#1E293B] hover:text-[#000000] hover:bg-[rgba(15,23,42,0.08)]'
+                      ? 'text-[var(--theme-red-main)] bg-[rgba(11,27,61,0.06)]' 
+                      : 'text-[var(--theme-navy-main)] hover:text-[var(--theme-red-main)] hover:bg-[rgba(11,27,61,0.06)]'
                   }`}
                   style={{
                     border: 'none',
@@ -58,10 +58,10 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
                   }}
                 >
                   {link.label}
-                  {/* Active indicator bar in subtle emerald green */}
+                  {/* Active indicator bar in Crimson Red */}
                   <span 
                     className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-0.5 rounded-full transition-all duration-300 ${
-                      isActive ? 'w-6 bg-[var(--theme-accent-green)]' : 'w-0 group-hover:w-4 bg-[#0F172A]/40'
+                      isActive ? 'w-6 bg-[var(--theme-red-main)]' : 'w-0 group-hover:w-4 bg-[#0B1B3D]/30'
                     }`}
                   />
                 </button>
@@ -70,7 +70,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
           </div>
 
           {/* =================================================================
-             RIGHT SIDE: Direct Social Logos (No White Outer Pill)
+             RIGHT SIDE: Direct Social Logos (Crimson Red hover)
              ================================================================= */}
           <div className="hidden lg:flex items-center gap-2">
             {/* Instagram */}
@@ -149,7 +149,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
           <div className="flex lg:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-lg text-[#0F172A] hover:bg-[rgba(15,23,42,0.1)] transition-colors focus:outline-none"
+              className="p-2.5 rounded-lg text-[var(--theme-navy-main)] hover:bg-[rgba(11,27,61,0.08)] transition-colors focus:outline-none"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
@@ -185,7 +185,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
                 }}
               >
                 <span>{link.label}</span>
-                <ChevronRight className="w-4 h-4 text-[var(--theme-accent-green)]" />
+                <ChevronRight className="w-4 h-4 text-[var(--theme-red-main)]" />
               </button>
             ))}
           </div>
@@ -201,7 +201,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-slate-800 hover:bg-[var(--theme-accent-green)]"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-[#1D2A44] hover:bg-[var(--theme-red-main)]"
               >
                 <InstagramIcon className="w-5 h-5" />
               </a>
@@ -211,7 +211,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-slate-800 hover:bg-[var(--theme-accent-green)]"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-[#1D2A44] hover:bg-[var(--theme-red-main)]"
               >
                 <FacebookIcon className="w-5 h-5" />
               </a>
@@ -221,7 +221,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-slate-800 hover:bg-[var(--theme-accent-green)]"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-[#1D2A44] hover:bg-[var(--theme-red-main)]"
               >
                 <WhatsAppIcon className="w-5 h-5" />
               </a>

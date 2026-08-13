@@ -5,61 +5,61 @@
   :root {
     /* ==========================================================================
        WINDSOR WARD 9 - SOHAM PATEL CAMPAIGN DESIGN SYSTEM & THEME
+       INSPIRATION: Official Campaign Poster (IMG_6983.png)
        TYPOGRAPHY: Google Fonts 'Ubuntu' (Weights 300, 400, 500, 700)
-       THEME PALETTE: Neutral Off-White & Slate Base with Subtle Green Highlights
-       RESTRICTION: No traditional primary red (#FF0000), primary blue (#0000FF),
-       or primary orange (#FFA500).
+       PALETTE: Deep Imperial Navy Blue, Bold Canadian Crimson Red, Crisp Ice Off-White
        ========================================================================== */
 
-    /* Core Page & Nav Backgrounds (Neutral Slate / Charcoal & Off-White) */
-    --theme-bg-page: #FAF9F5;               /* Warm Neutral Off-White */
-    --theme-bg-card: #FFFFFF;               /* Clean Pure White for cards */
-    --theme-bg-nav: #0F172A;                /* Deep Neutral Slate/Charcoal for Sticky Nav */
-    --theme-bg-nav-glass: rgba(15, 23, 42, 0.95); /* Translucent Charcoal Nav */
-    --theme-bg-mobile-drawer: #0F172A;      /* Deep Slate for Mobile Menu Drawer */
+    /* Primary Navy Family */
+    --theme-navy-main: #0B1B3D;           /* Deep Imperial Navy Blue */
+    --theme-navy-dark: #06122B;           /* Midnight Dark Navy */
+    --theme-navy-light: #1D2A44;          /* Medium Navy Accent */
+    --theme-navy-tint: #EEF2F9;           /* Soft Light Navy Background Tint */
 
-    /* Typography & Text Tokens (Neutral Dark Slate & Crisp Off-White) */
-    --theme-text-nav: #0F172A;              /* Dark Slate for Navbar text on light bg */
-    --theme-text-nav-muted: #64748B;        /* Soft Slate Muted Text */
-    --theme-text-primary: #0F172A;          /* Deep Neutral Slate for main body & headings */
-    --theme-text-secondary: #64748B;        /* Neutral Slate Gray for secondary text */
+    /* Primary Crimson Red Family */
+    --theme-red-main: #B20D1E;            /* Bold Canadian Crimson Red */
+    --theme-red-hover: #8F0A18;           /* Hover Dark Crimson Red */
+    --theme-red-dark: #7F1D1D;            /* Deep Crimson Accent */
+    --theme-red-tint: #FEF2F2;            /* Soft Light Red Tint */
 
-    /* Center Nav Links (Dark text against light background) */
-    --theme-nav-link-color: #1E293B;         /* Dark Slate text */
-    --theme-nav-link-hover: #000000;         /* Black text on hover */
-    --theme-nav-link-hover-bg: rgba(15, 23, 42, 0.08); /* Soft dark background highlight */
-    --theme-nav-link-active: #0F172A;
+    /* Core Page & Nav Backgrounds */
+    --theme-bg-page: #F8FAFC;             /* Crisp Ice Off-White */
+    --theme-bg-hero: #EEF2F9;             /* Light Navy-Tinted Hero Canvas */
+    --theme-bg-card: #FFFFFF;             /* Pure White for cards */
+    --theme-bg-nav: #0B1B3D;              /* Deep Navy Sticky Nav */
+    --theme-bg-mobile-drawer: #06122B;    /* Midnight Navy Mobile Menu Drawer */
 
-    /* Green Highlights / Accents (Subtle Emerald) */
-    --theme-accent-green: #059669;          /* Subtle Emerald Green Accent */
-    --theme-accent-green-hover: #047857;    /* Darker Emerald Accent */
-    --theme-accent-green-light: #D1FAE5;    /* Very Soft Mint Tint */
+    /* Typography & Text Tokens */
+    --theme-text-nav: #0B1B3D;            /* Dark Navy for Navbar text on light bg */
+    --theme-text-nav-muted: #64748B;      /* Soft Slate Muted Text */
+    --theme-text-primary: #0B1B3D;        /* Deep Imperial Navy for main body & headings */
+    --theme-text-secondary: #475569;      /* Slate Gray for secondary body text */
 
-    /* Right Action Pill 1: Request a Lawn Sign */
-    --theme-btn-lawn-bg: #059669;           /* Subtle Emerald Green Accent Fill */
-    --theme-btn-lawn-hover: #047857;        /* Hover Emerald */
-    --theme-btn-lawn-text: #FFFFFF;         /* Pure White Text */
+    /* Navigation Link Tokens */
+    --theme-nav-link-color: #0B1B3D;
+    --theme-nav-link-hover: #B20D1E;
+    --theme-nav-link-hover-bg: rgba(11, 27, 61, 0.08);
+    --theme-nav-link-active: #B20D1E;
 
-    /* Right Action Pill 2: Volunteer */
-    --theme-btn-volunteer-bg: #0F172A;      /* Deep Slate Fill */
-    --theme-btn-volunteer-hover: #1E293B;  /* Slate 800 Hover Fill */
-    --theme-btn-volunteer-text: #FFFFFF;   /* Pure White Text */
+    /* Primary Action Button: Request a Lawn Sign (Crimson Red) */
+    --theme-btn-lawn-bg: #B20D1E;         /* Bold Crimson Red Fill */
+    --theme-btn-lawn-hover: #8F0A18;      /* Hover Crimson Red */
+    --theme-btn-lawn-text: #FFFFFF;       /* Pure White Text */
 
-    /* Right Action Pill 3 Container: Social Media Pill Outline */
-    --theme-social-pill-border: rgba(15, 23, 42, 0.25); /* Darker Neutral Border for light bg */
-    --theme-social-pill-bg: rgba(255, 255, 255, 0.4);     /* Soft Light Pill */
+    /* Secondary Action Button: Volunteer (Deep Imperial Navy) */
+    --theme-btn-volunteer-bg: #0B1B3D;    /* Deep Navy Fill */
+    --theme-btn-volunteer-hover: #1D2A44;/* Hover Navy Fill */
+    --theme-btn-volunteer-text: #FFFFFF; /* Pure White Text */
 
     /* Social Media Circle Buttons */
-    --theme-social-icon-bg: rgba(15, 23, 42, 0.08);
-    --theme-social-icon-hover-bg: #059669;   /* Subtle Green Highlight on hover */
-    --theme-social-icon-color: #0F172A;      /* Dark Slate Icon for light bg */
+    --theme-social-icon-bg: rgba(11, 27, 61, 0.08);
+    --theme-social-icon-hover-bg: #B20D1E; /* Crimson Red Highlight on hover */
+    --theme-social-icon-color: #0B1B3D;    /* Deep Navy Icon for light bg */
     --theme-social-icon-hover-color: #FFFFFF;/* Pure White Icon on hover */
 
     /* Branding & Logo Colors */
-    --theme-logo-badge-bg: #059669;          /* Subtle Emerald Badge Accent */
-    --theme-logo-badge-text: #FFFFFF;
-    --theme-logo-title: #0F172A;             /* Dark Slate Title for light bg */
-    --theme-logo-subtitle: #059669;          /* Emerald Subtitle Highlight */
+    --theme-logo-title: #0B1B3D;           /* Deep Navy Title */
+    --theme-logo-subtitle: #B20D1E;        /* Crimson Red Subtitle Highlight */
   }
 }
 
@@ -173,8 +173,8 @@ body {
 }
 .card-hover-lift:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.12), 0 10px 20px -10px rgba(5, 150, 105, 0.15);
-  border-color: rgba(5, 150, 105, 0.4);
+  box-shadow: 0 20px 35px -10px rgba(11, 27, 61, 0.14), 0 10px 20px -10px rgba(178, 13, 30, 0.15);
+  border-color: rgba(178, 13, 30, 0.4);
 }
 
 /* Custom Scrollbar */
@@ -182,12 +182,12 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0F172A;
+  background: #0B1B3D;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #1D2A44;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #059669;
+  background: #B20D1E;
 }

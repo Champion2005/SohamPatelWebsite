@@ -51,10 +51,10 @@ export default function App() {
         {/* 1. HOME PAGE VIEW: Hero Section + Platform Section Directly Underneath */}
         {activeSection === 'home' && (
           <div className="space-y-16 sm:space-y-24 pb-16 sm:pb-24">
-            {/* Hero Banner */}
+            {/* Hero Banner (Soft Light Navy-Tinted Canvas) */}
             <div 
               className="h-[calc(100dvh-5rem)] min-h-[580px] flex flex-col justify-between overflow-hidden w-full" 
-              style={{ backgroundColor: '#D2E3DB' }}
+              style={{ backgroundColor: 'var(--theme-bg-hero)' }}
             >
               <HeroSection 
                 onLawnSignClick={() => setIsLawnSignOpen(true)}
@@ -101,9 +101,9 @@ export default function App() {
         {/* Call to Action Banner (Shown on About, Media, and Ward 9 pages) */}
         {activeSection !== 'home' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 w-full">
-            <section className="rounded-3xl bg-gradient-to-br from-[#062E2B] via-[#0F172A] to-[#090D16] text-white p-8 sm:p-12 lg:p-16 border border-emerald-800/40 shadow-2xl relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 reveal-zoom card-hover-lift">
+            <section className="rounded-3xl bg-gradient-to-br from-[#0B1B3D] via-[#06122B] to-[#0A192F] text-white p-8 sm:p-12 lg:p-16 border border-red-900/30 shadow-2xl relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 reveal-zoom card-hover-lift">
               <div className="space-y-3 max-w-2xl">
-                <span className="text-xs font-bold uppercase tracking-widest text-[#059669] block">
+                <span className="text-xs font-bold uppercase tracking-widest text-[var(--theme-red-main)] block">
                   Join The Movement
                 </span>
                 <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white leading-tight">
@@ -117,13 +117,13 @@ export default function App() {
               <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full sm:w-auto">
                 <button
                   onClick={() => setIsLawnSignOpen(true)}
-                  className="w-full sm:w-auto px-7 py-4 rounded-full bg-[#059669] hover:bg-[#047857] text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                  className="w-full sm:w-auto px-7 py-4 rounded-full bg-[var(--theme-red-main)] hover:bg-[var(--theme-red-hover)] text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                 >
                   Request a Lawn Sign
                 </button>
                 <button
                   onClick={() => setIsVolunteerOpen(true)}
-                  className="w-full sm:w-auto px-7 py-4 rounded-full bg-slate-800 hover:bg-slate-700 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all border border-slate-700 shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                  className="w-full sm:w-auto px-7 py-4 rounded-full bg-[var(--theme-navy-light)] hover:bg-[#2A3E66] text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all border border-slate-700 shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                 >
                   Volunteer
                 </button>
@@ -137,7 +137,7 @@ export default function App() {
       {/* =================================================================
          SITE FOOTER
          ================================================================= */}
-      <footer className="bg-[#090D16] text-slate-400 text-xs border-t border-slate-800/80 w-full">
+      <footer className="bg-[#06122B] text-slate-400 text-xs border-t border-slate-800/80 w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
           
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-800">
@@ -146,7 +146,7 @@ export default function App() {
               className="cursor-pointer text-left group"
               onClick={() => handleNavigate('home')}
             >
-              <span className="font-extrabold text-white text-xl block group-hover:text-[#059669] transition-colors">
+              <span className="font-extrabold text-white text-xl block group-hover:text-[var(--theme-red-main)] transition-colors">
                 Soham Patel
               </span>
               <span className="text-xs text-slate-400 block">Windsor City Council &bull; Ward 9 Candidate</span>
@@ -156,19 +156,19 @@ export default function App() {
             <div className="flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-300">
               <button 
                 onClick={() => handleNavigate('about')} 
-                className={`hover:text-white transition-colors cursor-pointer ${activeSection === 'about' ? 'text-emerald-400' : ''}`}
+                className={`hover:text-white transition-colors cursor-pointer ${activeSection === 'about' ? 'text-red-400' : ''}`}
               >
                 About Soham
               </button>
               <button 
                 onClick={() => handleNavigate('media')} 
-                className={`hover:text-white transition-colors cursor-pointer ${activeSection === 'media' ? 'text-emerald-400' : ''}`}
+                className={`hover:text-white transition-colors cursor-pointer ${activeSection === 'media' ? 'text-red-400' : ''}`}
               >
                 Media
               </button>
               <button 
                 onClick={() => handleNavigate('ward9')} 
-                className={`hover:text-white transition-colors cursor-pointer ${activeSection === 'ward9' ? 'text-emerald-400' : ''}`}
+                className={`hover:text-white transition-colors cursor-pointer ${activeSection === 'ward9' ? 'text-red-400' : ''}`}
               >
                 Ward 9 Map
               </button>
@@ -181,7 +181,7 @@ export default function App() {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
-                className="w-9 h-9 rounded-full bg-slate-800/80 hover:bg-[#059669] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-full bg-slate-800/80 hover:bg-[var(--theme-red-main)] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
               >
                 <InstagramIcon className="w-4 h-4" />
               </a>
@@ -190,7 +190,7 @@ export default function App() {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
-                className="w-9 h-9 rounded-full bg-slate-800/80 hover:bg-[#059669] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-full bg-slate-800/80 hover:bg-[var(--theme-red-main)] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
               >
                 <FacebookIcon className="w-4 h-4" />
               </a>
@@ -199,7 +199,7 @@ export default function App() {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="WhatsApp"
-                className="w-9 h-9 rounded-full bg-slate-800/80 hover:bg-[#059669] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-full bg-slate-800/80 hover:bg-[var(--theme-red-main)] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
               >
                 <WhatsAppIcon className="w-4 h-4" />
               </a>

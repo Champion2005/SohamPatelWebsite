@@ -112,8 +112,8 @@ export const MediaSection = () => {
       {/* =================================================================
          SECTION HEADER & INTRO
          ================================================================= */}
-      <div className="border-l-4 border-[#059669] pl-4 sm:pl-6 space-y-2">
-        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#0F172A]">
+      <div className="border-l-4 border-[var(--theme-red-main)] pl-4 sm:pl-6 space-y-2">
+        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[var(--theme-navy-main)]">
           Community & Media
         </h2>
         <p className="text-slate-600 font-medium text-base sm:text-lg max-w-3xl leading-relaxed pt-1">
@@ -125,7 +125,7 @@ export const MediaSection = () => {
          1. FEATURED CAMPAIGN VIDEOS & REELS
          ================================================================= */}
       <div className="space-y-6">
-        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#059669]">
+        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[var(--theme-red-main)]">
           <Video className="w-4 h-4" />
           <span>Featured Videos & Reels</span>
         </div>
@@ -137,7 +137,7 @@ export const MediaSection = () => {
               className="rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col justify-between card-hover-lift group"
             >
               {/* Video Thumbnail Container */}
-              <div className="relative aspect-video w-full bg-slate-900 overflow-hidden">
+              <div className="relative aspect-video w-full bg-[#06122B] overflow-hidden">
                 {activeVideo === video.id ? (
                   <iframe
                     className="w-full h-full"
@@ -153,12 +153,12 @@ export const MediaSection = () => {
                       alt={video.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-85"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#06122B]/90 via-[#06122B]/20 to-transparent" />
 
-                    {/* Play Button Overlay */}
+                    {/* Play Button Overlay (Crimson Red) */}
                     <button
                       onClick={() => setActiveVideo(video.id)}
-                      className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-[#059669] hover:bg-[#047857] text-white flex items-center justify-center shadow-xl transition-all hover:scale-110 cursor-pointer"
+                      className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-[var(--theme-red-main)] hover:bg-[var(--theme-red-hover)] text-white flex items-center justify-center shadow-xl transition-all hover:scale-110 cursor-pointer"
                       aria-label={`Play ${video.title}`}
                     >
                       <Play className="w-6 h-6 fill-current ml-0.5" />
@@ -170,7 +170,7 @@ export const MediaSection = () => {
                     </span>
 
                     {/* Category Badge */}
-                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#0F172A] text-[11px] font-extrabold tracking-wider uppercase shadow-sm">
+                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[var(--theme-navy-main)] text-[11px] font-extrabold tracking-wider uppercase shadow-sm">
                       {video.category}
                     </span>
                   </>
@@ -181,10 +181,10 @@ export const MediaSection = () => {
               <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
-                    <Calendar className="w-3.5 h-3.5 text-[#059669]" />
+                    <Calendar className="w-3.5 h-3.5 text-[var(--theme-red-main)]" />
                     <span>{video.date}</span>
                   </div>
-                  <h3 className="text-lg font-bold text-[#0F172A] leading-snug group-hover:text-[#059669] transition-colors">
+                  <h3 className="text-lg font-bold text-[var(--theme-navy-main)] leading-snug group-hover:text-[var(--theme-red-main)] transition-colors">
                     {video.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -202,9 +202,9 @@ export const MediaSection = () => {
          2. ORGANIC BENTO MASONRY PHOTO GRID (2x2, 1x2, 2x1, 1x1 Blocks)
          ================================================================= */}
       <div className="space-y-6 pt-8 border-t border-slate-200/80">
-        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#059669]">
+        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[var(--theme-red-main)]">
           <ImageIcon className="w-4 h-4" />
-          <span>Community Events & Organic Bento Photo Gallery</span>
+          <span>Community Events & Photo Gallery</span>
         </div>
 
         {/* Organic Bento Grid */}
@@ -212,7 +212,7 @@ export const MediaSection = () => {
           {photoBlocks.map((block) => (
             <div 
               key={block.id}
-              className={`rounded-3xl bg-slate-900 border border-slate-200/80 shadow-md overflow-hidden relative group card-hover-lift flex flex-col justify-end ${block.gridSpan}`}
+              className={`rounded-3xl bg-[#06122B] border border-slate-200/80 shadow-md overflow-hidden relative group card-hover-lift flex flex-col justify-end ${block.gridSpan}`}
             >
               {/* Background Image */}
               <img 
@@ -222,19 +222,19 @@ export const MediaSection = () => {
               />
 
               {/* Gradient Overlay for Readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#06122B] via-[#06122B]/40 to-transparent pointer-events-none" />
 
               {/* Top Date Badge */}
               <div className="absolute top-4 left-4 z-10">
-                <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#0F172A] text-[10px] font-black tracking-wider uppercase shadow-md">
+                <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[var(--theme-navy-main)] text-[10px] font-black tracking-wider uppercase shadow-md">
                   {block.date}
                 </span>
               </div>
 
               {/* Content Overlay at Bottom */}
               <div className="relative z-10 p-5 sm:p-6 space-y-2 text-white">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
-                  <MapPin className="w-3.5 h-3.5 shrink-0" />
+                <div className="flex items-center gap-1.5 text-xs font-bold text-red-400">
+                  <MapPin className="w-3.5 h-3.5 shrink-0 text-[var(--theme-red-main)]" />
                   <span className="truncate">{block.location}</span>
                 </div>
 

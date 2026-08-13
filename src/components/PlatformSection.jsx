@@ -70,8 +70,8 @@ export const PlatformSection = ({ onVolunteerClick }) => {
       {/* =================================================================
          SECTION HEADER & INTRO
          ================================================================= */}
-      <div className="border-l-4 border-[#059669] pl-4 sm:pl-6 space-y-2 reveal-up">
-        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#0F172A]">
+      <div className="border-l-4 border-[var(--theme-red-main)] pl-4 sm:pl-6 space-y-2 reveal-up">
+        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[var(--theme-navy-main)]">
           Platform
         </h2>
         <p className="text-slate-600 font-medium text-base sm:text-lg max-w-3xl leading-relaxed pt-1">
@@ -88,12 +88,12 @@ export const PlatformSection = ({ onVolunteerClick }) => {
             <div className="h-full p-6 sm:p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/90 shadow-sm card-hover-lift flex flex-col justify-between space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black tracking-wider uppercase">
+                  <span className="px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-[var(--theme-red-main)] text-xs font-black tracking-wider uppercase">
                     {item.badge}
                   </span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0F172A] leading-snug">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[var(--theme-navy-main)] leading-snug">
                   {item.title}
                 </h3>
 
@@ -104,7 +104,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
                 <ul className="space-y-2.5 pt-2 border-t border-slate-100">
                   {item.bulletPoints.map((pt, idx) => (
                     <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm font-medium text-slate-700">
-                      <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-[var(--theme-red-main)] shrink-0 mt-0.5" />
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -114,7 +114,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
               <div className="pt-2 flex items-center gap-4">
                 <button
                   onClick={onVolunteerClick}
-                  className="text-xs sm:text-sm font-bold text-[#059669] hover:text-[#047857] uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer group"
+                  className="text-xs sm:text-sm font-bold text-[var(--theme-red-main)] hover:text-[var(--theme-red-hover)] uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer group"
                 >
                   <span>Support this priority</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -123,12 +123,12 @@ export const PlatformSection = ({ onVolunteerClick }) => {
             </div>
           );
 
-          // Empty Dark Card Placeholder for future image (Identical height to text card)
+          // Deep Navy Card Placeholder for future image (Identical height to text card)
           const ImagePlaceholderCard = (
-            <div className="h-full min-h-[260px] sm:min-h-[300px] lg:min-h-full rounded-3xl bg-[#0F172A] border border-slate-800 shadow-xl overflow-hidden relative flex items-center justify-center card-hover-lift">
+            <div className="h-full min-h-[260px] sm:min-h-[300px] lg:min-h-full rounded-3xl bg-[var(--theme-navy-main)] border border-slate-800 shadow-xl overflow-hidden relative flex items-center justify-center card-hover-lift">
               {/* Subtle Ambient Background Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-[#0F172A] to-[#0A1120] pointer-events-none" />
-              <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-600/10 rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#06122B] via-[#0B1B3D] to-[#1D2A44] pointer-events-none" />
+              <div className="absolute top-0 right-0 w-48 h-48 bg-red-600/10 rounded-full blur-2xl pointer-events-none" />
             </div>
           );
 

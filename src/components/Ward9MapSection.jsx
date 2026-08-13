@@ -25,7 +25,7 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
   const [addressInput, setAddressInput] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchResult, setSearchResult] = useState(null); // { status: 'in' | 'out' | 'unknown', label, lat, lng }
+  const [searchResult, setSearchResult] = useState(null);
   
   const mapContainerRef = useRef(null);
   const mapInstanceRef = useRef(null);
@@ -59,13 +59,14 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
       maxZoom: 19
     }).addTo(map);
 
+    // Ward 9 GeoJSON Styling (Crimson Red Boundary Accent)
     const wardLayer = L.geoJSON(WARD9_GEOJSON, {
       style: {
-        color: '#047857',
+        color: '#B20D1E',
         weight: 3,
         opacity: 0.9,
-        fillColor: '#059669',
-        fillOpacity: 0.35,
+        fillColor: '#B20D1E',
+        fillOpacity: 0.25,
         dashArray: '4, 4'
       }
     }).addTo(map);
@@ -135,7 +136,7 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
       map.removeLayer(markerRef.current);
     }
 
-    const markerColor = inside ? '#059669' : '#0F172A';
+    const markerColor = inside ? '#B20D1E' : '#0B1B3D';
     const pinHtml = `
       <div style="
         background: ${markerColor};
@@ -174,7 +175,7 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
 
     const popupContent = `
       <div style="font-family: 'Ubuntu', sans-serif; padding: 4px;">
-        <div style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: ${inside ? '#059669' : '#475569'}; margin-bottom: 4px; text-transform: uppercase; font-size: 13px;">
+        <div style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: ${inside ? '#B20D1E' : '#0B1B3D'}; margin-bottom: 4px; text-transform: uppercase; font-size: 13px;">
           ${inside ? '✓ Inside Ward 9' : '✕ Outside Ward 9'}
         </div>
         <div style="font-size: 12px; color: #1E293B; font-weight: 600; margin-bottom: 4px;">${label}</div>
@@ -256,8 +257,8 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
       {/* =================================================================
          SECTION HEADER & INTRO
          ================================================================= */}
-      <div className="border-l-4 border-[#059669] pl-4 sm:pl-6 space-y-2 reveal-up">
-        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#0F172A]">
+      <div className="border-l-4 border-[var(--theme-red-main)] pl-4 sm:pl-6 space-y-2 reveal-up">
+        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[var(--theme-navy-main)]">
           Ward 9 Interactive Map
         </h2>
         <p className="text-slate-600 font-medium text-base sm:text-lg max-w-3xl leading-relaxed">
@@ -274,9 +275,9 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
         <div className="absolute top-4 left-4 right-4 sm:left-6 sm:right-auto sm:w-[480px] md:w-[540px] z-[1000] space-y-1">
           <form 
             onSubmit={handleSearchSubmit}
-            className="bg-white/95 backdrop-blur-md rounded-2xl border border-slate-300/90 shadow-lg flex items-center p-1.5 transition-all focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-500/20 gap-1.5"
+            className="bg-white/95 backdrop-blur-md rounded-2xl border border-slate-300/90 shadow-lg flex items-center p-1.5 transition-all focus-within:border-[var(--theme-red-main)] focus-within:ring-2 focus-within:ring-red-500/20 gap-1.5"
           >
-            <div className="pl-3 pr-1 text-emerald-700 shrink-0">
+            <div className="pl-3 pr-1 text-[var(--theme-red-main)] shrink-0">
               <Search className="w-5 h-5" />
             </div>
 
@@ -302,7 +303,7 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="px-5 py-2.5 rounded-xl bg-[#059669] hover:bg-[#047857] text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-1.5 shrink-0 shadow-sm ml-1"
+              className="px-5 py-2.5 rounded-xl bg-[var(--theme-red-main)] hover:bg-[var(--theme-red-hover)] text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-1.5 shrink-0 shadow-sm ml-1"
             >
               {isLoading ? (
                 <>
@@ -322,9 +323,9 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
                 <div 
                   key={idx}
                   onClick={() => handleSelectSuggestion(item)}
-                  className="p-3 hover:bg-emerald-50/70 transition-colors cursor-pointer flex items-start gap-2.5 text-left"
+                  className="p-3 hover:bg-red-50/70 transition-colors cursor-pointer flex items-start gap-2.5 text-left"
                 >
-                  <MapPin className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-[var(--theme-red-main)] shrink-0 mt-0.5" />
                   <div className="flex-1 min-w-0">
                     <p className="text-xs sm:text-sm font-bold text-slate-800 truncate">{item.label}</p>
                     <span className="text-[10px] text-slate-500 uppercase tracking-wider">{item.quality}</span>
@@ -338,14 +339,14 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
           {searchResult && (
             <div className={`p-4 rounded-2xl border shadow-lg backdrop-blur-md animate-slide-up-fade ${
               searchResult.status === 'in'
-                ? 'bg-emerald-950/90 border-emerald-500 text-white'
+                ? 'bg-[#0B1B3D]/95 border-[var(--theme-red-main)] text-white'
                 : searchResult.status === 'out'
                 ? 'bg-slate-900/90 border-slate-700 text-slate-100'
                 : 'bg-amber-900/90 border-amber-500 text-white'
             }`}>
               <div className="flex items-start gap-3">
                 {searchResult.status === 'in' ? (
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
                 ) : (
                   <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                 )}
@@ -365,13 +366,13 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
                     <div className="pt-2 flex flex-wrap gap-2">
                       <button
                         onClick={onLawnSignClick}
-                        className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider cursor-pointer shadow-sm"
+                        className="px-3 py-1.5 rounded-lg bg-[var(--theme-red-main)] hover:bg-[var(--theme-red-hover)] text-white font-bold text-xs uppercase tracking-wider cursor-pointer shadow-sm"
                       >
                         Request Lawn Sign
                       </button>
                       <button
                         onClick={onVolunteerClick}
-                        className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider cursor-pointer shadow-sm"
+                        className="px-3 py-1.5 rounded-lg bg-[var(--theme-navy-light)] hover:bg-[#2A3E66] text-white font-bold text-xs uppercase tracking-wider cursor-pointer shadow-sm"
                       >
                         Join Team Soham
                       </button>
@@ -395,14 +396,14 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
             onClick={handleRecenter}
             className="px-3.5 py-2 rounded-xl bg-white/95 backdrop-blur-md border border-slate-300 shadow-md hover:bg-slate-50 text-slate-800 font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer"
           >
-            <RotateCcw className="w-3.5 h-3.5 text-emerald-700" />
+            <RotateCcw className="w-3.5 h-3.5 text-[var(--theme-red-main)]" />
             <span>Reset Ward 9 View</span>
           </button>
         </div>
 
         {/* Map Legend (Bottom Right) */}
         <div className="absolute bottom-4 right-14 z-[1000] bg-white/95 backdrop-blur-md border border-slate-300 rounded-xl px-3 py-2 shadow-md flex items-center gap-2 text-xs font-semibold text-slate-700 hidden sm:flex">
-          <div className="w-4 h-4 rounded bg-[#059669]/40 border-2 border-[#047857]" />
+          <div className="w-4 h-4 rounded bg-[#B20D1E]/40 border-2 border-[#B20D1E]" />
           <span>Windsor Ward 9 Zone</span>
         </div>
 

@@ -38,7 +38,6 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
     if (isOpen) {
       renderTimeRef.current = Date.now();
       setErrorMessage('');
-      console.log('[LawnSignModal] Modal opened at:', new Date(renderTimeRef.current).toISOString());
     }
 
     const handleKeyDown = (e) => {
@@ -101,7 +100,6 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
-    console.log('[LawnSignModal] Form submission triggered. Event isTrusted:', e.isTrusted);
 
     const newErrors = {};
     if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
@@ -111,14 +109,11 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
     if (formData.email.trim() && !formData.email.includes('@')) newErrors.email = 'Please enter a valid email address';
 
     if (Object.keys(newErrors).length > 0) {
-      console.warn('[LawnSignModal] Validation errors:', newErrors);
       setErrors(newErrors);
       return;
     }
 
-    // Autofill Safety: Only block if honeypot is filled AND event is NOT trusted (synthetic script bot)
     if (formData._hp_website && !e.isTrusted) {
-      console.warn('[LawnSignModal] Submission blocked by Honeypot trap (untrusted event).');
       setIsSubmitted(true);
       return;
     }
@@ -128,8 +123,6 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
     const webhookUrl = 
       import.meta.env.VITE_GOOGLE_SHEETS_LAWN_SIGN_URL || 
       import.meta.env.VITE_GOOGLE_SHEETS_WEBHOOK_URL;
-
-    console.log('[LawnSignModal] Webhook URL configured:', webhookUrl ? `YES (${webhookUrl})` : 'NO');
 
     try {
       if (webhookUrl) {
@@ -144,8 +137,6 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
           emailUpdates: formData.emailUpdates ? 'Yes' : 'No'
         };
 
-        console.log('[LawnSignModal] Sending payload to Google Apps Script webhook:', payload);
-
         await fetch(webhookUrl, {
           method: 'POST',
           mode: 'no-cors',
@@ -154,17 +145,14 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
           },
           body: JSON.stringify(payload)
         });
-
-        console.log('[LawnSignModal] Fetch POST request sent successfully!');
       } else {
-        console.warn('[LawnSignModal] No Webhook URL provided. Simulating successful submission.');
         await new Promise(resolve => setTimeout(resolve, 800));
       }
 
       setIsSubmitting(false);
       setIsSubmitted(true);
     } catch (err) {
-      console.error('[LawnSignModal] Network submission error:', err);
+      console.error('[LawnSignModal] Submission error:', err);
       setIsSubmitting(false);
       setErrorMessage('Could not record your request. Please try again.');
     }
@@ -197,9 +185,10 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
         className="relative z-10 w-full max-w-lg rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
       >
         
-        <div className="p-6 sm:p-8 bg-[#0F172A] text-white flex items-center justify-between border-b border-slate-800">
+        {/* Modal Top Header (Deep Navy with Crimson Red Accent) */}
+        <div className="p-6 sm:p-8 bg-[#0B1B3D] text-white flex items-center justify-between border-b border-slate-800">
           <div className="space-y-1">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[#059669] block">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--theme-red-main)] block">
               Show Your Support
             </span>
             <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
@@ -218,10 +207,10 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
         <div className="p-6 sm:p-8 overflow-y-auto flex-1">
           {isSubmitted ? (
             <div className="py-8 text-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-emerald-100 text-[#059669] flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 rounded-full bg-red-100 text-[var(--theme-red-main)] flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
-              <h4 className="text-2xl font-extrabold text-[#0F172A]">
+              <h4 className="text-2xl font-extrabold text-[#0B1B3D]">
                 Thank You, {formData.firstName}!
               </h4>
               <p className="text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
@@ -229,7 +218,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
               </p>
               <button
                 onClick={handleResetAndClose}
-                className="mt-4 px-8 py-3 rounded-full bg-[#059669] hover:bg-[#047857] text-white font-bold text-sm uppercase tracking-wider transition-colors cursor-pointer"
+                className="mt-4 px-8 py-3 rounded-full bg-[var(--theme-red-main)] hover:bg-[var(--theme-red-hover)] text-white font-bold text-sm uppercase tracking-wider transition-colors cursor-pointer"
               >
                 Close Window
               </button>
@@ -247,7 +236,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                 </div>
               )}
 
-              {/* Anti-Bot Honeypot Field (Configured to ignore browser autofill for real humans) */}
+              {/* Honeypot Field */}
               <div style={{ opacity: 0, position: 'absolute', top: 0, left: 0, height: 0, width: 0, zIndex: -1, overflow: 'hidden' }} aria-hidden="true">
                 <input
                   type="text"
@@ -271,7 +260,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                     value={formData.firstName}
                     onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                     placeholder="First name"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#B20D1E] focus:ring-2 focus:ring-[#B20D1E]/20 outline-none transition-all"
                   />
                   {errors.firstName && <p className="text-xs text-red-500">{errors.firstName}</p>}
                 </div>
@@ -286,17 +275,17 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                     placeholder="Last name"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#B20D1E] focus:ring-2 focus:ring-[#B20D1E]/20 outline-none transition-all"
                   />
                   {errors.lastName && <p className="text-xs text-red-500">{errors.lastName}</p>}
                 </div>
               </div>
 
-              {/* Searchable Address Input (No example address in placeholder) */}
+              {/* Searchable Address Input */}
               <div className="space-y-1.5 relative">
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center justify-between">
                   <span>Street Address (Searchable) <span className="text-red-500">*</span></span>
-                  {isSearchingAddress && <Loader2 className="w-3.5 h-3.5 animate-spin text-[#059669]" />}
+                  {isSearchingAddress && <Loader2 className="w-3.5 h-3.5 animate-spin text-[var(--theme-red-main)]" />}
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -308,7 +297,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                     value={formData.address}
                     onChange={handleAddressChange}
                     placeholder="Start typing your street address..."
-                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#B20D1E] focus:ring-2 focus:ring-[#B20D1E]/20 outline-none transition-all"
                   />
                 </div>
                 {errors.address && <p className="text-xs text-red-500">{errors.address}</p>}
@@ -319,9 +308,9 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                       <div
                         key={idx}
                         onClick={() => handleSelectAddress(item)}
-                        className="p-3 hover:bg-emerald-50 text-xs font-semibold text-slate-800 cursor-pointer flex items-center gap-2 transition-colors text-left"
+                        className="p-3 hover:bg-red-50 text-xs font-semibold text-slate-800 cursor-pointer flex items-center gap-2 transition-colors text-left"
                       >
-                        <MapPin className="w-3.5 h-3.5 text-[#059669] shrink-0" />
+                        <MapPin className="w-3.5 h-3.5 text-[var(--theme-red-main)] shrink-0" />
                         <span className="truncate">{item.label}</span>
                       </div>
                     ))}
@@ -341,12 +330,12 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                   onChange={handlePhoneChange}
                   placeholder="Phone number"
                   maxLength={14}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#B20D1E] focus:ring-2 focus:ring-[#B20D1E]/20 outline-none transition-all"
                 />
                 {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
               </div>
 
-              {/* Email Address Field Switched Below Phone Number (Optional, Not Required) */}
+              {/* Email Address Field */}
               <div className="space-y-1.5">
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
                   Email Address <span className="text-slate-400 font-normal">(Optional)</span>
@@ -356,7 +345,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="Email address"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#B20D1E] focus:ring-2 focus:ring-[#B20D1E]/20 outline-none transition-all"
                 />
                 {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
               </div>
@@ -367,18 +356,18 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                   type="checkbox"
                   checked={formData.emailUpdates}
                   onChange={(e) => setFormData({ ...formData, emailUpdates: e.target.checked })}
-                  className="mt-0.5 w-4 h-4 rounded text-[#059669] focus:ring-[#059669] border-slate-300 cursor-pointer"
+                  className="mt-0.5 w-4 h-4 rounded text-[var(--theme-red-main)] focus:ring-[#B20D1E] border-slate-300 cursor-pointer"
                 />
                 <span className="text-xs text-slate-600 leading-snug">
                   Send me periodic campaign updates, community announcements, and election day reminders.
                 </span>
               </label>
 
-              {/* Submit Button */}
+              {/* Submit Button (Crimson Red) */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 rounded-full bg-[#059669] hover:bg-[#047857] text-white font-extrabold text-sm uppercase tracking-wider transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-full bg-[var(--theme-red-main)] hover:bg-[var(--theme-red-hover)] text-white font-extrabold text-sm uppercase tracking-wider transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>
