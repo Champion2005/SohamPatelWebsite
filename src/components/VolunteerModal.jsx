@@ -10,7 +10,6 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
     phone: '',
     bestTimeToCall: 'Evening (5pm - 8pm)',
     comments: '',
-    // Honeypot anti-spam field (hidden from real humans)
     _hp_website: ''
   });
 
@@ -19,11 +18,9 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState({});
 
-  // Timestamp trap to prevent instant bot submissions (< 1.8s)
   const renderTimeRef = useRef(Date.now());
   const modalRef = useRef(null);
 
-  // Close on Escape Key & reset timer on open
   useEffect(() => {
     if (isOpen) {
       renderTimeRef.current = Date.now();
@@ -39,7 +36,6 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Lock Body Scroll when Open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -66,33 +62,25 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
 
     if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
     if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
-    if (!formData.email.trim() || !formData.email.includes('@')) newErrors.email = 'Valid email address is required';
     if (!formData.phone.trim() || formData.phone.length < 14) newErrors.phone = 'Complete 10-digit phone number is required';
+    if (formData.email.trim() && !formData.email.includes('@')) newErrors.email = 'Please enter a valid email address';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    // =========================================================================
-    // LAYER 1: CLIENT-SIDE ANTI-SPAM (Honeypot + Time Trap)
-    // =========================================================================
     if (formData._hp_website) {
-      console.warn('Spam bot detected via Honeypot');
       setIsSubmitted(true);
       return;
     }
 
     const timeTakenSeconds = (Date.now() - renderTimeRef.current) / 1000;
     if (timeTakenSeconds < 1.8) {
-      console.warn(`Submission too fast (${timeTakenSeconds.toFixed(2)}s). Possible automated script.`);
       setIsSubmitted(true);
       return;
     }
 
-    // =========================================================================
-    // GOOGLE SHEETS WEBHOOK SUBMISSION
-    // =========================================================================
     setIsSubmitting(true);
 
     const webhookUrl = 
@@ -121,16 +109,15 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
           body: JSON.stringify(payload)
         });
       } else {
-        console.info('Google Sheets URL not configured in .env yet. Simulating successful submission.');
         await new Promise(resolve => setTimeout(resolve, 800));
       }
 
       setIsSubmitting(false);
       setIsSubmitted(true);
     } catch (err) {
-      console.error('Google Sheets submission error:', err);
+      console.error('Submission error:', err);
       setIsSubmitting(false);
-      setErrorMessage('Could not record your volunteer info. Please check your connection or contact the campaign directly.');
+      setErrorMessage('Could not record your volunteer info. Please try again.');
     }
   };
 
@@ -153,23 +140,21 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-slide-up-fade">
       
-      {/* Backdrop Click */}
       <div className="absolute inset-0" onClick={handleResetAndClose} />
 
-      {/* Modal Container */}
       <div 
         ref={modalRef}
         className="relative z-10 w-full max-w-lg rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
       >
         
-        {/* Modal Top Header */}
+        {/* Modal Top Header (Updated Title to "Support the Campaign") */}
         <div className="p-6 sm:p-8 bg-[#0F172A] text-white flex items-center justify-between border-b border-slate-800">
           <div className="space-y-1">
             <span className="text-[11px] font-bold uppercase tracking-widest text-[#059669] block">
               Join The Campaign
             </span>
             <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
-              Volunteer for Soham
+              Support the Campaign
             </h3>
           </div>
           <button
@@ -181,7 +166,6 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Modal Content */}
         <div className="p-6 sm:p-8 overflow-y-auto flex-1">
           {isSubmitted ? (
             <div className="py-8 text-center space-y-4">
@@ -214,13 +198,9 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
                 </div>
               )}
 
-              {/* =========================================================
-                  HONEYPOT FIELD (Layer 1 Anti-Spam: Hidden from real humans)
-                  ========================================================= */}
+              {/* Honeypot Field */}
               <div style={{ opacity: 0, position: 'absolute', top: 0, left: 0, height: 0, width: 0, zIndex: -1, overflow: 'hidden' }} aria-hidden="true">
-                <label htmlFor="volunteer_hp">Leave this field blank</label>
                 <input
-                  id="volunteer_hp"
                   type="text"
                   name="_hp_website"
                   tabIndex={-1}
@@ -241,7 +221,7 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
                     required
                     value={formData.firstName}
                     onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    placeholder="Jane"
+                    placeholder="First name"
                     className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
                   />
                   {errors.firstName && <p className="text-xs text-red-500">{errors.firstName}</p>}
@@ -256,30 +236,15 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
                     required
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    placeholder="Doe"
+                    placeholder="Last name"
                     className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
                   />
                   {errors.lastName && <p className="text-xs text-red-500">{errors.lastName}</p>}
                 </div>
               </div>
 
-              {/* Email & Phone */}
+              {/* Phone & Email (Phone Required, Email Optional, Phone placeholder updated) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                    Email Address <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="jane@example.com"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
-                  />
-                  {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
-                </div>
-
                 <div className="space-y-1.5">
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
                     Phone Number <span className="text-red-500">*</span>
@@ -289,11 +254,25 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
                     required
                     value={formData.phone}
                     onChange={handlePhoneChange}
-                    placeholder="(519) 555-0123"
+                    placeholder="Phone number"
                     maxLength={14}
                     className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
                   />
                   {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                    Email Address <span className="text-slate-400 font-normal">(Optional)</span>
+                  </label>
+                  <input
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="Email address"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
+                  />
+                  {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
                 </div>
               </div>
 
@@ -324,7 +303,7 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
                   rows={3}
                   value={formData.comments}
                   onChange={(e) => setFormData({ ...formData, comments: e.target.value })}
-                  placeholder="Tell us what you're interested in (canvassing, hosting signs, organizing neighborhood meets, digital advocacy, etc.)..."
+                  placeholder="Tell us what you're interested in..."
                   className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all resize-none"
                 />
               </div>
@@ -338,10 +317,10 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Saving Volunteer Info...</span>
+                    <span>Saving Info...</span>
                   </>
                 ) : (
-                  <span>Sign Up to Volunteer</span>
+                  <span>Sign Up to Support</span>
                 )}
               </button>
 

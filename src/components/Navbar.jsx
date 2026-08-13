@@ -14,11 +14,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
   const handleNavClick = (id) => {
     setActiveSection(id);
     setMobileMenuOpen(false);
-    // Smooth scroll to section if present
-    const elem = document.getElementById(id);
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -32,24 +28,16 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
         <div className="flex items-center justify-between h-20">
           
           {/* =================================================================
-             LEFT SIDE: Logo & Candidate Name Placeholder
+             LEFT SIDE: Just Text "Soham Patel" (No logo badge/icon)
              ================================================================= */}
-          <div className="flex items-center cursor-pointer group" onClick={() => handleNavClick('hero')}>
-            {/* Logo Badge Placeholder */}
-            <div 
-              className="w-11 h-11 rounded-xl flex items-center justify-center font-bold text-lg tracking-wider shadow-sm transition-transform group-hover:scale-105 duration-200 border"
-              style={{ 
-                backgroundColor: 'var(--theme-logo-badge-bg)', 
-                color: 'var(--theme-logo-badge-text)',
-                borderColor: 'rgba(5, 150, 105, 0.3)'
-              }}
-            >
-              SP
-            </div>
+          <div className="flex items-center cursor-pointer group" onClick={() => handleNavClick('home')}>
+            <span className="font-extrabold text-2xl sm:text-3xl tracking-tight text-[#0F172A] hover:text-[#059669] transition-colors">
+              Soham Patel
+            </span>
           </div>
 
           {/* =================================================================
-             CENTER: 3 Nav Buttons (Centered with the Screen Width)
+             CENTER: Nav Buttons (Centered with Screen Width)
              ================================================================= */}
           <div className="hidden lg:flex items-center space-x-2 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => {
@@ -82,89 +70,81 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
           </div>
 
           {/* =================================================================
-             RIGHT SIDE: Social Media Pill Container (Desktop lg+)
+             RIGHT SIDE: Direct Social Logos (No White Outer Pill)
              ================================================================= */}
-          <div className="hidden lg:flex items-center">
-            <div 
-              className="flex items-center gap-1.5 p-1 px-1.5 rounded-full border shadow-sm transition-all"
+          <div className="hidden lg:flex items-center gap-2">
+            {/* Instagram */}
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Instagram"
+              className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
               style={{
-                borderColor: 'var(--theme-social-pill-border)',
-                backgroundColor: 'var(--theme-social-pill-bg)'
+                backgroundColor: 'var(--theme-social-icon-bg)',
+                color: 'var(--theme-social-icon-color)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-hover-bg)';
+                e.currentTarget.style.color = 'var(--theme-social-icon-hover-color)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-bg)';
+                e.currentTarget.style.color = 'var(--theme-social-icon-color)';
               }}
             >
-              {/* Instagram */}
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Instagram"
-                className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200"
-                style={{
-                  backgroundColor: 'var(--theme-social-icon-bg)',
-                  color: 'var(--theme-social-icon-color)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-hover-bg)';
-                  e.currentTarget.style.color = 'var(--theme-social-icon-hover-color)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-bg)';
-                  e.currentTarget.style.color = 'var(--theme-social-icon-color)';
-                }}
-              >
-                <InstagramIcon className="w-4 h-4" />
-              </a>
+              <InstagramIcon className="w-4.5 h-4.5" />
+            </a>
 
-              {/* Facebook */}
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Facebook"
-                className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200"
-                style={{
-                  backgroundColor: 'var(--theme-social-icon-bg)',
-                  color: 'var(--theme-social-icon-color)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-hover-bg)';
-                  e.currentTarget.style.color = 'var(--theme-social-icon-hover-color)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-bg)';
-                  e.currentTarget.style.color = 'var(--theme-social-icon-color)';
-                }}
-              >
-                <FacebookIcon className="w-4 h-4" />
-              </a>
+            {/* Facebook */}
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Facebook"
+              className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
+              style={{
+                backgroundColor: 'var(--theme-social-icon-bg)',
+                color: 'var(--theme-social-icon-color)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-hover-bg)';
+                e.currentTarget.style.color = 'var(--theme-social-icon-hover-color)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-bg)';
+                e.currentTarget.style.color = 'var(--theme-social-icon-color)';
+              }}
+            >
+              <FacebookIcon className="w-4.5 h-4.5" />
+            </a>
 
-              {/* WhatsApp */}
-              <a
-                href="https://wa.me/"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="WhatsApp"
-                className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200"
-                style={{
-                  backgroundColor: 'var(--theme-social-icon-bg)',
-                  color: 'var(--theme-social-icon-color)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-hover-bg)';
-                  e.currentTarget.style.color = 'var(--theme-social-icon-hover-color)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-bg)';
-                  e.currentTarget.style.color = 'var(--theme-social-icon-color)';
-                }}
-              >
-                <WhatsAppIcon className="w-4 h-4" />
-              </a>
-            </div>
+            {/* WhatsApp */}
+            <a
+              href="https://wa.me/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="WhatsApp"
+              className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
+              style={{
+                backgroundColor: 'var(--theme-social-icon-bg)',
+                color: 'var(--theme-social-icon-color)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-hover-bg)';
+                e.currentTarget.style.color = 'var(--theme-social-icon-hover-color)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--theme-social-icon-bg)';
+                e.currentTarget.style.color = 'var(--theme-social-icon-color)';
+              }}
+            >
+              <WhatsAppIcon className="w-4.5 h-4.5" />
+            </a>
           </div>
 
           {/* =================================================================
-             MOBILE / TABLET HAMBURGER BUTTON (Visible on < lg screens)
+             MOBILE / TABLET HAMBURGER BUTTON
              ================================================================= */}
           <div className="flex lg:hidden items-center">
             <button
@@ -180,7 +160,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
       </div>
 
       {/* =================================================================
-         MOBILE & TABLET NAVIGATION DRAWER / DROPDOWN
+         MOBILE & TABLET NAVIGATION DRAWER
          ================================================================= */}
       {mobileMenuOpen && (
         <div 
@@ -210,24 +190,18 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
             ))}
           </div>
 
-          {/* Drawer Social Media Pill */}
+          {/* Drawer Social Media Logos */}
           <div className="flex items-center justify-between pt-2">
             <span className="text-xs uppercase tracking-wider font-semibold text-slate-300">
               Connect with Soham:
             </span>
-            <div 
-              className="flex items-center gap-2 p-1.5 px-2 rounded-full border shadow-sm"
-              style={{
-                borderColor: 'rgba(255, 255, 255, 0.2)',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)'
-              }}
-            >
+            <div className="flex items-center gap-2">
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white hover:bg-[var(--theme-accent-green)]"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-slate-800 hover:bg-[var(--theme-accent-green)]"
               >
                 <InstagramIcon className="w-5 h-5" />
               </a>
@@ -237,7 +211,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white hover:bg-[var(--theme-accent-green)]"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-slate-800 hover:bg-[var(--theme-accent-green)]"
               >
                 <FacebookIcon className="w-5 h-5" />
               </a>
@@ -247,7 +221,7 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white hover:bg-[var(--theme-accent-green)]"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-slate-800 hover:bg-[var(--theme-accent-green)]"
               >
                 <WhatsAppIcon className="w-5 h-5" />
               </a>

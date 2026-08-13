@@ -20,7 +20,6 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
     address: '',
     phone: '',
     emailUpdates: true,
-    // Honeypot anti-spam field (hidden from real humans)
     _hp_website: ''
   });
 
@@ -31,12 +30,10 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState({});
 
-  // Timestamp trap to prevent instant bot submissions (< 1.8s)
   const renderTimeRef = useRef(Date.now());
   const debounceTimerRef = useRef(null);
   const modalRef = useRef(null);
 
-  // Close on Escape Key & reset timer on open
   useEffect(() => {
     if (isOpen) {
       renderTimeRef.current = Date.now();
@@ -52,7 +49,6 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Lock Body Scroll when Open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -66,7 +62,6 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  // Search Address as user types
   const handleAddressChange = (e) => {
     const val = e.target.value;
     setFormData(prev => ({ ...prev, address: val }));
@@ -109,34 +104,26 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
 
     if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
     if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
-    if (!formData.email.trim() || !formData.email.includes('@')) newErrors.email = 'Valid email address is required';
     if (!formData.address.trim()) newErrors.address = 'Search and select your Windsor address';
     if (!formData.phone.trim() || formData.phone.length < 14) newErrors.phone = 'Complete 10-digit phone number is required';
+    if (formData.email.trim() && !formData.email.includes('@')) newErrors.email = 'Please enter a valid email address';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    // =========================================================================
-    // LAYER 1: CLIENT-SIDE ANTI-SPAM (Honeypot + Time Trap)
-    // =========================================================================
     if (formData._hp_website) {
-      console.warn('Spam bot detected via Honeypot');
       setIsSubmitted(true);
       return;
     }
 
     const timeTakenSeconds = (Date.now() - renderTimeRef.current) / 1000;
     if (timeTakenSeconds < 1.8) {
-      console.warn(`Submission too fast (${timeTakenSeconds.toFixed(2)}s). Possible automated script.`);
       setIsSubmitted(true);
       return;
     }
 
-    // =========================================================================
-    // GOOGLE SHEETS WEBHOOK SUBMISSION
-    // =========================================================================
     setIsSubmitting(true);
 
     const webhookUrl = 
@@ -165,16 +152,15 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
           body: JSON.stringify(payload)
         });
       } else {
-        console.info('Google Sheets URL not configured in .env yet. Simulating successful submission.');
         await new Promise(resolve => setTimeout(resolve, 800));
       }
 
       setIsSubmitting(false);
       setIsSubmitted(true);
     } catch (err) {
-      console.error('Google Sheets submission error:', err);
+      console.error('Submission error:', err);
       setIsSubmitting(false);
-      setErrorMessage('Could not record your request. Please try again or contact the campaign directly.');
+      setErrorMessage('Could not record your request. Please try again.');
     }
   };
 
@@ -198,16 +184,13 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-slide-up-fade">
       
-      {/* Backdrop Click */}
       <div className="absolute inset-0" onClick={handleResetAndClose} />
 
-      {/* Modal Container */}
       <div 
         ref={modalRef}
         className="relative z-10 w-full max-w-lg rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
       >
         
-        {/* Modal Top Header */}
         <div className="p-6 sm:p-8 bg-[#0F172A] text-white flex items-center justify-between border-b border-slate-800">
           <div className="space-y-1">
             <span className="text-[11px] font-bold uppercase tracking-widest text-[#059669] block">
@@ -226,7 +209,6 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Modal Content */}
         <div className="p-6 sm:p-8 overflow-y-auto flex-1">
           {isSubmitted ? (
             <div className="py-8 text-center space-y-4">
@@ -259,13 +241,9 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                 </div>
               )}
 
-              {/* =========================================================
-                  HONEYPOT FIELD (Layer 1 Anti-Spam: Hidden from real humans)
-                  ========================================================= */}
+              {/* Honeypot Field */}
               <div style={{ opacity: 0, position: 'absolute', top: 0, left: 0, height: 0, width: 0, zIndex: -1, overflow: 'hidden' }} aria-hidden="true">
-                <label htmlFor="lawn_sign_hp">Leave this field blank</label>
                 <input
-                  id="lawn_sign_hp"
                   type="text"
                   name="_hp_website"
                   tabIndex={-1}
@@ -286,7 +264,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                     required
                     value={formData.firstName}
                     onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    placeholder="Jane"
+                    placeholder="First name"
                     className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
                   />
                   {errors.firstName && <p className="text-xs text-red-500">{errors.firstName}</p>}
@@ -301,30 +279,14 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                     required
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    placeholder="Doe"
+                    placeholder="Last name"
                     className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
                   />
                   {errors.lastName && <p className="text-xs text-red-500">{errors.lastName}</p>}
                 </div>
               </div>
 
-              {/* Email Address */}
-              <div className="space-y-1.5">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                  Email Address <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="jane@example.com"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
-                />
-                {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
-              </div>
-
-              {/* Searchable Address Input */}
+              {/* Searchable Address Input (No example address in placeholder) */}
               <div className="space-y-1.5 relative">
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center justify-between">
                   <span>Street Address (Searchable) <span className="text-red-500">*</span></span>
@@ -339,13 +301,12 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                     required
                     value={formData.address}
                     onChange={handleAddressChange}
-                    placeholder="Start typing your street (e.g. 3155 Walker Rd)..."
+                    placeholder="Start typing your street address..."
                     className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
                   />
                 </div>
                 {errors.address && <p className="text-xs text-red-500">{errors.address}</p>}
 
-                {/* Autocomplete Dropdown */}
                 {addressSuggestions.length > 0 && (
                   <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden z-50 divide-y divide-slate-100 max-h-48 overflow-y-auto">
                     {addressSuggestions.map((item, idx) => (
@@ -362,7 +323,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                 )}
               </div>
 
-              {/* Phone Number with Auto Formatting */}
+              {/* Phone Number Field First */}
               <div className="space-y-1.5">
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
                   Phone Number <span className="text-red-500">*</span>
@@ -372,11 +333,26 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                   required
                   value={formData.phone}
                   onChange={handlePhoneChange}
-                  placeholder="(519) 555-0123"
+                  placeholder="Phone number"
                   maxLength={14}
                   className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
                 />
                 {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
+              </div>
+
+              {/* Email Address Field Switched Below Phone Number (Optional, Not Required) */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Email Address <span className="text-slate-400 font-normal">(Optional)</span>
+                </label>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="Email address"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/20 outline-none transition-all"
+                />
+                {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
               </div>
 
               {/* Email Updates Checkbox */}
