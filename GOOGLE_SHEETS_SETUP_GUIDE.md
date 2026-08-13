@@ -36,12 +36,12 @@ function doPost(e) {
       }
       sheet.appendRow([
         data.submittedAt || new Date().toLocaleString(),
-        data.firstName,
-        data.lastName,
-        data.email,
-        data.address,
-        data.phone,
-        data.emailUpdates
+        data.firstName || "",
+        data.lastName || "",
+        data.email || "", // Blank if optional email was left empty
+        data.address || "",
+        data.phone || "",
+        data.emailUpdates || "No"
       ]);
     } else if (formType === "Volunteer") {
       var sheet = ss.getSheetByName("Volunteers");
@@ -52,12 +52,12 @@ function doPost(e) {
       }
       sheet.appendRow([
         data.submittedAt || new Date().toLocaleString(),
-        data.firstName,
-        data.lastName,
-        data.email,
-        data.phone,
-        data.bestTimeToCall,
-        data.comments
+        data.firstName || "",
+        data.lastName || "",
+        data.email || "", // Blank if optional email was left empty
+        data.phone || "",
+        data.bestTimeToCall || "",
+        data.comments || ""
       ]);
     }
 
@@ -112,5 +112,5 @@ Both forms are equipped with a **two-part Layer 1 Spam Filter**:
 ## 🧪 Testing Your Integration
 1. Run `npm run dev` or open your live site.
 2. Click **Request a Lawn Sign** or **Volunteer**.
-3. Fill out the form and submit.
-4. Check your Google Sheet: the data will appear in the `Lawn Signs` or `Volunteers` tab!
+3. Fill out the form (with or without an email address) and submit.
+4. Check your Google Sheet: the row will appear in the `Lawn Signs` or `Volunteers` tab with a blank cell in the Email column if omitted!
