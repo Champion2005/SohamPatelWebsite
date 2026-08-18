@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Play, Image as ImageIcon, Video, Calendar, MapPin } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Play, Image as ImageIcon, Video, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 // Import Campaign Photos
@@ -12,6 +12,7 @@ export const MediaSection = () => {
   useScrollReveal();
 
   const [activeVideo, setActiveVideo] = useState(null);
+  const videoScrollRef = useRef(null);
 
   const videos = [
     {
@@ -19,7 +20,6 @@ export const MediaSection = () => {
       title: "Soham Patel's Vision for Windsor Ward 9",
       category: "Campaign Vision",
       duration: "2:45",
-      date: "August 2026",
       youtubeId: "dQw4w9WgXcQ",
       thumbnail: eventPhoto3,
       description: "Soham outlines key priorities for safer streets, modern storm drainage resilience, and transparent leadership at Windsor City Hall."
@@ -29,7 +29,6 @@ export const MediaSection = () => {
       title: "Neighborhood Infrastructure & Flood Mitigation",
       category: "Town Hall Highlight",
       duration: "3:12",
-      date: "July 2026",
       youtubeId: "dQw4w9WgXcQ",
       thumbnail: eventPhoto2,
       description: "Discussion with Ward 9 homeowners on stormwater subsidy expansion and local road resurfacing plans."
@@ -39,20 +38,34 @@ export const MediaSection = () => {
       title: "Revitalizing Ward 9 Parks & Youth Spaces",
       category: "Community Walkthrough",
       duration: "1:58",
-      date: "June 2026",
       youtubeId: "dQw4w9WgXcQ",
       thumbnail: eventPhoto1,
       description: "Touring local park amenities and discussing playground upgrades with active families in South Windsor."
+    },
+    {
+      id: "video4",
+      title: "Door-to-Door Resident Conversations",
+      category: "Listening Tour",
+      duration: "2:15",
+      youtubeId: "dQw4w9WgXcQ",
+      thumbnail: eventPhoto4,
+      description: "Connecting with residents across Ward 9 neighborhoods to hear firsthand priorities for City Council."
     }
   ];
 
-  // Organic Bento Grid Photo Blocks (2x2, 1x2, 2x1, and 1x1 Blocks)
+  const scrollVideos = (direction) => {
+    if (videoScrollRef.current) {
+      const scrollAmount = direction === 'left' ? -380 : 380;
+      videoScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  // Organic Bento Grid Photo Blocks (Dates removed as requested)
   const photoBlocks = [
     {
       id: 1,
       title: "Ward 9 Resident Town Hall",
       location: "South Windsor Community Center",
-      date: "August 2026",
       image: eventPhoto3,
       caption: "Answering resident questions and discussing local budget accountability ahead of City Council votes.",
       gridSpan: "col-span-1 sm:col-span-2 lg:col-span-2 row-span-2", // 2x2 Feature Hero Block
@@ -62,7 +75,6 @@ export const MediaSection = () => {
       id: 2,
       title: "Door-to-Door Listening Tour",
       location: "East Windsor Residential",
-      date: "July 2026",
       image: eventPhoto4,
       caption: "Hearing directly from local homeowners about traffic calming.",
       gridSpan: "col-span-1 row-span-2", // 1x2 Tall Block
@@ -72,7 +84,6 @@ export const MediaSection = () => {
       id: 3,
       title: "Neighborhood Coffee Meet",
       location: "Walker Road Area",
-      date: "July 2026",
       image: eventPhoto1,
       caption: "Connecting with long-time Ward 9 seniors and families.",
       gridSpan: "col-span-1 row-span-1" // 1x1 Square Block
@@ -81,7 +92,6 @@ export const MediaSection = () => {
       id: 4,
       title: "Jackson Park Walkthrough",
       location: "Jackson Park Corridor",
-      date: "June 2026",
       image: eventPhoto2,
       caption: "Discussing park amenities and accessible green space.",
       gridSpan: "col-span-1 row-span-1" // 1x1 Square Block
@@ -90,7 +100,6 @@ export const MediaSection = () => {
       id: 5,
       title: "Parks & Greenways Discussion",
       location: "South Windsor Greenways",
-      date: "June 2026",
       image: eventPhoto2,
       caption: "Expanding tree canopy and year-round youth sports programming.",
       gridSpan: "col-span-1 sm:col-span-2 row-span-1" // 2x1 Wide Banner Block
@@ -99,7 +108,6 @@ export const MediaSection = () => {
       id: 6,
       title: "Active Families & Youth Engagement",
       location: "Roseland Area",
-      date: "May 2026",
       image: eventPhoto1,
       caption: "Proactive community-focused neighborhood initiatives.",
       gridSpan: "col-span-1 sm:col-span-2 row-span-1" // 2x1 Wide Banner Block
@@ -112,32 +120,57 @@ export const MediaSection = () => {
       {/* =================================================================
          SECTION HEADER & INTRO
          ================================================================= */}
-      <div className="border-l-4 border-[var(--theme-red-main)] pl-4 sm:pl-6 space-y-2">
-        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[var(--theme-navy-main)]">
+      <div className="border-l-4 border-[#FF0000] pl-4 sm:pl-6 space-y-2">
+        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#0A3E88]">
           Community & Media
         </h2>
         <p className="text-slate-600 font-medium text-base sm:text-lg max-w-3xl leading-relaxed pt-1">
-          Highlights from recent neighborhood town halls, community events, and video updates from Soham Patel’s campaign across Windsor Ward 9.
+          Highlights from recent neighborhood town halls, community events, and video reels from Soham Patel’s campaign across Windsor Ward 9.
         </p>
       </div>
 
       {/* =================================================================
-         1. FEATURED CAMPAIGN VIDEOS & REELS
+         1. FEATURED CAMPAIGN VIDEOS & REELS (Side-to-Side Scrolling Controls)
          ================================================================= */}
       <div className="space-y-6">
-        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[var(--theme-red-main)]">
-          <Video className="w-4 h-4" />
-          <span>Featured Videos & Reels</span>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#FF0000]">
+            <Video className="w-4 h-4" />
+            <span>Featured Videos & Reels</span>
+          </div>
+
+          {/* Side to Side Scroll Buttons */}
+          <div className="flex items-center gap-2 self-end sm:self-auto">
+            <button
+              onClick={() => scrollVideos('left')}
+              className="w-10 h-10 rounded-full bg-white border border-slate-300 hover:border-[#0A3E88] text-[#0A3E88] hover:bg-[#0A3E88] hover:text-white flex items-center justify-center transition-all shadow-sm cursor-pointer"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => scrollVideos('right')}
+              className="w-10 h-10 rounded-full bg-white border border-slate-300 hover:border-[#0A3E88] text-[#0A3E88] hover:bg-[#0A3E88] hover:text-white flex items-center justify-center transition-all shadow-sm cursor-pointer"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+        {/* Video Cards Scroll Container */}
+        <div 
+          ref={videoScrollRef}
+          className="flex gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory no-scrollbar"
+          style={{ scrollBehavior: 'smooth' }}
+        >
           {videos.map((video) => (
             <div 
               key={video.id}
-              className="rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col justify-between card-hover-lift group"
+              className="w-[300px] sm:w-[360px] lg:w-[380px] shrink-0 snap-start rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col justify-between card-hover-lift group"
             >
               {/* Video Thumbnail Container */}
-              <div className="relative aspect-video w-full bg-[#06122B] overflow-hidden">
+              <div className="relative aspect-video w-full bg-[#062654] overflow-hidden">
                 {activeVideo === video.id ? (
                   <iframe
                     className="w-full h-full"
@@ -151,14 +184,14 @@ export const MediaSection = () => {
                     <img 
                       src={video.thumbnail} 
                       alt={video.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-85"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#06122B]/90 via-[#06122B]/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#062654]/90 via-[#062654]/20 to-transparent" />
 
-                    {/* Play Button Overlay (Crimson Red) */}
+                    {/* Play Button Overlay (Red) */}
                     <button
                       onClick={() => setActiveVideo(video.id)}
-                      className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-[var(--theme-red-main)] hover:bg-[var(--theme-red-hover)] text-white flex items-center justify-center shadow-xl transition-all hover:scale-110 cursor-pointer"
+                      className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white flex items-center justify-center shadow-xl transition-all hover:scale-110 cursor-pointer"
                       aria-label={`Play ${video.title}`}
                     >
                       <Play className="w-6 h-6 fill-current ml-0.5" />
@@ -170,7 +203,7 @@ export const MediaSection = () => {
                     </span>
 
                     {/* Category Badge */}
-                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[var(--theme-navy-main)] text-[11px] font-extrabold tracking-wider uppercase shadow-sm">
+                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 text-[#0A3E88] text-[11px] font-black tracking-wider uppercase shadow-sm">
                       {video.category}
                     </span>
                   </>
@@ -178,16 +211,12 @@ export const MediaSection = () => {
               </div>
 
               {/* Video Details */}
-              <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
-                    <Calendar className="w-3.5 h-3.5 text-[var(--theme-red-main)]" />
-                    <span>{video.date}</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[var(--theme-navy-main)] leading-snug group-hover:text-[var(--theme-red-main)] transition-colors">
+              <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
+                <div className="space-y-1.5">
+                  <h3 className="text-base sm:text-lg font-black text-[#0A3E88] uppercase leading-snug group-hover:text-[#FF0000] transition-colors">
                     {video.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-2">
                     {video.description}
                   </p>
                 </div>
@@ -199,10 +228,10 @@ export const MediaSection = () => {
       </div>
 
       {/* =================================================================
-         2. ORGANIC BENTO MASONRY PHOTO GRID (2x2, 1x2, 2x1, 1x1 Blocks)
+         2. ORGANIC BENTO MASONRY PHOTO GRID (Date badges removed)
          ================================================================= */}
       <div className="space-y-6 pt-8 border-t border-slate-200/80">
-        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[var(--theme-red-main)]">
+        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#FF0000]">
           <ImageIcon className="w-4 h-4" />
           <span>Community Events & Photo Gallery</span>
         </div>
@@ -212,7 +241,7 @@ export const MediaSection = () => {
           {photoBlocks.map((block) => (
             <div 
               key={block.id}
-              className={`rounded-3xl bg-[#06122B] border border-slate-200/80 shadow-md overflow-hidden relative group card-hover-lift flex flex-col justify-end ${block.gridSpan}`}
+              className={`rounded-3xl bg-[#062654] border border-slate-200/80 shadow-md overflow-hidden relative group card-hover-lift flex flex-col justify-end ${block.gridSpan}`}
             >
               {/* Background Image */}
               <img 
@@ -222,23 +251,16 @@ export const MediaSection = () => {
               />
 
               {/* Gradient Overlay for Readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#06122B] via-[#06122B]/40 to-transparent pointer-events-none" />
-
-              {/* Top Date Badge */}
-              <div className="absolute top-4 left-4 z-10">
-                <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[var(--theme-navy-main)] text-[10px] font-black tracking-wider uppercase shadow-md">
-                  {block.date}
-                </span>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#062654] via-[#062654]/40 to-transparent pointer-events-none" />
 
               {/* Content Overlay at Bottom */}
               <div className="relative z-10 p-5 sm:p-6 space-y-2 text-white">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-red-400">
-                  <MapPin className="w-3.5 h-3.5 shrink-0 text-[var(--theme-red-main)]" />
+                  <MapPin className="w-3.5 h-3.5 shrink-0 text-[#FF0000]" />
                   <span className="truncate">{block.location}</span>
                 </div>
 
-                <h3 className={`font-extrabold leading-snug tracking-tight text-white ${
+                <h3 className={`font-black uppercase leading-snug tracking-tight text-white ${
                   block.isHero ? 'text-xl sm:text-2xl lg:text-3xl' : 'text-base sm:text-lg'
                 }`}>
                   {block.title}

@@ -1,71 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @layer base {
   :root {
     /* ==========================================================================
-       WINDSOR WARD 9 - SOHAM PATEL CAMPAIGN DESIGN SYSTEM & THEME
-       INSPIRATION: Official Campaign Poster (IMG_6983.png)
-       TYPOGRAPHY: Google Fonts 'Ubuntu' (Weights 300, 400, 500, 700)
-       PALETTE: Deep Imperial Navy Blue, Bold Canadian Crimson Red, Crisp Ice Off-White
+       WINDSOR WARD 9 - SOHAM PATEL CAMPAIGN DESIGN SYSTEM
+       COLORS: Red (#FF0000), White (#FFFFFF), Blue (#0A3E88)
+       TYPOGRAPHY: Google Fonts 'Oswald' (Weights 300, 400, 500, 600, 700)
+       RULE: No italics anywhere on the website.
        ========================================================================== */
 
-    /* Primary Navy Family */
-    --theme-navy-main: #0B1B3D;           /* Deep Imperial Navy Blue */
-    --theme-navy-dark: #06122B;           /* Midnight Dark Navy */
-    --theme-navy-light: #1D2A44;          /* Medium Navy Accent */
-    --theme-navy-tint: #EEF2F9;           /* Soft Light Navy Background Tint */
+    /* Primary Blue Family (#0A3E88) */
+    --theme-blue-main: #0A3E88;           /* Primary Campaign Royal Blue */
+    --theme-blue-dark: #062654;           /* Dark Midnight Blue (Drawers, Footer) */
+    --theme-blue-hover: #08326E;          /* Hover Blue */
+    --theme-blue-tint: #EEF4FC;           /* Soft Light Blue Tint */
 
-    /* Primary Crimson Red Family */
-    --theme-red-main: #B20D1E;            /* Bold Canadian Crimson Red */
-    --theme-red-hover: #8F0A18;           /* Hover Dark Crimson Red */
-    --theme-red-dark: #7F1D1D;            /* Deep Crimson Accent */
-    --theme-red-tint: #FEF2F2;            /* Soft Light Red Tint */
+    /* Primary Red Family (#FF0000) */
+    --theme-red-main: #FF0000;            /* Primary Campaign Red */
+    --theme-red-hover: #D90000;           /* Darker Red on hover */
+    --theme-red-dark: #B30000;            /* Deep Red */
+    --theme-red-tint: #FFF0F0;            /* Soft Light Red Tint */
 
-    /* Core Page & Nav Backgrounds */
-    --theme-bg-page: #F8FAFC;             /* Crisp Ice Off-White */
-    --theme-bg-hero: #EEF2F9;             /* Light Navy-Tinted Hero Canvas */
-    --theme-bg-card: #FFFFFF;             /* Pure White for cards */
-    --theme-bg-nav: #0B1B3D;              /* Deep Navy Sticky Nav */
-    --theme-bg-mobile-drawer: #06122B;    /* Midnight Navy Mobile Menu Drawer */
+    /* Surfaces & Layout Backgrounds */
+    --theme-bg-page: #F8FAFC;             /* Crisp Ice Off-White Page Canvas */
+    --theme-bg-hero: #EEF4FC;             /* Light Blue Hero Canvas */
+    --theme-bg-card: #FFFFFF;             /* Pure White Card Surface */
+    --theme-bg-nav: #0A3E88;              /* Solid Blue Top Sticky Navbar */
+    --theme-bg-mobile-drawer: #062654;    /* Dark Midnight Blue Mobile Drawer */
 
-    /* Typography & Text Tokens */
-    --theme-text-nav: #0B1B3D;            /* Dark Navy for Navbar text on light bg */
-    --theme-text-nav-muted: #64748B;      /* Soft Slate Muted Text */
-    --theme-text-primary: #0B1B3D;        /* Deep Imperial Navy for main body & headings */
-    --theme-text-secondary: #475569;      /* Slate Gray for secondary body text */
+    /* Typography Tokens */
+    --theme-text-nav: #FFFFFF;            /* Pure White text in Top Navbar */
+    --theme-text-primary: #0A3E88;        /* Blue for Headings and Major Titles */
+    --theme-text-secondary: #334155;      /* Slate for Body Paragraphs */
+    --theme-text-muted: #64748B;          /* Muted Label Text */
 
-    /* Navigation Link Tokens */
-    --theme-nav-link-color: #0B1B3D;
-    --theme-nav-link-hover: #B20D1E;
-    --theme-nav-link-hover-bg: rgba(11, 27, 61, 0.08);
-    --theme-nav-link-active: #B20D1E;
+    /* Navbar Link Tokens */
+    --theme-nav-link-color: #FFFFFF;
+    --theme-nav-link-hover: #FF0000;
+    --theme-nav-link-hover-bg: rgba(255, 255, 255, 0.12);
+    --theme-nav-link-active: #FFFFFF;
 
-    /* Primary Action Button: Request a Lawn Sign (Crimson Red) */
-    --theme-btn-lawn-bg: #B20D1E;         /* Bold Crimson Red Fill */
-    --theme-btn-lawn-hover: #8F0A18;      /* Hover Crimson Red */
-    --theme-btn-lawn-text: #FFFFFF;       /* Pure White Text */
+    /* Buttons */
+    --theme-btn-lawn-bg: #FF0000;         /* Primary Action: Bold Red */
+    --theme-btn-lawn-hover: #D90000;      /* Hover Darker Red */
+    --theme-btn-lawn-text: #FFFFFF;       /* White text */
 
-    /* Secondary Action Button: Volunteer (Deep Imperial Navy) */
-    --theme-btn-volunteer-bg: #0B1B3D;    /* Deep Navy Fill */
-    --theme-btn-volunteer-hover: #1D2A44;/* Hover Navy Fill */
-    --theme-btn-volunteer-text: #FFFFFF; /* Pure White Text */
+    --theme-btn-volunteer-bg: #0A3E88;    /* Secondary Action: Royal Blue */
+    --theme-btn-volunteer-hover: #08326E; /* Hover Deep Blue */
+    --theme-btn-volunteer-text: #FFFFFF;  /* White text */
 
-    /* Social Media Circle Buttons */
-    --theme-social-icon-bg: rgba(11, 27, 61, 0.08);
-    --theme-social-icon-hover-bg: #B20D1E; /* Crimson Red Highlight on hover */
-    --theme-social-icon-color: #0B1B3D;    /* Deep Navy Icon for light bg */
-    --theme-social-icon-hover-color: #FFFFFF;/* Pure White Icon on hover */
-
-    /* Branding & Logo Colors */
-    --theme-logo-title: #0B1B3D;           /* Deep Navy Title */
-    --theme-logo-subtitle: #B20D1E;        /* Crimson Red Subtitle Highlight */
+    /* Social Media Icons */
+    --theme-social-icon-bg: rgba(255, 255, 255, 0.18);
+    --theme-social-icon-hover-bg: #FF0000;
+    --theme-social-icon-color: #FFFFFF;
+    --theme-social-icon-hover-color: #FFFFFF;
   }
 }
 
-/* Base Body Styling with Google Fonts Ubuntu */
-body, button, input, select, textarea {
-  font-family: 'Ubuntu', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+/* Base Body Styling with Google Fonts Oswald */
+body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, span, a, label {
+  font-family: 'Oswald', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+  font-style: normal !important;
 }
 
 body {
@@ -77,49 +73,49 @@ body {
 }
 
 /* ==========================================================================
-   DESKTOP ANIMATIONS (Scroll-Tied with Extended 90%+ Visibility Duration)
+   DESKTOP ANIMATIONS (Scroll-Tied with Default Visibility Fallback)
    ========================================================================== */
 @media (min-width: 1024px) {
   .reveal-left {
-    opacity: var(--scroll-p, 0);
-    transform: translateX(calc(-75px * (1 - var(--scroll-p, 0)))) scale(calc(0.95 + 0.05 * var(--scroll-p, 0)));
-    transition: opacity 0.15s linear, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: var(--scroll-p, 1);
+    transform: translateX(calc(-50px * (1 - var(--scroll-p, 1))));
+    transition: opacity 0.25s linear, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
   .reveal-right {
-    opacity: var(--scroll-p, 0);
-    transform: translateX(calc(75px * (1 - var(--scroll-p, 0)))) scale(calc(0.95 + 0.05 * var(--scroll-p, 0)));
-    transition: opacity 0.15s linear, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: var(--scroll-p, 1);
+    transform: translateX(calc(50px * (1 - var(--scroll-p, 1))));
+    transition: opacity 0.25s linear, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
   .reveal-up {
-    opacity: var(--scroll-p, 0);
-    transform: translateY(calc(45px * (1 - var(--scroll-p, 0))));
-    transition: opacity 0.15s linear, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: var(--scroll-p, 1);
+    transform: translateY(calc(30px * (1 - var(--scroll-p, 1))));
+    transition: opacity 0.25s linear, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
   .reveal-zoom {
-    opacity: var(--scroll-p, 0);
-    transform: scale(calc(0.84 + 0.16 * var(--scroll-p, 0))) translateY(calc(35px * (1 - var(--scroll-p, 0))));
-    transition: opacity 0.15s linear, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: var(--scroll-p, 1);
+    transform: scale(calc(0.92 + 0.08 * var(--scroll-p, 1))) translateY(calc(20px * (1 - var(--scroll-p, 1))));
+    transition: opacity 0.25s linear, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 }
 
 /* ==========================================================================
-   MOBILE ANIMATIONS (Time-Based, Smooth Vertical Transitions, Zero Layout Overflow)
+   MOBILE ANIMATIONS
    ========================================================================== */
 @media (max-width: 1023px) {
   .reveal-left,
   .reveal-right,
   .reveal-up,
   .reveal-zoom {
-    opacity: 0.1;
-    transform: translateY(20px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0.2;
+    transform: translateY(15px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
@@ -152,29 +148,38 @@ body {
 
 .animate-slide-up-fade {
   opacity: 0;
-  animation: slideUpFade 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUpFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-delay-100 {
-  animation-delay: 0.2s;
+  animation-delay: 0.15s;
 }
 
 .animate-delay-200 {
-  animation-delay: 0.4s;
+  animation-delay: 0.3s;
 }
 
 .animate-delay-300 {
-  animation-delay: 0.6s;
+  animation-delay: 0.45s;
 }
 
 /* Micro-interaction Hover Effects */
 .card-hover-lift {
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
 }
 .card-hover-lift:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 35px -10px rgba(11, 27, 61, 0.14), 0 10px 20px -10px rgba(178, 13, 30, 0.15);
-  border-color: rgba(178, 13, 30, 0.4);
+  box-shadow: 0 20px 35px -10px rgba(10, 62, 136, 0.18), 0 10px 20px -10px rgba(255, 0, 0, 0.18);
+  border-color: rgba(255, 0, 0, 0.35);
+}
+
+/* Custom Horizontal Scrollbar for Reels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Custom Scrollbar */
@@ -182,12 +187,12 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B1B3D;
+  background: #062654;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1D2A44;
+  background: #0A3E88;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B20D1E;
+  background: #FF0000;
 }

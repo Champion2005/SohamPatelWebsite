@@ -10,16 +10,16 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
     <section id="about" className="scroll-mt-24 w-full max-w-5xl mx-auto space-y-8">
       
       {/* 1. Header: Meet Soham Patel */}
-      <div className="border-l-4 border-[var(--theme-red-main)] pl-4 sm:pl-6 reveal-up">
-        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[var(--theme-navy-main)]">
+      <div className="border-l-4 border-[#FF0000] pl-4 sm:pl-6 reveal-up">
+        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#0A3E88]">
           Meet Soham Patel
         </h2>
       </div>
 
       {/* 2. Picture Directly Underneath Header */}
-      <div className="w-full rounded-3xl bg-[var(--theme-navy-tint)] border border-[#0B1B3D]/10 shadow-lg overflow-hidden flex justify-center items-end p-6 sm:p-10 relative reveal-zoom card-hover-lift">
+      <div className="w-full rounded-3xl bg-[#EEF4FC] border border-[#0A3E88]/15 shadow-lg overflow-hidden flex justify-center items-end p-6 sm:p-10 relative reveal-zoom card-hover-lift">
         {/* Soft Ambient Background Light */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B3D]/10 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A3E88]/10 via-transparent to-transparent pointer-events-none" />
 
         <div 
           className="relative z-10 flex justify-center items-end"
@@ -54,7 +54,7 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
         <div className="pt-6 border-t border-slate-100 flex items-center justify-end">
           <button
             onClick={onNavigateToPlatform}
-            className="text-sm sm:text-base font-extrabold text-[var(--theme-red-main)] hover:text-[var(--theme-red-hover)] uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer group py-2 px-4 rounded-xl hover:bg-red-50"
+            className="text-sm sm:text-base font-black text-[#FF0000] hover:text-[#D90000] uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer group py-2 px-4 rounded-xl hover:bg-red-50"
           >
             <span>Click here for platform details</span>
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />

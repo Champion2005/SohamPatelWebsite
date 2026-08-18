@@ -15,28 +15,28 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick }) => {
            ================================================================= */}
         <div className="w-full lg:max-w-3xl xl:max-w-4xl space-y-4 sm:space-y-6 pt-2 sm:pt-6">
           
-          {/* Text Stack Block (Inspiration from IMG_6983.png) */}
+          {/* Text Stack Block */}
           <div className="space-y-1 sm:space-y-3 w-full">
             
             {/* SOHAM PATEL */}
             <div className="animate-slide-up-fade w-full">
               <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-8xl xl:text-9xl font-black uppercase tracking-tight leading-[0.92] drop-shadow-sm w-full">
-                <span className="text-[var(--theme-navy-main)]">SOHAM </span>
-                <span className="text-[var(--theme-red-main)]">PATEL</span>
+                <span className="text-[#0A3E88]">SOHAM </span>
+                <span className="text-[#FF0000]">PATEL</span>
               </h1>
             </div>
 
             {/* FOR WARD 9 */}
             <div className="animate-slide-up-fade animate-delay-100 w-full pt-1">
               <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-black uppercase tracking-tight leading-none">
-                <span className="text-[var(--theme-navy-main)]">FOR WARD </span>
-                <span className="text-[var(--theme-red-main)]">9</span>
+                <span className="text-[#0A3E88]">FOR WARD </span>
+                <span className="text-[#FF0000]">9</span>
               </h2>
             </div>
 
             {/* Windsor, Ontario */}
             <div className="animate-slide-up-fade animate-delay-200 pt-1 sm:pt-2">
-              <span className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[var(--theme-navy-main)] tracking-wide block">
+              <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#0A3E88] tracking-wider uppercase block">
                 Windsor, Ontario
               </span>
             </div>
@@ -46,29 +46,19 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick }) => {
           {/* Action Buttons */}
           <div className="animate-slide-up-fade animate-delay-300 pt-3 sm:pt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 sm:gap-5 w-full sm:w-auto">
             
-            {/* Button 1: Request a Lawn Sign (Crimson Red) */}
+            {/* Button 1: Request a Lawn Sign (Red) */}
             <button
               onClick={onLawnSignClick}
-              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-extrabold text-sm sm:text-base tracking-wider transition-all duration-200 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center gap-3 group text-white w-full sm:w-auto"
-              style={{
-                backgroundColor: 'var(--theme-btn-lawn-bg)',
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-btn-lawn-hover)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-btn-lawn-bg)'}
+              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-black text-sm sm:text-base uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center gap-3 group text-white bg-[#FF0000] hover:bg-[#D90000] w-full sm:w-auto"
             >
               <span>Request a Lawn Sign</span>
               <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1.5" />
             </button>
 
-            {/* Button 2: Volunteer (Deep Navy) */}
+            {/* Button 2: Volunteer (Blue) */}
             <button
               onClick={onVolunteerClick}
-              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-extrabold text-sm sm:text-base tracking-wider transition-all duration-200 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center gap-3 group text-white w-full sm:w-auto"
-              style={{
-                backgroundColor: 'var(--theme-btn-volunteer-bg)',
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-btn-volunteer-hover)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-btn-volunteer-bg)'}
+              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-black text-sm sm:text-base uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center gap-3 group text-white bg-[#0A3E88] hover:bg-[#08326E] w-full sm:w-auto"
             >
               <span>Volunteer</span>
               <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1.5" />

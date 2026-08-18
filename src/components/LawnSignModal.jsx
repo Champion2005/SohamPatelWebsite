@@ -185,10 +185,10 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
         className="relative z-10 w-full max-w-lg rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
       >
         
-        {/* Modal Top Header (Deep Navy with Crimson Red Accent) */}
-        <div className="p-6 sm:p-8 bg-[#0B1B3D] text-white flex items-center justify-between border-b border-slate-800">
+        {/* Modal Top Header (Blue #0A3E88 with Red Accent) */}
+        <div className="p-6 sm:p-8 bg-[#0A3E88] text-white flex items-center justify-between border-b border-blue-900">
           <div className="space-y-1">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--theme-red-main)] block">
+            <span className="text-[11px] font-black uppercase tracking-widest text-[#FF0000] bg-white px-2 py-0.5 rounded-full inline-block">
               Show Your Support
             </span>
             <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
@@ -197,7 +197,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
           </div>
           <button
             onClick={handleResetAndClose}
-            className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+            className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Close"
           >
             <X className="w-5 h-5" />
@@ -207,10 +207,10 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
         <div className="p-6 sm:p-8 overflow-y-auto flex-1">
           {isSubmitted ? (
             <div className="py-8 text-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-red-100 text-[var(--theme-red-main)] flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 rounded-full bg-red-100 text-[#FF0000] flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
-              <h4 className="text-2xl font-extrabold text-[#0B1B3D]">
+              <h4 className="text-2xl font-black uppercase text-[#0A3E88]">
                 Thank You, {formData.firstName}!
               </h4>
               <p className="text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
@@ -218,7 +218,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
               </p>
               <button
                 onClick={handleResetAndClose}
-                className="mt-4 px-8 py-3 rounded-full bg-[var(--theme-red-main)] hover:bg-[var(--theme-red-hover)] text-white font-bold text-sm uppercase tracking-wider transition-colors cursor-pointer"
+                className="mt-4 px-8 py-3 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-sm uppercase tracking-wider transition-colors cursor-pointer"
               >
                 Close Window
               </button>
@@ -251,8 +251,8 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
               {/* First & Last Name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                    First Name <span className="text-red-500">*</span>
+                  <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
+                    First Name <span className="text-[#FF0000]">*</span>
                   </label>
                   <input
                     type="text"
@@ -260,14 +260,14 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                     value={formData.firstName}
                     onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                     placeholder="First name"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#B20D1E] focus:ring-2 focus:ring-[#B20D1E]/20 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                   />
                   {errors.firstName && <p className="text-xs text-red-500">{errors.firstName}</p>}
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                    Last Name <span className="text-red-500">*</span>
+                  <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
+                    Last Name <span className="text-[#FF0000]">*</span>
                   </label>
                   <input
                     type="text"
@@ -275,7 +275,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                     placeholder="Last name"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#B20D1E] focus:ring-2 focus:ring-[#B20D1E]/20 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                   />
                   {errors.lastName && <p className="text-xs text-red-500">{errors.lastName}</p>}
                 </div>
@@ -283,9 +283,9 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
 
               {/* Searchable Address Input */}
               <div className="space-y-1.5 relative">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center justify-between">
-                  <span>Street Address (Searchable) <span className="text-red-500">*</span></span>
-                  {isSearchingAddress && <Loader2 className="w-3.5 h-3.5 animate-spin text-[var(--theme-red-main)]" />}
+                <label className="block text-xs font-black uppercase tracking-wider text-slate-700 flex items-center justify-between">
+                  <span>Street Address (Searchable) <span className="text-[#FF0000]">*</span></span>
+                  {isSearchingAddress && <Loader2 className="w-3.5 h-3.5 animate-spin text-[#FF0000]" />}
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -297,7 +297,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                     value={formData.address}
                     onChange={handleAddressChange}
                     placeholder="Start typing your street address..."
-                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#B20D1E] focus:ring-2 focus:ring-[#B20D1E]/20 outline-none transition-all"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                   />
                 </div>
                 {errors.address && <p className="text-xs text-red-500">{errors.address}</p>}
@@ -308,9 +308,9 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                       <div
                         key={idx}
                         onClick={() => handleSelectAddress(item)}
-                        className="p-3 hover:bg-red-50 text-xs font-semibold text-slate-800 cursor-pointer flex items-center gap-2 transition-colors text-left"
+                        className="p-3 hover:bg-red-50 text-xs font-bold text-slate-800 cursor-pointer flex items-center gap-2 transition-colors text-left"
                       >
-                        <MapPin className="w-3.5 h-3.5 text-[var(--theme-red-main)] shrink-0" />
+                        <MapPin className="w-3.5 h-3.5 text-[#FF0000] shrink-0" />
                         <span className="truncate">{item.label}</span>
                       </div>
                     ))}
@@ -320,8 +320,8 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
 
               {/* Phone Number Field First */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                  Phone Number <span className="text-red-500">*</span>
+                <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
+                  Phone Number <span className="text-[#FF0000]">*</span>
                 </label>
                 <input
                   type="tel"
@@ -330,14 +330,14 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                   onChange={handlePhoneChange}
                   placeholder="Phone number"
                   maxLength={14}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#B20D1E] focus:ring-2 focus:ring-[#B20D1E]/20 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                 />
                 {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
               </div>
 
               {/* Email Address Field */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
                   Email Address <span className="text-slate-400 font-normal">(Optional)</span>
                 </label>
                 <input
@@ -345,7 +345,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="Email address"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#B20D1E] focus:ring-2 focus:ring-[#B20D1E]/20 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                 />
                 {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
               </div>
@@ -356,18 +356,18 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
                   type="checkbox"
                   checked={formData.emailUpdates}
                   onChange={(e) => setFormData({ ...formData, emailUpdates: e.target.checked })}
-                  className="mt-0.5 w-4 h-4 rounded text-[var(--theme-red-main)] focus:ring-[#B20D1E] border-slate-300 cursor-pointer"
+                  className="mt-0.5 w-4 h-4 rounded text-[#FF0000] focus:ring-red-500 border-slate-300 cursor-pointer"
                 />
                 <span className="text-xs text-slate-600 leading-snug">
                   Send me periodic campaign updates, community announcements, and election day reminders.
                 </span>
               </label>
 
-              {/* Submit Button (Crimson Red) */}
+              {/* Submit Button (Red #FF0000) */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 rounded-full bg-[var(--theme-red-main)] hover:bg-[var(--theme-red-hover)] text-white font-extrabold text-sm uppercase tracking-wider transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-sm uppercase tracking-wider transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>
