@@ -16,8 +16,8 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
         </h2>
       </div>
 
-      {/* 2. Picture Directly Underneath Header */}
-      <div className="w-full rounded-3xl bg-[#EEF4FC] border border-[#0A3E88]/15 shadow-lg overflow-hidden flex justify-center items-end p-6 sm:p-10 relative reveal-zoom card-hover-lift">
+      {/* 2. Picture Directly Underneath Header (Static presentation - no hover lift) */}
+      <div className="w-full rounded-3xl bg-[#EEF4FC] border border-[#0A3E88]/15 shadow-lg overflow-hidden flex justify-center items-end p-6 sm:p-10 relative reveal-zoom">
         {/* Soft Ambient Background Light */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A3E88]/10 via-transparent to-transparent pointer-events-none" />
 
@@ -31,13 +31,13 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
           <img 
             src={sohamHeadshot} 
             alt="Soham Patel Candidate Portrait" 
-            className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto max-h-[360px] sm:max-h-[420px] object-contain object-bottom drop-shadow-2xl transition-transform duration-500 hover:scale-105"
+            className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto max-h-[360px] sm:max-h-[420px] object-contain object-bottom drop-shadow-2xl"
           />
         </div>
       </div>
 
-      {/* 3. About Me Body Directly Underneath Picture */}
-      <div className="w-full p-6 sm:p-10 lg:p-12 rounded-3xl bg-white border border-slate-200/90 shadow-md space-y-6 text-slate-700 text-base sm:text-lg leading-relaxed reveal-up card-hover-lift">
+      {/* 3. About Me Body Directly Underneath Picture (Static text container - no hover lift) */}
+      <div className="w-full p-6 sm:p-10 lg:p-12 rounded-3xl bg-white border border-slate-200/90 shadow-md space-y-6 text-slate-700 text-base sm:text-lg leading-relaxed reveal-up">
         <p>
           Soham Patel is a lifelong community champion and experienced project professional who believes Windsor’s Ward 9 deserves responsive, proactive, and accessible leadership at City Hall. Having worked closely with local neighborhood groups, small business owners, and active families across the ward, Soham understands the everyday priorities that make our neighborhoods safe, prosperous, and connected.
         </p>
@@ -50,7 +50,7 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
           Soham’s campaign is built on direct accountability and community engagement. He is committed to holding regular ward town halls, maintaining an open-door policy for all residents, and ensuring every municipal tax dollar is invested transparently to build a stronger future for Ward 9.
         </p>
 
-        {/* 4. Link at the End of Body */}
+        {/* 4. Interactive Link at the End of Body (Has hover transition) */}
         <div className="pt-6 border-t border-slate-100 flex items-center justify-end">
           <button
             onClick={onNavigateToPlatform}

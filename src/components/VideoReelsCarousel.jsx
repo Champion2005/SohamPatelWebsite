@@ -1,17 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, ChevronLeft, ChevronRight, Video, Sparkles } from 'lucide-react';
+import { Play, ChevronLeft, ChevronRight, Video } from 'lucide-react';
 
 import eventPhoto1 from '../assets/soham_community_event_1786409209158.jpg';
 import eventPhoto2 from '../assets/soham_park_walkthrough_1786654746277.jpg';
 import eventPhoto3 from '../assets/soham_town_hall_1786654769835.jpg';
 import eventPhoto4 from '../assets/soham_patel_portrait_1786409194842.jpg';
 
-export const VideoReelsCarousel = ({ title = "Campaign Reels & Video Highlights", subtitle = "Watch recent updates, neighborhood tours, and town hall discussions with Soham Patel." }) => {
+export const VideoReelsCarousel = ({ 
+  title = "Campaign Reels & Video Highlights", 
+  subtitle = "Watch recent updates, neighborhood tours, and town hall discussions with Soham Patel." 
+}) => {
   const [activeVideo, setActiveVideo] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
   const carouselRef = useRef(null);
+  const animationFrameRef = useRef(null);
 
-  const videoReels = [
+  const baseVideoReels = [
     {
       id: "reel1",
       title: "Soham Patel's Vision for Windsor Ward 9",
@@ -50,29 +54,42 @@ export const VideoReelsCarousel = ({ title = "Campaign Reels & Video Highlights"
     }
   ];
 
-  // Auto-scrolling side to side logic
-  useEffect(() => {
-    if (isPaused || activeVideo) return;
+  // Tripled list for infinite looping marquee
+  const loopedReels = [...baseVideoReels, ...baseVideoReels, ...baseVideoReels];
 
-    const interval = setInterval(() => {
-      if (carouselRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-        const maxScroll = scrollWidth - clientWidth;
-        
-        if (scrollLeft >= maxScroll - 10) {
-          carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          carouselRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+  // Continuous infinite smooth scrolling ticker
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+
+    let isInteracting = false;
+    const speed = 0.75; // Pixels per frame for smooth continuous scroll
+
+    const step = () => {
+      if (!isPaused && !activeVideo && el && !isInteracting) {
+        el.scrollLeft += speed;
+
+        // Halfway point of the duplicated content: seamless infinite loop
+        const maxLoopPoint = (el.scrollWidth - el.clientWidth) * 0.5;
+        if (el.scrollLeft >= maxLoopPoint) {
+          el.scrollLeft = 1;
         }
       }
-    }, 3800);
+      animationFrameRef.current = requestAnimationFrame(step);
+    };
 
-    return () => clearInterval(interval);
+    animationFrameRef.current = requestAnimationFrame(step);
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
   }, [isPaused, activeVideo]);
 
-  const scroll = (direction) => {
+  const scrollManual = (direction) => {
     if (carouselRef.current) {
-      const scrollAmount = direction === 'left' ? -360 : 360;
+      const scrollAmount = direction === 'left' ? -380 : 380;
       carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
@@ -98,14 +115,14 @@ export const VideoReelsCarousel = ({ title = "Campaign Reels & Video Highlights"
         {/* Side-to-Side Manual Scroll Buttons */}
         <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
           <button
-            onClick={() => scroll('left')}
+            onClick={() => scrollManual('left')}
             className="w-11 h-11 rounded-full bg-white border border-slate-300 hover:border-[#0A3E88] text-[#0A3E88] hover:bg-[#0A3E88] hover:text-white flex items-center justify-center transition-all shadow-sm hover:shadow-md cursor-pointer active:scale-95"
             aria-label="Scroll reels left"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
-            onClick={() => scroll('right')}
+            onClick={() => scrollManual('right')}
             className="w-11 h-11 rounded-full bg-white border border-slate-300 hover:border-[#0A3E88] text-[#0A3E88] hover:bg-[#0A3E88] hover:text-white flex items-center justify-center transition-all shadow-sm hover:shadow-md cursor-pointer active:scale-95"
             aria-label="Scroll reels right"
           >
@@ -114,24 +131,23 @@ export const VideoReelsCarousel = ({ title = "Campaign Reels & Video Highlights"
         </div>
       </div>
 
-      {/* Reels Carousel Horizontal Container */}
+      {/* Continuous Infinite Looping Reels Track */}
       <div 
         ref={carouselRef}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={() => setIsPaused(true)}
         onTouchEnd={() => setIsPaused(false)}
-        className="flex gap-5 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory no-scrollbar cursor-grab"
-        style={{ scrollBehavior: 'smooth' }}
+        className="flex gap-5 overflow-x-auto pb-4 pt-1 no-scrollbar select-none cursor-grab active:cursor-grabbing"
       >
-        {videoReels.map((reel) => (
+        {loopedReels.map((reel, idx) => (
           <div
-            key={reel.id}
-            className="w-[290px] sm:w-[340px] md:w-[360px] shrink-0 snap-start rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col justify-between card-hover-lift group relative"
+            key={`${reel.id}-${idx}`}
+            className="w-[290px] sm:w-[340px] md:w-[360px] shrink-0 rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col justify-between group relative"
           >
             {/* Reel Video Display / Thumbnail */}
             <div className="relative aspect-[16/10] w-full bg-[#062654] overflow-hidden">
-              {activeVideo === reel.id ? (
+              {activeVideo === `${reel.id}-${idx}` ? (
                 <iframe
                   className="w-full h-full"
                   src={`https://www.youtube.com/embed/${reel.youtubeId}?autoplay=1`}
@@ -150,7 +166,7 @@ export const VideoReelsCarousel = ({ title = "Campaign Reels & Video Highlights"
 
                   {/* Play Button Overlay in Red */}
                   <button
-                    onClick={() => setActiveVideo(reel.id)}
+                    onClick={() => setActiveVideo(`${reel.id}-${idx}`)}
                     className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white flex items-center justify-center shadow-2xl transition-all hover:scale-110 cursor-pointer z-10"
                     aria-label={`Play ${reel.title}`}
                   >

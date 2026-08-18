@@ -93,7 +93,7 @@ export default function App() {
           </div>
         )}
 
-        {/* 2. ABOUT SOHAM PAGE VIEW */}
+        {/* 2. ABOUT PAGE VIEW */}
         {activeSection === 'about' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
             <AboutSection 
@@ -119,7 +119,7 @@ export default function App() {
           </div>
         )}
 
-        {/* 5. CONTACT SOHAM PAGE VIEW */}
+        {/* 5. CONTACT PAGE VIEW */}
         {activeSection === 'contact' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
             <ContactSection />
@@ -129,7 +129,7 @@ export default function App() {
         {/* Call to Action Banner (Shown on inner pages) */}
         {activeSection !== 'home' && activeSection !== 'contact' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 w-full">
-            <section className="rounded-3xl bg-gradient-to-br from-[#0A3E88] via-[#062654] to-[#041B3D] text-white p-8 sm:p-12 lg:p-16 border border-blue-800/40 shadow-2xl relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 reveal-zoom card-hover-lift">
+            <section className="rounded-3xl bg-gradient-to-br from-[#0A3E88] via-[#062654] to-[#041B3D] text-white p-8 sm:p-12 lg:p-16 border border-blue-800/40 shadow-2xl relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 reveal-zoom">
               <div className="space-y-3 max-w-2xl">
                 <span className="text-xs font-black uppercase tracking-widest text-[#FF0000] bg-white px-3 py-1 rounded-full inline-block">
                   Join The Movement
@@ -183,7 +183,7 @@ export default function App() {
               </span>
             </div>
 
-            {/* Quick Links */}
+            {/* Quick Links (Names removed: Home, About, Media, Ward 9, Contact) */}
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-200">
               <button 
                 onClick={() => handleNavigate('home')} 
@@ -195,7 +195,7 @@ export default function App() {
                 onClick={() => handleNavigate('about')} 
                 className={`hover:text-[#FF0000] transition-colors cursor-pointer ${activeSection === 'about' ? 'text-[#FF0000]' : ''}`}
               >
-                About Soham
+                About
               </button>
               <button 
                 onClick={() => handleNavigate('media')} 
@@ -207,13 +207,13 @@ export default function App() {
                 onClick={() => handleNavigate('ward9')} 
                 className={`hover:text-[#FF0000] transition-colors cursor-pointer ${activeSection === 'ward9' ? 'text-[#FF0000]' : ''}`}
               >
-                Ward 9 Map
+                Ward 9
               </button>
               <button 
                 onClick={() => handleNavigate('contact')} 
                 className={`hover:text-[#FF0000] transition-colors cursor-pointer ${activeSection === 'contact' ? 'text-[#FF0000]' : ''}`}
               >
-                Contact Soham
+                Contact
               </button>
             </div>
 

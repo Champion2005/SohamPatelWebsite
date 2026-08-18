@@ -7,10 +7,10 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
 
   const navLinks = [
     { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About Soham' },
+    { id: 'about', label: 'About' },
     { id: 'media', label: 'Media' },
     { id: 'ward9', label: 'Ward 9' },
-    { id: 'contact', label: 'Contact Soham' },
+    { id: 'contact', label: 'Contact' },
   ];
 
   const handleNavClick = (id) => {
@@ -35,16 +35,16 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
         <div className="flex items-center justify-between h-20">
           
           {/* =================================================================
-             LEFT SIDE: Brand "Soham Patel"
+             LEFT SIDE: Brand "SOHAM PATEL"
              ================================================================= */}
           <div className="flex items-center cursor-pointer group" onClick={() => handleNavClick('home')}>
-            <span className="font-extrabold text-2xl sm:text-3xl tracking-tight text-white group-hover:text-[#FF0000] transition-colors">
+            <span className="font-black text-2xl sm:text-3xl tracking-tight text-white group-hover:text-[#FF0000] transition-colors uppercase">
               SOHAM PATEL
             </span>
           </div>
 
           {/* =================================================================
-             CENTER: Nav Buttons (Home, About Soham, Media, Ward 9, Contact Soham)
+             CENTER: Nav Buttons (Home, About, Media, Ward 9, Contact)
              ================================================================= */}
           <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => {

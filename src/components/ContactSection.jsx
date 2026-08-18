@@ -114,10 +114,10 @@ export const ContactSection = () => {
       {/* Direct Contact Cards Row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 reveal-zoom">
         
-        {/* Phone Card */}
+        {/* Phone Card (Interactive link with hover effect) */}
         <a 
           href="tel:5199909999" 
-          className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm card-hover-lift flex items-start gap-4 group"
+          className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm card-hover-lift flex items-start gap-4 group cursor-pointer"
         >
           <div className="w-12 h-12 rounded-2xl bg-[#EEF4FC] text-[#0A3E88] group-hover:bg-[#FF0000] group-hover:text-white transition-colors flex items-center justify-center shrink-0">
             <Phone className="w-6 h-6" />
@@ -129,10 +129,10 @@ export const ContactSection = () => {
           </div>
         </a>
 
-        {/* Email Card */}
+        {/* Email Card (Interactive link with hover effect) */}
         <a 
           href="mailto:soham@sohampatel.ca" 
-          className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm card-hover-lift flex items-start gap-4 group"
+          className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm card-hover-lift flex items-start gap-4 group cursor-pointer"
         >
           <div className="w-12 h-12 rounded-2xl bg-[#EEF4FC] text-[#0A3E88] group-hover:bg-[#FF0000] group-hover:text-white transition-colors flex items-center justify-center shrink-0">
             <Mail className="w-6 h-6" />
@@ -144,8 +144,8 @@ export const ContactSection = () => {
           </div>
         </a>
 
-        {/* Ward Location Card */}
-        <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm card-hover-lift flex items-start gap-4">
+        {/* Ward Location Card (Static info block - no hover lift) */}
+        <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm flex items-start gap-4">
           <div className="w-12 h-12 rounded-2xl bg-[#EEF4FC] text-[#0A3E88] flex items-center justify-center shrink-0">
             <MapPin className="w-6 h-6 text-[#FF0000]" />
           </div>
@@ -158,8 +158,8 @@ export const ContactSection = () => {
 
       </div>
 
-      {/* "Ask Soham a Question" Google-Forms-Style Card */}
-      <div className="p-6 sm:p-10 lg:p-12 rounded-3xl bg-white border border-slate-200/90 shadow-xl reveal-up card-hover-lift">
+      {/* "Ask Soham a Question" Google-Forms-Style Card (Static container - no hover lift) */}
+      <div className="p-6 sm:p-10 lg:p-12 rounded-3xl bg-white border border-slate-200/90 shadow-xl reveal-up">
         
         <div className="flex items-center gap-3 pb-6 border-b border-slate-100 mb-6">
           <div className="w-10 h-10 rounded-xl bg-[#0A3E88] text-white flex items-center justify-center shrink-0">
@@ -234,7 +234,7 @@ export const ContactSection = () => {
 
               <div className="space-y-1.5">
                 <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
-                  Your Email Address <span className="text-[#FF0000]">* (For Soham's Reply)</span>
+                  Your Email Address <span className="text-[#FF0000]">*</span>
                 </label>
                 <input
                   type="email"

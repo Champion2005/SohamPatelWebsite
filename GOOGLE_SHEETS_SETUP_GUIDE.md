@@ -1,29 +1,44 @@
-# 📊 Google Sheets Form Integration & Setup Guide
+# 📊 Google Sheets Form Integration & Automatic Email Forwarding Guide
 
-This guide explains how to connect the **Request a Lawn Sign** and **Volunteer** forms on the Soham Patel Campaign website directly into a **Google Spreadsheet** using a free, secure Google Apps Script webhook.
-
----
-
-## ⏱️ Quick 2-Minute Setup
-
-### Step 1: Create a Google Sheet
-1. Open [Google Sheets](https://sheets.new) in your browser.
-2. Name your spreadsheet (e.g. `Soham Patel Campaign 2026 - Responses`).
+This guide explains how all website forms (**Request a Lawn Sign**, **Volunteer**, and **Ask Me Questions / Contact**) connect directly to a **Google Spreadsheet** and can **automatically send an email to Soham's inbox** whenever a resident asks a question.
 
 ---
 
-### Step 2: Add the Google Apps Script
-1. In your Google Sheet menu bar, click **Extensions** $\rightarrow$ **Apps Script**.
-2. Delete any default code in the editor, and paste the complete script below (includes both `doGet` and `doPost` handlers):
+## 🚀 How the System Works (Under the Hood)
+
+1. **Website Submission (Frontend)**:
+   When a resident submits the form on the website, React packages the responses into a structured JSON payload and issues an asynchronous `fetch()` POST request to your Google Apps Script Web App URL.
+
+2. **Google Spreadsheet Logging (Backend)**:
+   Google Apps Script receives the payload and automatically organizes it into the correct tab:
+   * `Questions & Contact` tab (for resident inquiries)
+   * `Lawn Signs` tab (for lawn sign requests)
+   * `Volunteers` tab (for campaign volunteers)
+
+3. **Automatic Email Notification to Soham**:
+   Google Apps Script triggers `MailApp.sendEmail()`, which immediately sends an email directly to your inbox with the resident's name, email, topic, and message, and sets `replyTo: residentEmail` so you can simply click **"Reply"** in your email client to answer them!
+
+---
+
+## ⏱️ Google Apps Script Code (Copy & Paste)
+
+1. Open your [Google Sheet](https://sheets.new).
+2. In the top menu, click **Extensions** $\rightarrow$ **Apps Script**.
+3. Replace all code in the script editor with this complete script:
 
 ```javascript
 /**
- * Soham Patel Campaign 2026 - Automatic Google Sheets Webhook
- * Handles Lawn Sign requests and Volunteer sign-ups into separate sheet tabs.
+ * Soham Patel Campaign 2026 - Master Form Webhook & Email Notification
  */
+
+// 1. Set your campaign notification email address here:
+var CAMPAIGN_NOTIFICATION_EMAIL = "soham@sohampatel.ca"; // (Change to your Gmail/Campaign email)
+
 function doGet(e) {
-  return ContentService.createTextOutput(JSON.stringify({ status: "online", message: "Soham Patel Campaign Webhook API is active." }))
-    .setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(JSON.stringify({ 
+    status: "online", 
+    message: "Soham Patel Campaign Webhook API is active." 
+  })).setMimeType(ContentService.MimeType.JSON);
 }
 
 function doPost(e) {
@@ -32,34 +47,85 @@ function doPost(e) {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var formType = data.formType || "General";
 
-    if (formType === "Lawn Sign") {
+    // -------------------------------------------------------------
+    // 1. ASK ME QUESTIONS / CONTACT FORM
+    // -------------------------------------------------------------
+    if (formType === "Question / Contact") {
+      var sheet = ss.getSheetByName("Questions & Contact");
+      if (!sheet) {
+        sheet = ss.insertSheet("Questions & Contact");
+        sheet.appendRow(["Timestamp", "Full Name", "Email Address", "Phone Number", "Topic", "Question / Message"]);
+        sheet.getRange(1, 1, 1, 6).setFontWeight("bold").setBackground("#EEF4FC");
+      }
+      sheet.appendRow([
+        data.submittedAt || new Date().toLocaleString(),
+        data.name || "",
+        data.email || "",
+        data.phone || "",
+        data.topic || "",
+        data.message || ""
+      ]);
+
+      // AUTOMATIC EMAIL NOTIFICATION TO SOHAM:
+      if (CAMPAIGN_NOTIFICATION_EMAIL) {
+        var emailSubject = "🗳️ New Ward 9 Question from " + data.name + " (" + data.topic + ")";
+        var emailBody = "Hello Soham,\n\n" +
+          "You received a new message from your campaign website:\n\n" +
+          "--------------------------------------------------\n" +
+          "• Name: " + data.name + "\n" +
+          "• Email: " + data.email + "\n" +
+          "• Phone: " + (data.phone || "Not provided") + "\n" +
+          "• Topic: " + data.topic + "\n" +
+          "• Submitted At: " + data.submittedAt + "\n\n" +
+          "Message:\n" + data.message + "\n" +
+          "--------------------------------------------------\n\n" +
+          "👉 You can reply directly to this email to respond to " + data.name + " (" + data.email + ").";
+
+        MailApp.sendEmail({
+          to: CAMPAIGN_NOTIFICATION_EMAIL,
+          subject: emailSubject,
+          body: emailBody,
+          replyTo: data.email // Allows you to click 'Reply' directly in Gmail!
+        });
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 2. LAWN SIGN REQUESTS
+    // -------------------------------------------------------------
+    else if (formType === "Lawn Sign") {
       var sheet = ss.getSheetByName("Lawn Signs");
       if (!sheet) {
         sheet = ss.insertSheet("Lawn Signs");
         sheet.appendRow(["Timestamp", "First Name", "Last Name", "Email", "Address", "Phone Number", "Email Updates Subscribed"]);
-        sheet.getRange(1, 1, 1, 7).setFontWeight("bold").setBackground("#D1FAE5");
+        sheet.getRange(1, 1, 1, 7).setFontWeight("bold").setBackground("#FFF0F0");
       }
       sheet.appendRow([
         data.submittedAt || new Date().toLocaleString(),
         data.firstName || "",
         data.lastName || "",
-        data.email || "", // Blank if optional email was left empty
+        data.email || "",
         data.address || "",
         data.phone || "",
         data.emailUpdates || "No"
       ]);
-    } else if (formType === "Volunteer") {
+    }
+
+    // -------------------------------------------------------------
+    // 3. VOLUNTEER SIGN-UPS
+    // -------------------------------------------------------------
+    else if (formType === "Volunteer") {
       var sheet = ss.getSheetByName("Volunteers");
       if (!sheet) {
         sheet = ss.insertSheet("Volunteers");
         sheet.appendRow(["Timestamp", "First Name", "Last Name", "Email", "Phone Number", "Best Time to Call", "Comments / Ideas"]);
-        sheet.getRange(1, 1, 1, 7).setFontWeight("bold").setBackground("#E2E8F0");
+        sheet.getRange(1, 1, 1, 7).setFontWeight("bold").setBackground("#EEF4FC");
       }
       sheet.appendRow([
         data.submittedAt || new Date().toLocaleString(),
         data.firstName || "",
         data.lastName || "",
-        data.email || "", // Blank if optional email was left empty
+        data.email || "",
         data.phone || "",
         data.bestTimeToCall || "",
         data.comments || ""
@@ -75,52 +141,15 @@ function doPost(e) {
 }
 ```
 
-3. Click the **Save** icon (disk icon) or press `Ctrl + S` / `Cmd + S`.
-
 ---
 
-### Step 3: Deploy / Re-Deploy as a Web App
-1. In the top right of the Apps Script editor, click **Deploy** $\rightarrow$ **Manage deployments** (or **New deployment** if first time).
-2. Click the **Pencil icon (Edit)**.
-3. Under **Version**, select **`New version`** *(Crucial step so Google applies your changes!)*.
-4. Set **Execute as**: `Me (your email)`.
-5. Set **Who has access**: `Anyone` *(Crucial: allows website submissions without requiring Google login)*.
-6. Click **Deploy**.
-7. Copy the **Web App URL** provided (starts with `https://script.google.com/macros/s/.../exec`).
+## ⚡ Deployment Steps
 
----
-
-### Step 4: Add the URL to your `.env` File & GitHub Secrets
-
-* **For Local Testing (`npm run dev`)**:
-  In your project root `.env` file, paste your Web App URL:
-  ```env
-  VITE_GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/AKfycbx.../exec
-  ```
-
-* **For Live GitHub Pages Site**:
-  1. Go to your GitHub repository: `https://github.com/Champion2005/SohamPatelWebsite`
-  2. Go to **Settings** $\rightarrow$ **Secrets and variables** $\rightarrow$ **Actions**.
-  3. Create or update `VITE_GOOGLE_SHEETS_WEBHOOK_URL` with your new Google Web App URL.
-
----
-
-## 🛡️ Built-In Layer 1 Anti-Spam Protection
-
-Both forms are equipped with a **two-part Layer 1 Spam Filter**:
-
-1. **Invisible Honeypot Field (`_hp_website`)**:
-   * A field that is invisible to human users via styling and screen reader tags.
-   * Automated spambots automatically fill in every input field they find. If this field contains any data, the form silently stops without sending junk to your Google Sheet.
-
-2. **Time-Trap Bot Detection ($< 1.8$s)**:
-   * Automated scrapers submit forms instantaneously within milliseconds.
-   * If a submission occurs in under 1.8 seconds from the modal opening, it is automatically discarded as a bot script.
-
----
-
-## 🧪 Testing Your Integration
-1. Open your Web App URL in your browser tab directly. It will return:
-   `{"status":"online","message":"Soham Patel Campaign Webhook API is active."}`
-2. Open your website form, fill it out, and click **Submit**.
-3. Check your Google Sheet: the new row will instantly appear in the `Lawn Signs` or `Volunteers` tab!
+1. Click **Save** (`Ctrl + S` / `Cmd + S`).
+2. In the top right, click **Deploy** $\rightarrow$ **Manage deployments** (or **New deployment**).
+3. Click the **Pencil (Edit)** icon.
+4. Under **Version**, select **`New version`**.
+5. Set **Execute as**: `Me (your email)`.
+6. Set **Who has access**: `Anyone`.
+7. Click **Deploy** and copy your Web App URL.
+8. Add this URL to your `.env` as `VITE_GOOGLE_SHEETS_WEBHOOK_URL` and in your GitHub Repository Secrets for GitHub Actions deployment!

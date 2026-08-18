@@ -80,12 +80,12 @@ export const PlatformSection = ({ onVolunteerClick }) => {
       </div>
 
       {/* =================================================================
-         PLATFORM POINTS: Unclipped Alternating Rows
+         PLATFORM POINTS: Clean Content Layout
          ================================================================= */}
       <div className="space-y-8 lg:space-y-10 py-2">
         {platformPoints.map((item) => {
           const TextBlock = (
-            <div className="h-full p-6 sm:p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/90 shadow-sm card-hover-lift flex flex-col justify-between space-y-6">
+            <div className="h-full p-6 sm:p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="px-3.5 py-1 rounded-full bg-[#FFF0F0] border border-[#FF0000]/20 text-[#FF0000] text-xs font-black tracking-wider uppercase">
@@ -125,7 +125,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
 
           // Deep Blue Card Placeholder for future image
           const ImagePlaceholderCard = (
-            <div className="h-full min-h-[260px] sm:min-h-[300px] lg:min-h-full rounded-3xl bg-[#0A3E88] border border-blue-900 shadow-xl overflow-hidden relative flex items-center justify-center card-hover-lift">
+            <div className="h-full min-h-[260px] sm:min-h-[300px] lg:min-h-full rounded-3xl bg-[#0A3E88] border border-blue-900 shadow-xl overflow-hidden relative flex items-center justify-center">
               {/* Subtle Ambient Background Gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#062654] via-[#0A3E88] to-[#08326E] pointer-events-none" />
               <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF0000]/15 rounded-full blur-2xl pointer-events-none" />

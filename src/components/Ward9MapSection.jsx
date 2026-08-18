@@ -267,9 +267,9 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
       </div>
 
       {/* =================================================================
-         INTERACTIVE MAP CONTAINER CARD
+         INTERACTIVE MAP CONTAINER CARD (Static Container - No Hover Lift)
          ================================================================= */}
-      <div className="w-full rounded-3xl bg-white border border-slate-200 shadow-xl overflow-hidden relative reveal-zoom card-hover-lift">
+      <div className="w-full rounded-3xl bg-white border border-slate-200 shadow-xl overflow-hidden relative reveal-zoom">
         
         {/* Floating Instruction Callout Banner on Top of Map */}
         <div className="bg-[#0A3E88] text-white px-4 py-2.5 text-center text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 border-b border-blue-900">
