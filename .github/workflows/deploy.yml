@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -37,6 +38,9 @@ jobs:
         env:
           VITE_GOOGLE_SHEETS_WEBHOOK_URL: ${{ secrets.VITE_GOOGLE_SHEETS_WEBHOOK_URL }}
           VITE_GOOGLE_SHEETS_WEBAPP_URL: ${{ secrets.VITE_GOOGLE_SHEETS_WEBAPP_URL }}
+          VITE_GOOGLE_SHEETS_CONTACT_URL: ${{ secrets.VITE_GOOGLE_SHEETS_CONTACT_URL }}
+          VITE_GOOGLE_SHEETS_LAWN_SIGN_URL: ${{ secrets.VITE_GOOGLE_SHEETS_LAWN_SIGN_URL }}
+          VITE_GOOGLE_SHEETS_VOLUNTEER_URL: ${{ secrets.VITE_GOOGLE_SHEETS_VOLUNTEER_URL }}
         run: npm run build
 
       - name: Setup Pages
