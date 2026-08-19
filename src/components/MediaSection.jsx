@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { Play, Image as ImageIcon, Video, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import { Image as ImageIcon, MapPin } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { VideoReelsCarousel } from './VideoReelsCarousel';
 
 // Import Campaign Photos
 import eventPhoto1 from '../assets/soham_community_event_1786409209158.jpg';
@@ -10,55 +11,6 @@ import eventPhoto4 from '../assets/soham_patel_portrait_1786409194842.jpg';
 
 export const MediaSection = () => {
   useScrollReveal();
-
-  const [activeVideo, setActiveVideo] = useState(null);
-  const videoScrollRef = useRef(null);
-
-  const videos = [
-    {
-      id: "video1",
-      title: "Soham Patel's Vision for Windsor Ward 9",
-      category: "Campaign Vision",
-      duration: "2:45",
-      youtubeId: "dQw4w9WgXcQ",
-      thumbnail: eventPhoto3,
-      description: "Soham outlines key priorities for safer streets, modern storm drainage resilience, and transparent leadership at Windsor City Hall."
-    },
-    {
-      id: "video2",
-      title: "Neighborhood Infrastructure & Flood Mitigation",
-      category: "Town Hall Highlight",
-      duration: "3:12",
-      youtubeId: "dQw4w9WgXcQ",
-      thumbnail: eventPhoto2,
-      description: "Discussion with Ward 9 homeowners on stormwater subsidy expansion and local road resurfacing plans."
-    },
-    {
-      id: "video3",
-      title: "Revitalizing Ward 9 Parks & Youth Spaces",
-      category: "Community Walkthrough",
-      duration: "1:58",
-      youtubeId: "dQw4w9WgXcQ",
-      thumbnail: eventPhoto1,
-      description: "Touring local park amenities and discussing playground upgrades with active families in South Windsor."
-    },
-    {
-      id: "video4",
-      title: "Door-to-Door Resident Conversations",
-      category: "Listening Tour",
-      duration: "2:15",
-      youtubeId: "dQw4w9WgXcQ",
-      thumbnail: eventPhoto4,
-      description: "Connecting with residents across Ward 9 neighborhoods to hear firsthand priorities for City Council."
-    }
-  ];
-
-  const scrollVideos = (direction) => {
-    if (videoScrollRef.current) {
-      const scrollAmount = direction === 'left' ? -380 : 380;
-      videoScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-  };
 
   // Organic Bento Grid Photo Blocks (Dates removed as requested)
   const photoBlocks = [
@@ -130,101 +82,13 @@ export const MediaSection = () => {
       </div>
 
       {/* =================================================================
-         1. FEATURED CAMPAIGN VIDEOS & REELS (Side-to-Side Scrolling Controls)
+         1. FEATURED CAMPAIGN VIDEOS & REELS (Reusing VideoReelsCarousel with infinite continuous loop)
          ================================================================= */}
-      <div className="space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#FF0000]">
-            <Video className="w-4 h-4" />
-            <span>Featured Videos & Reels</span>
-          </div>
-
-          {/* Side to Side Scroll Buttons */}
-          <div className="flex items-center gap-2 self-end sm:self-auto">
-            <button
-              onClick={() => scrollVideos('left')}
-              className="w-10 h-10 rounded-full bg-white border border-slate-300 hover:border-[#0A3E88] text-[#0A3E88] hover:bg-[#0A3E88] hover:text-white flex items-center justify-center transition-all shadow-sm cursor-pointer"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => scrollVideos('right')}
-              className="w-10 h-10 rounded-full bg-white border border-slate-300 hover:border-[#0A3E88] text-[#0A3E88] hover:bg-[#0A3E88] hover:text-white flex items-center justify-center transition-all shadow-sm cursor-pointer"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        {/* Video Cards Scroll Container */}
-        <div 
-          ref={videoScrollRef}
-          className="flex gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory no-scrollbar"
-          style={{ scrollBehavior: 'smooth' }}
-        >
-          {videos.map((video) => (
-            <div 
-              key={video.id}
-              className="w-[300px] sm:w-[360px] lg:w-[380px] shrink-0 snap-start rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col justify-between card-hover-lift group"
-            >
-              {/* Video Thumbnail Container */}
-              <div className="relative aspect-video w-full bg-[#062654] overflow-hidden">
-                {activeVideo === video.id ? (
-                  <iframe
-                    className="w-full h-full"
-                    src={`https://www.youtube.com/embed/${video.youtubeId}?autoplay=1`}
-                    title={video.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                ) : (
-                  <>
-                    <img 
-                      src={video.thumbnail} 
-                      alt={video.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#062654]/90 via-[#062654]/20 to-transparent" />
-
-                    {/* Play Button Overlay (Red) */}
-                    <button
-                      onClick={() => setActiveVideo(video.id)}
-                      className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white flex items-center justify-center shadow-xl transition-all hover:scale-110 cursor-pointer"
-                      aria-label={`Play ${video.title}`}
-                    >
-                      <Play className="w-6 h-6 fill-current ml-0.5" />
-                    </button>
-
-                    {/* Duration Badge */}
-                    <span className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-black/80 text-white text-xs font-bold tracking-wider">
-                      {video.duration}
-                    </span>
-
-                    {/* Category Badge */}
-                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 text-[#0A3E88] text-[11px] font-black tracking-wider uppercase shadow-sm">
-                      {video.category}
-                    </span>
-                  </>
-                )}
-              </div>
-
-              {/* Video Details */}
-              <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
-                <div className="space-y-1.5">
-                  <h3 className="text-base sm:text-lg font-black text-[#0A3E88] uppercase leading-snug group-hover:text-[#FF0000] transition-colors">
-                    {video.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-2">
-                    {video.description}
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          ))}
-        </div>
+      <div className="w-full">
+        <VideoReelsCarousel 
+          title="Featured Videos & Reels" 
+          subtitle="Watch recent campaign updates, neighborhood tours, and town hall discussions with Soham Patel."
+        />
       </div>
 
       {/* =================================================================
@@ -241,7 +105,7 @@ export const MediaSection = () => {
           {photoBlocks.map((block) => (
             <div 
               key={block.id}
-              className={`rounded-3xl bg-[#062654] border border-slate-200/80 shadow-md overflow-hidden relative group card-hover-lift flex flex-col justify-end ${block.gridSpan}`}
+              className={`rounded-3xl bg-[#062654] border border-slate-200/80 shadow-md overflow-hidden relative group flex flex-col justify-end ${block.gridSpan}`}
             >
               {/* Background Image */}
               <img 
