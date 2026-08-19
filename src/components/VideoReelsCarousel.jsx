@@ -131,80 +131,91 @@ export const VideoReelsCarousel = ({
         </div>
       </div>
 
-      {/* Continuous Infinite Looping Reels Track */}
-      <div 
-        ref={carouselRef}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onTouchStart={() => setIsPaused(true)}
-        onTouchEnd={() => setIsPaused(false)}
-        className="flex gap-5 overflow-x-auto pb-4 pt-1 no-scrollbar select-none cursor-grab active:cursor-grabbing"
-      >
-        {loopedReels.map((reel, idx) => (
-          <div
-            key={`${reel.id}-${idx}`}
-            className="w-[290px] sm:w-[340px] md:w-[360px] shrink-0 rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col justify-between group relative"
-          >
-            {/* Reel Video Display / Thumbnail */}
-            <div className="relative aspect-[16/10] w-full bg-[#062654] overflow-hidden">
-              {activeVideo === `${reel.id}-${idx}` ? (
-                <iframe
-                  className="w-full h-full"
-                  src={`https://www.youtube.com/embed/${reel.youtubeId}?autoplay=1`}
-                  title={reel.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              ) : (
-                <>
-                  <img 
-                    src={reel.thumbnail} 
-                    alt={reel.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90"
+      {/* Carousel Wrapper with Soft Gradient Fade on Left and Right Edges */}
+      <div className="relative w-full overflow-hidden">
+        
+        {/* Left Edge Gradient Fade Mask */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 z-20 bg-gradient-to-r from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent" />
+
+        {/* Right Edge Gradient Fade Mask */}
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 z-20 bg-gradient-to-l from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent" />
+
+        {/* Continuous Infinite Looping Reels Track */}
+        <div 
+          ref={carouselRef}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
+          className="flex gap-5 overflow-x-auto pb-4 pt-1 no-scrollbar select-none cursor-grab active:cursor-grabbing px-2"
+        >
+          {loopedReels.map((reel, idx) => (
+            <div
+              key={`${reel.id}-${idx}`}
+              className="w-[290px] sm:w-[340px] md:w-[360px] shrink-0 rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col justify-between group relative"
+            >
+              {/* Reel Video Display / Thumbnail */}
+              <div className="relative aspect-[16/10] w-full bg-[#062654] overflow-hidden">
+                {activeVideo === `${reel.id}-${idx}` ? (
+                  <iframe
+                    className="w-full h-full"
+                    src={`https://www.youtube.com/embed/${reel.youtubeId}?autoplay=1`}
+                    title={reel.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#062654] via-[#062654]/30 to-transparent" />
+                ) : (
+                  <>
+                    <img 
+                      src={reel.thumbnail} 
+                      alt={reel.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#062654] via-[#062654]/30 to-transparent" />
 
-                  {/* Play Button Overlay in Red */}
-                  <button
-                    onClick={() => setActiveVideo(`${reel.id}-${idx}`)}
-                    className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white flex items-center justify-center shadow-2xl transition-all hover:scale-110 cursor-pointer z-10"
-                    aria-label={`Play ${reel.title}`}
-                  >
-                    <Play className="w-6 h-6 fill-current ml-0.5" />
-                  </button>
+                    {/* Play Button Overlay in Red */}
+                    <button
+                      onClick={() => setActiveVideo(`${reel.id}-${idx}`)}
+                      className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white flex items-center justify-center shadow-2xl transition-all hover:scale-110 cursor-pointer z-10"
+                      aria-label={`Play ${reel.title}`}
+                    >
+                      <Play className="w-6 h-6 fill-current ml-0.5" />
+                    </button>
 
-                  {/* Duration Badge */}
-                  <span className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-black/80 text-white text-[11px] font-bold tracking-wider">
-                    {reel.duration}
-                  </span>
+                    {/* Duration Badge */}
+                    <span className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-black/80 text-white text-[11px] font-bold tracking-wider">
+                      {reel.duration}
+                    </span>
 
-                  {/* Category Badge */}
-                  <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 text-[#0A3E88] text-[10px] font-black tracking-wider uppercase shadow-md">
-                    {reel.category}
-                  </span>
-                </>
-              )}
-            </div>
-
-            {/* Reel Description */}
-            <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
-              <div className="space-y-1.5">
-                <h3 className="text-base sm:text-lg font-black text-[#0A3E88] uppercase leading-snug group-hover:text-[#FF0000] transition-colors">
-                  {reel.title}
-                </h3>
-                <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
-                  {reel.description}
-                </p>
+                    {/* Category Badge */}
+                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 text-[#0A3E88] text-[10px] font-black tracking-wider uppercase shadow-md">
+                      {reel.category}
+                    </span>
+                  </>
+                )}
               </div>
 
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-black uppercase text-[#FF0000]">
-                <span>Watch Reel</span>
-                <span className="text-slate-400 group-hover:translate-x-1 transition-transform">→</span>
-              </div>
-            </div>
+              {/* Reel Description */}
+              <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
+                <div className="space-y-1.5">
+                  <h3 className="text-base sm:text-lg font-black text-[#0A3E88] uppercase leading-snug group-hover:text-[#FF0000] transition-colors">
+                    {reel.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                    {reel.description}
+                  </p>
+                </div>
 
-          </div>
-        ))}
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-black uppercase text-[#FF0000]">
+                  <span>Watch Reel</span>
+                  <span className="text-slate-400 group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </div>
+
+            </div>
+          ))}
+        </div>
+
       </div>
 
     </section>
