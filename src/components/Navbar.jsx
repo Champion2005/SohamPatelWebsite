@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Menu, X, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight, Heart } from 'lucide-react';
 import { InstagramIcon, FacebookIcon, TwitterIcon, PhoneCallIcon } from './SocialIcons';
 
-export const Navbar = ({ activeSection, setActiveSection }) => {
+export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -21,6 +21,11 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
+  };
+
+  const handleDonateClick = () => {
+    setMobileMenuOpen(false);
+    if (onDonateClick) onDonateClick();
   };
 
   return (
@@ -77,9 +82,22 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
           </div>
 
           {/* =================================================================
-             RIGHT SIDE: Social & Action Icons (Twitter, Phone, Instagram, Facebook)
+             RIGHT SIDE: Donate Button & Social Icons
              ================================================================= */}
-          <div className="hidden lg:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-3">
+            
+            {/* Prominent Donate Button */}
+            <button
+              onClick={handleDonateClick}
+              className="px-4 py-2 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5"
+            >
+              <Heart className="w-3.5 h-3.5 fill-current" />
+              <span>Donate</span>
+            </button>
+
+            {/* Social Links Divider */}
+            <div className="h-6 w-px bg-white/20 mx-0.5" />
+
             {/* Phone Call */}
             <a
               href="tel:5199909999"
@@ -126,10 +144,18 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
           {/* =================================================================
              MOBILE / TABLET HAMBURGER BUTTON
              ================================================================= */}
-          <div className="flex lg:hidden items-center">
+          <div className="flex lg:hidden items-center gap-2">
+            <button
+              onClick={handleDonateClick}
+              className="px-3 py-1.5 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs uppercase tracking-wider transition-all shadow-sm flex items-center gap-1 cursor-pointer"
+            >
+              <Heart className="w-3 h-3 fill-current" />
+              <span>Donate</span>
+            </button>
+
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-lg text-white hover:bg-white/15 transition-colors focus:outline-none cursor-pointer"
+              className="p-2 rounded-lg text-white hover:bg-white/15 transition-colors focus:outline-none cursor-pointer"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
@@ -168,6 +194,15 @@ export const Navbar = ({ activeSection, setActiveSection }) => {
                 <ChevronRight className="w-4 h-4 text-[#FF0000]" />
               </button>
             ))}
+
+            {/* Mobile Donate Link */}
+            <button
+              onClick={handleDonateClick}
+              className="w-full mt-2 py-3 px-4 rounded-xl bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md"
+            >
+              <Heart className="w-4 h-4 fill-current" />
+              <span>Make a Campaign Contribution</span>
+            </button>
           </div>
 
           {/* Drawer Contact & Social Links */}
