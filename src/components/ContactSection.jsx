@@ -263,6 +263,19 @@ export const ContactSection = () => {
               {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
             </div>
 
+            {/* Periodic Campaign Updates Checkbox */}
+            <label className="flex items-start gap-3 cursor-pointer pt-1">
+              <input
+                type="checkbox"
+                checked={formData.emailUpdates !== false}
+                onChange={(e) => setFormData({ ...formData, emailUpdates: e.target.checked })}
+                className="mt-0.5 w-4 h-4 rounded text-[#FF0000] focus:ring-red-500 border-slate-300 cursor-pointer"
+              />
+              <span className="text-xs text-slate-600 leading-snug">
+                Send me periodic campaign updates, community announcements, and election day reminders.
+              </span>
+            </label>
+
             {/* Submit Button (Red #FF0000) */}
             <button
               type="submit"

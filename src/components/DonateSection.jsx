@@ -11,6 +11,7 @@ export const DonateSection = () => {
   const [isCustom, setIsCustom] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isMemoConfirmed, setIsMemoConfirmed] = useState(false);
+  const [emailUpdates, setEmailUpdates] = useState(true);
   const [copied, setCopied] = useState(false);
 
   const stripeUrl = import.meta.env.VITE_STRIPE_DONATION_URL || 'https://buy.stripe.com';
@@ -141,6 +142,19 @@ export const DonateSection = () => {
                 />
                 <span className="text-xs sm:text-sm font-bold text-slate-800 leading-snug">
                   I confirm that I will include my <u>Full Legal Name</u> and <u>Residential Address</u> in the e-Transfer message/memo box as required under s. 88.22(1)(g) of the <em>Municipal Elections Act, 1996</em> for official receipt issuance. <span className="text-[#FF0000]">*</span>
+                </span>
+              </label>
+
+              {/* Checkbox 3: Periodic Campaign Updates */}
+              <label className="flex items-start gap-3.5 cursor-pointer p-4 rounded-2xl bg-slate-50 border border-slate-200 transition-colors hover:bg-slate-100">
+                <input
+                  type="checkbox"
+                  checked={emailUpdates}
+                  onChange={(e) => setEmailUpdates(e.target.checked)}
+                  className="mt-0.5 w-5 h-5 rounded text-[#FF0000] focus:ring-red-500 border-slate-300 cursor-pointer shrink-0"
+                />
+                <span className="text-xs sm:text-sm text-slate-700 leading-snug font-medium">
+                  Send me periodic campaign updates, community announcements, and election day reminders.
                 </span>
               </label>
             </div>

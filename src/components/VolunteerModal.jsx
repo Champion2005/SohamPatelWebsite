@@ -143,14 +143,9 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
         
         {/* Modal Top Header (Blue #0A3E88 with Red Accent) */}
         <div className="p-6 sm:p-8 bg-[#0A3E88] text-white flex items-center justify-between border-b border-blue-900">
-          <div className="space-y-1">
-            <span className="text-[11px] font-black uppercase tracking-widest text-[#FF0000] bg-white px-2 py-0.5 rounded-full inline-block">
-              Join The Campaign
-            </span>
-            <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
-              Support the Campaign
-            </h3>
-          </div>
+          <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
+            JOIN THE CAMPAIGN
+          </h3>
           <button
             onClick={handleResetAndClose}
             className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer"
@@ -182,7 +177,7 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Whether you can knock on doors, make phone calls, host a coffee meet & greet, or offer creative ideas, your help makes a difference in Ward 9!
+                Knock a few doors. Make a few calls. Put up a lawn sign. Whatever you can give, it moves the needle in Ward 9.
               </p>
 
               {errorMessage && (
@@ -301,6 +296,19 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
                   className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all resize-none"
                 />
               </div>
+
+              {/* Periodic Campaign Updates Checkbox */}
+              <label className="flex items-start gap-3 cursor-pointer pt-1">
+                <input
+                  type="checkbox"
+                  checked={formData.emailUpdates !== false}
+                  onChange={(e) => setFormData({ ...formData, emailUpdates: e.target.checked })}
+                  className="mt-0.5 w-4 h-4 rounded text-[#FF0000] focus:ring-red-500 border-slate-300 cursor-pointer"
+                />
+                <span className="text-xs text-slate-600 leading-snug">
+                  Send me periodic campaign updates, community announcements, and election day reminders.
+                </span>
+              </label>
 
               {/* Submit Button (Blue #0A3E88) */}
               <button

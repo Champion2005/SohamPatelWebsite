@@ -187,14 +187,9 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
         
         {/* Modal Top Header (Blue #0A3E88 with Red Accent) */}
         <div className="p-6 sm:p-8 bg-[#0A3E88] text-white flex items-center justify-between border-b border-blue-900">
-          <div className="space-y-1">
-            <span className="text-[11px] font-black uppercase tracking-widest text-[#FF0000] bg-white px-2 py-0.5 rounded-full inline-block">
-              Show Your Support
-            </span>
-            <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
-              Request a Lawn Sign
-            </h3>
-          </div>
+          <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
+            Request a Lawn Sign
+          </h3>
           <button
             onClick={handleResetAndClose}
             className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer"
@@ -226,7 +221,7 @@ export const LawnSignModal = ({ isOpen, onClose }) => {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Get a free campaign lawn sign delivered right to your front yard. Support Soham Patel’s vision for Windsor Ward 9.
+                Receive a campaign lawn sign delivered and installed directly to your property to show your support for Soham's Ward 9 campaign.
               </p>
               <p className="text-[11px] text-slate-500 bg-slate-50 border border-slate-200 p-2.5 rounded-xl leading-snug">
                 <strong>Notice:</strong> Under s. 88.2 of the <em>Municipal Elections Act, 1996</em>, residential tenants and condominium owners/occupants have a protected legal right to display election campaign signs on their leased or unit premises.

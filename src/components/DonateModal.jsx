@@ -8,6 +8,7 @@ export const DonateModal = ({ isOpen, onClose }) => {
   const [isCustom, setIsCustom] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isMemoConfirmed, setIsMemoConfirmed] = useState(false);
+  const [emailUpdates, setEmailUpdates] = useState(true);
   const [copied, setCopied] = useState(false);
   const modalRef = useRef(null);
 
@@ -90,15 +91,10 @@ export const DonateModal = ({ isOpen, onClose }) => {
         
         {/* Top Header (Blue #0A3E88) */}
         <div className="p-6 sm:p-7 bg-[#0A3E88] text-white flex items-center justify-between border-b border-blue-900">
-          <div className="space-y-1">
-            <span className="text-[11px] font-black uppercase tracking-widest text-[#FF0000] bg-white px-2.5 py-0.5 rounded-full inline-block">
-              Campaign Contribution
-            </span>
-            <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white flex items-center gap-2">
-              <span>Support Soham Patel</span>
-              <Heart className="w-5 h-5 text-[#FF0000] fill-current" />
-            </h3>
-          </div>
+          <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white flex items-center gap-2">
+            <span>Support Soham Patel</span>
+            <Heart className="w-5 h-5 text-[#FF0000] fill-current" />
+          </h3>
           <button
             onClick={onClose}
             className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer"
@@ -185,6 +181,19 @@ export const DonateModal = ({ isOpen, onClose }) => {
                   />
                   <span className="text-xs font-bold text-slate-800 leading-snug">
                     I confirm that I will include my <u>Full Legal Name</u> and <u>Residential Address</u> in the e-Transfer message/memo box as required under s. 88.22(1)(g) of the <em>Municipal Elections Act, 1996</em> for official receipt issuance. <span className="text-[#FF0000]">*</span>
+                  </span>
+                </label>
+
+                {/* Checkbox 3: Periodic Campaign Updates */}
+                <label className="flex items-start gap-3 cursor-pointer p-4 rounded-2xl bg-slate-50 border border-slate-200 transition-colors hover:bg-slate-100">
+                  <input
+                    type="checkbox"
+                    checked={emailUpdates}
+                    onChange={(e) => setEmailUpdates(e.target.checked)}
+                    className="mt-0.5 w-4.5 h-4.5 rounded text-[#FF0000] focus:ring-red-500 border-slate-300 cursor-pointer shrink-0"
+                  />
+                  <span className="text-xs text-slate-700 leading-snug font-medium">
+                    Send me periodic campaign updates, community announcements, and election day reminders.
                   </span>
                 </label>
               </div>
