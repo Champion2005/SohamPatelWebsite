@@ -8,7 +8,7 @@ export const DonateModal = ({ isOpen, onClose }) => {
   const modalRef = useRef(null);
 
   const stripeUrl = import.meta.env.VITE_STRIPE_DONATION_URL || 'https://buy.stripe.com';
-  const interacEmail = import.meta.env.VITE_INTERAC_DONATION_EMAIL || 'donate@sohampatel.ca';
+  const interacEmail = import.meta.env.VITE_INTERAC_DONATION_EMAIL || 'sohamforcouncil@gmail.com';
 
   const presetAmounts = [25, 50, 100, 250, 500];
 

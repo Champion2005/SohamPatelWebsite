@@ -54,7 +54,7 @@ Interac e-Transfer is the most popular, zero-fee method used by Ontario municipa
 
 ### How It Works:
 1. Donors send an e-Transfer from their online banking to:
-   **`donate@sohampatel.ca`** (Auto-deposit enabled on the campaign bank account).
+   **`sohamforcouncil@gmail.com`** (Auto-deposit enabled on the campaign bank account).
 2. Donors are instructed on the website to include their **Full Legal Name** and **Residential Address** in the transfer message/memo box to satisfy s. 88.22(1)(g) of the *Municipal Elections Act, 1996*.
 3. **100% of every dollar** is deposited directly into the campaign account with zero fee deductions.
 
@@ -67,4 +67,4 @@ Add these variables to your `.env` file for local development and to **GitHub Se
 | Variable | Default / Example Value | Description |
 | :--- | :--- | :--- |
 | `VITE_STRIPE_DONATION_URL` | `https://buy.stripe.com/...` | Your live Stripe donation link |
-| `VITE_INTERAC_DONATION_EMAIL` | `donate@sohampatel.ca` | Campaign e-Transfer email |
+| `VITE_INTERAC_DONATION_EMAIL` | `sohamforcouncil@gmail.com` | Campaign e-Transfer email |

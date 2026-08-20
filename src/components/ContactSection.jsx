@@ -131,7 +131,7 @@ export const ContactSection = () => {
 
         {/* Email Card (Interactive link with hover effect) */}
         <a 
-          href="mailto:soham@sohampatel.ca" 
+          href="mailto:sohamforcouncil@gmail.com" 
           className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm card-hover-lift flex items-start gap-4 group cursor-pointer"
         >
           <div className="w-12 h-12 rounded-2xl bg-[#EEF4FC] text-[#0A3E88] group-hover:bg-[#FF0000] group-hover:text-white transition-colors flex items-center justify-center shrink-0">
@@ -139,7 +139,7 @@ export const ContactSection = () => {
           </div>
           <div>
             <span className="text-xs font-black uppercase tracking-wider text-slate-500 block">Email Address</span>
-            <span className="text-lg font-black text-[#0A3E88] group-hover:text-[#FF0000] transition-colors block">soham@sohampatel.ca</span>
+            <span className="text-lg font-black text-[#0A3E88] group-hover:text-[#FF0000] transition-colors block">sohamforcouncil@gmail.com</span>
             <span className="text-xs text-slate-500">Direct campaign inbox</span>
           </div>
         </a>

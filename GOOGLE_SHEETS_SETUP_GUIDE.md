@@ -32,7 +32,7 @@ This guide explains how all website forms (**Request a Lawn Sign**, **Volunteer*
  */
 
 // 1. Set your campaign notification email address here:
-var CAMPAIGN_NOTIFICATION_EMAIL = "soham@sohampatel.ca"; // (Change to your Gmail/Campaign email)
+var CAMPAIGN_NOTIFICATION_EMAIL = "sohamforcouncil@gmail.com";
 
 function doGet(e) {
   return ContentService.createTextOutput(JSON.stringify({ 
