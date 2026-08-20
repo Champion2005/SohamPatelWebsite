@@ -43,20 +43,20 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
 
           </div>
 
-          {/* Action Buttons Stack (CTA layout) */}
-          <div className="animate-slide-up-fade animate-delay-300 pt-3 sm:pt-6 flex flex-col gap-3 w-full sm:w-80 md:w-[420px]">
+          {/* Action Buttons Stack (Exact CTA layout & styling) */}
+          <div className="animate-slide-up-fade animate-delay-300 pt-3 sm:pt-6 flex flex-col gap-3 w-full sm:w-80 md:w-[380px]">
             
             {/* Top Row: Request Lawn Sign & Volunteer */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
               <button
                 onClick={onLawnSignClick}
-                className="w-full px-4 py-3.5 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
+                className="w-full px-4 py-3.5 rounded-full bg-white text-[#0A3E88] hover:bg-slate-100 font-black text-xs uppercase tracking-wider transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center border border-slate-200/80"
               >
                 Request Lawn Sign
               </button>
               <button
                 onClick={onVolunteerClick}
-                className="w-full px-4 py-3.5 rounded-full bg-[#0A3E88] hover:bg-[#08326E] text-white font-black text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
+                className="w-full px-4 py-3.5 rounded-full bg-[#062654] border border-blue-400/40 text-white hover:bg-blue-900 font-black text-xs uppercase tracking-wider transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
               >
                 Volunteer
               </button>
@@ -65,7 +65,7 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
             {/* Bottom Row: Donate Button (Under Lawn Sign and Volunteer, same width) */}
             <button
               onClick={onDonateClick}
-              className="w-full px-6 py-3.5 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
+              className="w-full px-7 py-3.5 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
             >
               Donate
             </button>
