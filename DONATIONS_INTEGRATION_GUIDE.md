@@ -1,92 +1,70 @@
-# 💳 Campaign Donation Integration Guide & Payment Alternatives
+# 💳 Campaign Donation Integration Guide (Stripe & Interac e-Transfer)
 
-This guide provides a step-by-step walkthrough for setting up **Stripe Donation Payments** for the Soham Patel Campaign website, as well as **cheaper and zero-fee alternatives** tailored for Ontario municipal election campaigns.
-
----
-
-## ⚖️ Ontario Municipal Campaign Rules to Keep in Mind
-Under Ontario's *Municipal Elections Act, 1996*:
-1. **Donor Eligibility**: Only individuals who reside in Ontario can contribute. Corporations, trade unions, and foreign donors cannot contribute.
-2. **Contribution Limits**: Maximum $1,200 per individual donor to a single council candidate.
-3. **Mandatory Donor Records**: You must record the donor's **Full Name** and **Full Residential Address** for campaign audit and disclosure filings.
-4. **Dedicated Campaign Account**: All contribution funds must deposit directly into the official campaign bank account opened in the candidate's campaign name.
+This guide provides a step-by-step walkthrough for accepting **Credit Card / Apple Pay** donations via **Stripe** and **100% Free** donations via **Interac e-Transfer** for the Soham Patel Campaign in compliance with Ontario's *Municipal Elections Act, 1996*.
 
 ---
 
-## 🚀 Option 1: Stripe Payment Links (Easiest & Fastest Setup)
-
-Stripe Payment Links require **zero backend code** and can be embedded directly into website buttons (e.g., "$25", "$50", "$100", "Custom Amount").
-
-### Step-by-Step Stripe Setup:
-
-### 1. Create & Verify Your Stripe Account
-1. Go to [stripe.com](https://stripe.com) and create an account.
-2. Complete business verification using your **Official Campaign Bank Account** (opened under the campaign name).
-3. Set your account country to **Canada (CAD)**.
-
-### 2. Create a Donation Payment Link
-1. In your Stripe Dashboard, go to **More** $\rightarrow$ **Payment Links** $\rightarrow$ **New**.
-2. Under **Type**, choose **"Customers choose what to pay"** (or create preset amounts like $50, $100, $250, $500).
-3. Enable **"Collect customers' addresses"** $\rightarrow$ select **"Billing addresses only"** or **"Billing and shipping addresses"** *(Required for Ontario municipal campaign compliance)*.
-4. Enable **"Collect phone numbers"** (optional, recommended).
-5. In the Confirmation step, set the redirect URL to:
-   `https://champion2005.github.io/SohamPatelWebsite/?donation=success`
-6. Click **Create Link** and copy the generated URL (`https://buy.stripe.com/...`).
-
-### 3. Embed into Website
-We can create a dedicated **"Donate" modal or button** in the website header and footer that opens this link in a popup or new tab.
+## ⚖️ Ontario Municipal Campaign Contribution Rules (Statutory Requirements)
+Under the *Municipal Elections Act, 1996* (S.O. 1996, c. 32, Sched., ss. 88.8, 88.9, 88.16, 88.22):
+1. **Contribution Limits (s. 88.9, s. 88.22(1)(r))**:
+   * Maximum **$1,200 CAD** from an individual contributor to any one candidate.
+   * Maximum **$5,000 CAD** total to two or more candidates for office on the same municipal council.
+2. **Eligibility (s. 88.8(3))**: Only individuals who reside in Ontario can contribute.
+3. **Prohibited Contributors (s. 88.8(4))**: Corporations, trade unions, federal/provincial parties, and foreign entities cannot contribute.
+4. **Traceability & Own Funds (s. 88.8(8), s. 88.16)**: All contributions over $25 must be traceable to the contributor's own funds. Anonymous donations and cash over $25 are prohibited.
+5. **Mandatory Donor Records (s. 88.22(1)(g))**: The campaign must record the **Full Name** and **Residential Address** of every contributor for campaign audit and financial filing.
+6. **Dedicated Campaign Bank Account (s. 88.22(1)(a))**: All contribution funds must deposit directly into the official campaign bank account opened in the candidate's name.
 
 ---
 
-## 💰 Fee Comparison & Cheaper Alternatives
+## 💳 Option 1: Stripe Payment Links (Credit Card, Apple Pay, Google Pay)
 
-| Platform | Transaction Fees | Payout Speed | Donor Data Collection | Best For |
-| :--- | :--- | :--- | :--- | :--- |
-| **Interac e-Transfer** | **$0.00 (100% Free)** | Instant | Manual via Form | Direct zero-fee Canadian donations |
-| **Zeffy** | **$0.00 (100% Free - 0% Fee)** | 2–3 Days | Automatic full address capture | Zero-fee credit card donations |
-| **Stripe** | **2.9% + $0.30 CAD** | 2 Days (Rolling) | Automatic address capture | Fast setup, Apple Pay & Google Pay |
-| **Square** | **2.9% + $0.30 CAD** (online) / **2.65%** (in-person tap) | Next Day | Automatic | In-person events + online payment links |
-| **PayPal** | **2.9% + $0.30 CAD** | 1–2 Days | Basic | Familiar name, but clunkier checkout |
+Stripe directly supports political campaigns and candidates in Canada.
 
----
+### Step-by-Step Setup:
 
-## 🏆 Top Recommended Alternatives
+1. **Create & Verify Your Stripe Account**:
+   * Sign up at [stripe.com](https://stripe.com).
+   * Link your **Official Campaign Bank Account** (opened under Soham Patel's campaign).
+   * Set your account currency to **Canadian Dollars (CAD)**.
 
-### 1. 🥇 Interac e-Transfer (100% Free, Most Popular in Ontario Campaigns)
-* **Cost**: **$0.00 transaction fees**. 100% of every dollar goes directly into the campaign account.
-* **How It Works on Website**:
-  1. We add a clean **"Donate via e-Transfer"** card.
-  2. The website provides the official campaign email: `donate@sohampatel.ca` (or campaign bank auto-deposit email).
-  3. Includes a mandatory form or instructions for donors to include their **Full Legal Name and Address** in the e-Transfer message memo for municipal election compliance.
+2. **Create a Donation Payment Link**:
+   * In your Stripe Dashboard, go to **More** $\rightarrow$ **Payment Links** $\rightarrow$ **+ New**.
+   * Under **Type**, choose **"Customers choose what to pay"** (or create preset amounts).
+   * Under **Advanced Options / Custom Fields**:
+     * Enable **"Collect customers' addresses"** $\rightarrow$ select **"Billing addresses only"** *(Essential for Ontario Municipal Elections compliance)*.
+     * Enable **"Collect phone numbers"** (optional).
+   * Under **Confirmation Page**:
+     * Set the redirect URL to: `https://champion2005.github.io/SohamPatelWebsite/`
+   * Click **Create Link** and copy your generated URL (e.g. `https://buy.stripe.com/abc123xyz`).
 
----
+3. **Add Your Link to the Website**:
+   * In your `.env` file or GitHub Repository Secrets:
+     ```env
+     VITE_STRIPE_DONATION_URL=https://buy.stripe.com/your-payment-link
+     ```
 
-### 2. 🥈 Zeffy (100% Free Credit Card Processing - 0% Platform & Processing Fees)
-* **Cost**: **0% processing fee** (Funded voluntarily by optional donor tips).
-* **Benefits**:
-  * Gives you a professional credit card, Apple Pay, and Google Pay checkout page.
-  * Captures full municipal compliance data (legal name, address, Ontario residency checkbox).
-  * The campaign receives **100% of the donated funds** with zero deductions.
-* **Setup**:
-  1. Register at [zeffy.com](https://www.zeffy.com).
-  2. Create a "Municipal Campaign Donation" form.
-  3. Copy the embed link directly into the website.
+* **Stripe Processing Fee**: Standard Canadian card rate is `2.9% + $0.30 CAD` per donation.
 
 ---
 
-### 3. 🥉 Square (Best for Combined Online + In-Person Campaign Events)
-* **Cost**: **2.9% + $0.30 CAD** online / **2.65% flat** on physical tap card reader.
-* **Benefits**:
-  * You can use the physical Square Tap Reader at door-to-door events, coffee meet-and-greets, and campaign rallies.
-  * Square Online Checkout links can be placed on the website just like Stripe.
+## 📱 Option 2: Interac e-Transfer (100% Free - 0% Fees)
+
+Interac e-Transfer is the most popular, zero-fee method used by Ontario municipal campaigns.
+
+### How It Works:
+1. Donors send an e-Transfer from their online banking to:
+   **`donate@sohampatel.ca`** (Auto-deposit enabled on the campaign bank account).
+2. Donors are instructed on the website to include their **Full Legal Name** and **Residential Address** in the transfer message/memo box to satisfy s. 88.22(1)(g) of the *Municipal Elections Act, 1996*.
+3. **100% of every dollar** is deposited directly into the campaign account with zero fee deductions.
 
 ---
 
-## 🛠️ Next Steps & Implementation Options
+## ⚙️ Environment Variables Summary
 
-When you are ready, we can implement any of the following on the website:
-1. **Dedicated "Donate" Navigation Button** in the Navbar & Mobile Drawer (styled in campaign Red `#FF0000`).
-2. **Interactive Donation Modal** offering choices:
-   - Direct Credit Card / Apple Pay (Stripe or Zeffy)
-   - Interac e-Transfer instructions with copyable email address
-   - Ontario residency declaration checkbox for compliance.
+Add these variables to your `.env` file for local development and to **GitHub Settings $\rightarrow$ Secrets and variables $\rightarrow$ Actions** for live deployment:
+
+| Variable | Default / Example Value | Description |
+| :--- | :--- | :--- |
+| `VITE_STRIPE_DONATION_URL` | `https://buy.stripe.com/...` | Your live Stripe donation link |
+| `VITE_INTERAC_DONATION_EMAIL` | `donate@sohampatel.ca` | Campaign e-Transfer email |
