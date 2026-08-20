@@ -56,7 +56,7 @@ export default function App() {
       {/* =================================================================
          MAIN CONTENT ROUTER (Home, About, Media, Ward 9, Contact, Donate)
          ================================================================= */}
-      <main className="flex-1 w-full overflow-x-hidden">
+      <main className="flex-1 w-full pt-20">
         
         {/* 1. HOME PAGE VIEW */}
         {activeSection === 'home' && (

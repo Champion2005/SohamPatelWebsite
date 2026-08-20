@@ -30,7 +30,7 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
 
   return (
     <nav 
-      className="sticky top-0 z-50 w-full shadow-lg border-b transition-all duration-300" 
+      className="fixed top-0 left-0 right-0 z-50 w-full shadow-lg border-b transition-all duration-300" 
       style={{ 
         backgroundColor: '#0A3E88',
         borderColor: 'rgba(255, 255, 255, 0.15)'
