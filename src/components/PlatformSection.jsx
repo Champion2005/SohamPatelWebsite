@@ -8,7 +8,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
   const platformPoints = [
     {
       id: 1,
-      badge: "Mission 01",
+      badge: "MAIN FOCUS 01",
       title: "Safe, Connected & Peaceful Neighborhoods",
       summary: "Prioritizing neighborhood traffic calming, pedestrian crosswalk safety, and proactive community-focused policing to protect families and seniors throughout Ward 9.",
       bulletPoints: [
@@ -22,7 +22,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     },
     {
       id: 2,
-      badge: "Mission 02",
+      badge: "MAIN FOCUS 02",
       title: "Modern Infrastructure & Storm Drainage Resilience",
       summary: "Investing in essential road resurfacing, sidewalk accessibility, and proactive stormwater drainage upgrades to prevent residential flooding during heavy rainstorms.",
       bulletPoints: [
@@ -36,7 +36,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     },
     {
       id: 3,
-      badge: "Mission 03",
+      badge: "MAIN FOCUS 03",
       title: "Revitalized Parks, Recreation & Green Spaces",
       summary: "Preserving and expanding Ward 9's public parks, sports fields, splash pads, and recreational amenities for children, growing families, and seniors.",
       bulletPoints: [
@@ -50,7 +50,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     },
     {
       id: 4,
-      badge: "Mission 04",
+      badge: "MAIN FOCUS 04",
       title: "Transparent Governance & Fiscal Accountability",
       summary: "Ensuring every municipal property tax dollar delivers maximum value for residents, with honest representation and direct community feedback on City Council decisions.",
       bulletPoints: [
@@ -75,7 +75,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
           Platform
         </h2>
         <p className="text-slate-600 font-medium text-base sm:text-lg max-w-3xl leading-relaxed pt-1">
-          Ward 9 is one of Windsor’s most dynamic and family-focused communities. Here is Soham’s practical roadmap to strengthen our neighborhoods, protect public infrastructure, and represent our residents with integrity at City Hall.
+          Ward 9 is one of Windsor's most dynamic, family-focused communities, and it deserves a councillor who treats it that way. Here's Soham's practical roadmap to protect our neighbourhoods and represent residents with integrity at City Hall.
         </p>
       </div>
 

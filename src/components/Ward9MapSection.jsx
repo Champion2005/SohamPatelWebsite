@@ -262,7 +262,7 @@ export const Ward9MapSection = ({ onLawnSignClick, onVolunteerClick }) => {
           Ward 9 Interactive Map
         </h2>
         <p className="text-slate-600 font-medium text-base sm:text-lg max-w-3xl leading-relaxed">
-          Windsor Ward 9 covers vibrant neighborhoods across South & East Windsor. Use the search tool below or click on your house/area to find out if you are in Ward 9.
+          Ward 9 covers a beautiful stretch of South & East Windsor — home to strong neighbourhoods, growing families, and steady new development. Use the search tool below or click on your house/area to find out if you're in Ward 9.
         </p>
       </div>
 

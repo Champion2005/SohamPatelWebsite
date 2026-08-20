@@ -33,7 +33,7 @@ This document outlines all requested copy, text, and layout modifications transl
   2. **Email Field**:
      * **Change Label**: From `YOUR EMAIL ADDRESS *` $\rightarrow$ `"EMAIL ADDRESS *"` (remove `"YOUR"`).
   3. **Phone Number Field**:
-     * **Action**: **REMOVE** the Phone Number input field entirely from the contact form.
+     * **Action**: **CHANGE** the Phone Number input field default example phone number to Sohams phone number (do this for all fields that ask for phone number).
   4. **Question Category / Topic Field**:
      * **Action**: **REMOVE** the Question Category / Topic dropdown select field entirely from the contact form.
 
@@ -41,7 +41,7 @@ This document outlines all requested copy, text, and layout modifications transl
 
 ## 2. 🌐 Social Media Links (Site-wide)
 
-* **Action**: **DISABLE / HIDE** all social media logos and links (Twitter/X, Instagram, Facebook) across the Navbar, Footer, and Contact section.
+* **Action**: **HIDE (for now)** all social media logos and links (Phone, Twitter/X, Instagram, Facebook) across the Navbar, Footer, and Contact (DO NOT REMOVE PHONE NUMBER HERE JUST OTHER SOCIAL LINKS) section. 
 
 ---
 
@@ -73,9 +73,9 @@ This document outlines all requested copy, text, and layout modifications transl
 ## 6. 🏠 Hero Section (`src/components/HeroSection.jsx`)
 
 * **Slogan below "Windsor, Ontario"**:
-  * **Action**: Remove current slogan text under "Windsor, Ontario" (leave blank for now).
-* **Candidate Photo**:
-  * **Note**: Keep portrait container ready for replacement photo.
+  * **Action**: Will add slogan text under "Windsor, Ontario" (leave blank for now).
+
+* **DONATE BUTTON**: add donate button similar to layout in the CTA, below the 2 buttons (lawn sign and volunteer)
 
 ---
 
@@ -85,4 +85,4 @@ This document outlines all requested copy, text, and layout modifications transl
   * **Current Text**: *"Ward 9 is one of Windsor’s most dynamic and family-focused communities. Here is Soham’s practical roadmap to strengthen our neighborhoods, protect public infrastructure, and represent our residents with integrity at City Hall."*
   * **Change To**: `"Ward 9 is one of Windsor's most dynamic, family-focused communities, and it deserves a councillor who treats it that way. Here's Soham's practical roadmap to protect our neighbourhoods and represent residents with integrity at City Hall."`
 * **Card Pill Badges**:
-  * **Change Label**: From `MISSION 01`, `MISSION 02`, etc. $\rightarrow$ `"MAIN FOCUS"` (e.g. `MAIN FOCUS 01`, `MAIN FOCUS 02`, etc.).
+  * **Change Label**: From `MISSION 01`, `MISSION 02`, etc. $\rightarrow$ `"MAIN FOCUS"` (no numbering).

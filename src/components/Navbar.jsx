@@ -8,7 +8,6 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
   const navLinks = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'media', label: 'Media' },
     { id: 'ward9', label: 'Ward 9' },
     { id: 'contact', label: 'Contact' },
   ];
@@ -82,63 +81,17 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
           </div>
 
           {/* =================================================================
-             RIGHT SIDE: Donate Button & Social Icons
+             RIGHT SIDE: Donate Button
              ================================================================= */}
-          <div className="hidden lg:flex items-center gap-3">
-            
+          <div className="hidden lg:flex items-center">
             {/* Prominent Donate Button */}
             <button
               onClick={handleDonateClick}
-              className="px-4 py-2 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5"
+              className="px-4.5 py-2 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5"
             >
               <Heart className="w-3.5 h-3.5 fill-current" />
               <span>Donate</span>
             </button>
-
-            {/* Social Links Divider */}
-            <div className="h-6 w-px bg-white/20 mx-0.5" />
-
-            {/* Phone Call */}
-            <a
-              href="tel:5199909999"
-              title="Call Campaign"
-              className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105 bg-white/15 text-white hover:bg-[#FF0000]"
-            >
-              <PhoneCallIcon className="w-4.5 h-4.5" />
-            </a>
-
-            {/* Twitter / X */}
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Twitter / X"
-              className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105 bg-white/15 text-white hover:bg-[#FF0000]"
-            >
-              <TwitterIcon className="w-4 h-4" />
-            </a>
-
-            {/* Instagram */}
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Instagram"
-              className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105 bg-white/15 text-white hover:bg-[#FF0000]"
-            >
-              <InstagramIcon className="w-4.5 h-4.5" />
-            </a>
-
-            {/* Facebook */}
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Facebook"
-              className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105 bg-white/15 text-white hover:bg-[#FF0000]"
-            >
-              <FacebookIcon className="w-4.5 h-4.5" />
-            </a>
           </div>
 
           {/* =================================================================
@@ -204,53 +157,6 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
               <span>Make a Campaign Contribution</span>
             </button>
           </div>
-
-          {/* Drawer Contact & Social Links */}
-          <div className="flex items-center justify-between pt-2">
-            <span className="text-xs uppercase tracking-wider font-semibold text-slate-300">
-              Connect With Soham:
-            </span>
-            <div className="flex items-center gap-2">
-              <a
-                href="tel:5199909999"
-                aria-label="Phone Call"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-white/15 hover:bg-[#FF0000]"
-              >
-                <PhoneCallIcon className="w-4.5 h-4.5" />
-              </a>
-
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-white/15 hover:bg-[#FF0000]"
-              >
-                <TwitterIcon className="w-4 h-4" />
-              </a>
-
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-white/15 hover:bg-[#FF0000]"
-              >
-                <InstagramIcon className="w-4.5 h-4.5" />
-              </a>
-
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors text-white bg-white/15 hover:bg-[#FF0000]"
-              >
-                <FacebookIcon className="w-4.5 h-4.5" />
-              </a>
-            </div>
-          </div>
-
         </div>
       )}
     </nav>

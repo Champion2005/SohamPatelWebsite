@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Send, CheckCircle2, Loader2, AlertCircle, MessageSquare } from 'lucide-react';
-import { formatPhoneNumber } from './LawnSignModal';
+import { Phone, Mail, Send, CheckCircle2, Loader2, AlertCircle, MessageSquare } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export const ContactSection = () => {
@@ -9,8 +8,6 @@ export const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    topic: 'General Question',
     message: '',
     _hp_website: ''
   });
@@ -19,12 +16,6 @@ export const ContactSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState({});
-
-  const handlePhoneChange = (e) => {
-    const formatted = formatPhoneNumber(e.target.value);
-    setFormData(prev => ({ ...prev, phone: formatted }));
-    if (errors.phone) setErrors(prev => ({ ...prev, phone: '' }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,8 +50,6 @@ export const ContactSection = () => {
           submittedAt: new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' }),
           name: formData.name.trim(),
           email: formData.email.trim(),
-          phone: formData.phone.trim(),
-          topic: formData.topic,
           message: formData.message.trim()
         };
 
@@ -90,8 +79,6 @@ export const ContactSection = () => {
     setFormData({
       name: '',
       email: '',
-      phone: '',
-      topic: 'General Question',
       message: '',
       _hp_website: ''
     });
@@ -107,58 +94,46 @@ export const ContactSection = () => {
           Contact Soham
         </h2>
         <p className="text-slate-600 font-medium text-base sm:text-lg max-w-3xl leading-relaxed pt-1">
-          Have a question about the campaign, an idea for Ward 9, or a neighborhood concern? Send Soham a direct message below or reach out via phone and email.
+          Have a question, want to support the campaign, or have a concern to raise? Reach out, I'd love to hear from you.
         </p>
       </div>
 
-      {/* Direct Contact Cards Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 reveal-zoom">
+      {/* Direct Contact Cards Row (Phone and Email Cards) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-3xl mx-auto reveal-zoom">
         
-        {/* Phone Card (Interactive link with hover effect) */}
+        {/* Phone Card */}
         <a 
-          href="tel:5199909999" 
-          className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm card-hover-lift flex items-start gap-4 group cursor-pointer"
+          href="tel:2262608869" 
+          className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-200 shadow-sm card-hover-lift flex items-start gap-4 group cursor-pointer"
         >
           <div className="w-12 h-12 rounded-2xl bg-[#EEF4FC] text-[#0A3E88] group-hover:bg-[#FF0000] group-hover:text-white transition-colors flex items-center justify-center shrink-0">
             <Phone className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-xs font-black uppercase tracking-wider text-slate-500 block">Phone Hotline</span>
-            <span className="text-lg font-black text-[#0A3E88] group-hover:text-[#FF0000] transition-colors block">(519) 990-9999</span>
-            <span className="text-xs text-slate-500">Call or leave a voicemail</span>
+            <span className="text-xs font-black uppercase tracking-wider text-slate-500 block">Direct Phone</span>
+            <span className="text-lg sm:text-xl font-black text-[#0A3E88] group-hover:text-[#FF0000] transition-colors block">(226) 260-8869</span>
+            <span className="text-xs text-slate-500">Call or Text</span>
           </div>
         </a>
 
-        {/* Email Card (Interactive link with hover effect) */}
+        {/* Email Card */}
         <a 
           href="mailto:sohamforcouncil@gmail.com" 
-          className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm card-hover-lift flex items-start gap-4 group cursor-pointer"
+          className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-200 shadow-sm card-hover-lift flex items-start gap-4 group cursor-pointer"
         >
           <div className="w-12 h-12 rounded-2xl bg-[#EEF4FC] text-[#0A3E88] group-hover:bg-[#FF0000] group-hover:text-white transition-colors flex items-center justify-center shrink-0">
             <Mail className="w-6 h-6" />
           </div>
           <div>
             <span className="text-xs font-black uppercase tracking-wider text-slate-500 block">Email Address</span>
-            <span className="text-lg font-black text-[#0A3E88] group-hover:text-[#FF0000] transition-colors block">sohamforcouncil@gmail.com</span>
-            <span className="text-xs text-slate-500">Direct campaign inbox</span>
+            <span className="text-base sm:text-lg font-black text-[#0A3E88] group-hover:text-[#FF0000] transition-colors block truncate">sohamforcouncil@gmail.com</span>
+            <span className="text-xs text-slate-500">Direct Campaign Inbox</span>
           </div>
         </a>
 
-        {/* Ward Location Card (Static info block - no hover lift) */}
-        <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm flex items-start gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-[#EEF4FC] text-[#0A3E88] flex items-center justify-center shrink-0">
-            <MapPin className="w-6 h-6 text-[#FF0000]" />
-          </div>
-          <div>
-            <span className="text-xs font-black uppercase tracking-wider text-slate-500 block">Ward 9 Focus</span>
-            <span className="text-lg font-black text-[#0A3E88] block">South & East Windsor</span>
-            <span className="text-xs text-slate-500">Windsor, Ontario</span>
-          </div>
-        </div>
-
       </div>
 
-      {/* "Ask Soham a Question" Google-Forms-Style Card (Static container - no hover lift) */}
+      {/* "Ask Soham a Question" Form Card */}
       <div className="p-6 sm:p-10 lg:p-12 rounded-3xl bg-white border border-slate-200/90 shadow-xl reveal-up">
         
         <div className="flex items-center gap-3 pb-6 border-b border-slate-100 mb-6">
@@ -170,7 +145,7 @@ export const ContactSection = () => {
               Ask Me Questions / Share Your Voice
             </h3>
             <p className="text-xs sm:text-sm text-slate-600">
-              Submit your question directly to Soham's inbox. All inquiries are reviewed personally.
+              Submit your question directly to Soham's inbox. All inquiries are personally reviewed.
             </p>
           </div>
         </div>
@@ -184,7 +159,7 @@ export const ContactSection = () => {
               Thank You for Reaching Out, {formData.name}!
             </h4>
             <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-              Your question regarding <strong className="text-slate-900">{formData.topic}</strong> has been delivered to Soham. He will respond to your email at <strong className="text-slate-900">{formData.email}</strong> shortly.
+              Your message has been delivered to Soham. He will respond to your email at <strong className="text-slate-900">{formData.email}</strong> shortly.
             </p>
             <button
               onClick={handleReset}
@@ -215,18 +190,18 @@ export const ContactSection = () => {
               />
             </div>
 
-            {/* Name & Email */}
+            {/* Name & Email Fields */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="space-y-1.5">
                 <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
-                  Your Full Name <span className="text-[#FF0000]">*</span>
+                  FULL NAME <span className="text-[#FF0000]">*</span>
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="First and last name"
+                  placeholder="First and Last name"
                   className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                 />
                 {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
@@ -234,7 +209,7 @@ export const ContactSection = () => {
 
               <div className="space-y-1.5">
                 <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
-                  Your Email Address <span className="text-[#FF0000]">*</span>
+                  EMAIL ADDRESS <span className="text-[#FF0000]">*</span>
                 </label>
                 <input
                   type="email"
@@ -245,42 +220,6 @@ export const ContactSection = () => {
                   className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                 />
                 {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
-              </div>
-            </div>
-
-            {/* Phone & Topic */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div className="space-y-1.5">
-                <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
-                  Phone Number <span className="text-slate-400 font-normal">(Optional)</span>
-                </label>
-                <input
-                  type="tel"
-                  value={formData.phone}
-                  onChange={handlePhoneChange}
-                  placeholder="(519) 555-0123"
-                  maxLength={14}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
-                  Question Category / Topic
-                </label>
-                <select
-                  value={formData.topic}
-                  onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all bg-white"
-                >
-                  <option value="General Question">General Campaign Question</option>
-                  <option value="Roads & Storm Drainage Resilience">Roads & Storm Drainage Resilience</option>
-                  <option value="Traffic Calming & Neighborhood Safety">Traffic Calming & Neighborhood Safety</option>
-                  <option value="Parks, Trees & Youth Spaces">Parks, Trees & Youth Spaces</option>
-                  <option value="City Budget & Tax Transparency">City Budget & Tax Transparency</option>
-                  <option value="Host a Coffee / Meet & Greet">Host a Coffee Meet & Greet</option>
-                  <option value="Other Inquiries">Other Inquiries</option>
-                </select>
               </div>
             </div>
 

@@ -76,11 +76,6 @@ export default function App() {
               <PlatformSection />
             </div>
 
-            {/* VIDEO REELS CONTINUOUS LOOPING CAROUSEL */}
-            <div className="w-full py-4 sm:py-8 bg-[#F8FAFC]">
-              <VideoReelsCarousel />
-            </div>
-
             {/* WARD 9 INTERACTIVE MAP SECTION */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               <Ward9MapSection 
@@ -144,7 +139,7 @@ export default function App() {
                   Ready to Shape the Future of Ward 9?
                 </h3>
                 <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
-                  Every conversation, lawn sign, volunteer hour, and contribution brings positive change to our neighborhood.
+                  Every conversation, lawn sign, and volunteer hour brings positive change to our neighborhood. Get involved today.
                 </p>
               </div>
 
@@ -215,12 +210,6 @@ export default function App() {
                 About
               </button>
               <button 
-                onClick={() => handleNavigate('media')} 
-                className={`hover:text-[#FF0000] transition-colors cursor-pointer ${activeSection === 'media' ? 'text-[#FF0000]' : ''}`}
-              >
-                Media
-              </button>
-              <button 
                 onClick={() => handleNavigate('ward9')} 
                 className={`hover:text-[#FF0000] transition-colors cursor-pointer ${activeSection === 'ward9' ? 'text-[#FF0000]' : ''}`}
               >
@@ -238,44 +227,6 @@ export default function App() {
               >
                 Donate
               </button>
-            </div>
-
-            {/* Social Icons (Phone, Twitter, Instagram, Facebook) */}
-            <div className="flex items-center gap-2.5">
-              <a 
-                href="tel:5199909999" 
-                title="Phone Call"
-                className="w-9 h-9 rounded-full bg-white/15 hover:bg-[#FF0000] text-white flex items-center justify-center transition-all hover:scale-105"
-              >
-                <PhoneCallIcon className="w-4.5 h-4.5" />
-              </a>
-              <a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label="Twitter / X"
-                className="w-9 h-9 rounded-full bg-white/15 hover:bg-[#FF0000] text-white flex items-center justify-center transition-all hover:scale-105"
-              >
-                <TwitterIcon className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label="Instagram"
-                className="w-9 h-9 rounded-full bg-white/15 hover:bg-[#FF0000] text-white flex items-center justify-center transition-all hover:scale-105"
-              >
-                <InstagramIcon className="w-4.5 h-4.5" />
-              </a>
-              <a 
-                href="https://facebook.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-full bg-white/15 hover:bg-[#FF0000] text-white flex items-center justify-center transition-all hover:scale-105"
-              >
-                <FacebookIcon className="w-4.5 h-4.5" />
-              </a>
             </div>
 
           </div>
