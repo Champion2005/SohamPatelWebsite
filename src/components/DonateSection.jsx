@@ -32,12 +32,8 @@ export const DonateSection = () => {
       
       {/* Section Header */}
       <div className="border-l-4 border-[#FF0000] pl-4 sm:pl-6 space-y-2 reveal-up">
-        <span className="text-xs font-black uppercase tracking-widest text-[#FF0000] bg-red-50 border border-red-200 px-3 py-1 rounded-full inline-block">
-          Campaign Contribution
-        </span>
-        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#0A3E88] flex items-center gap-3">
-          <span>Support Soham Patel</span>
-          <Heart className="w-8 h-8 sm:w-10 sm:h-10 text-[#FF0000] fill-current" />
+        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#0A3E88]">
+          Support Soham Patel
         </h2>
         <p className="text-slate-600 font-medium text-base sm:text-lg max-w-3xl leading-relaxed pt-1">
           Grassroots support fuels our mission for Windsor Ward 9. Every contribution directly funds lawn signs, door-to-door flyers, and community outreach.
