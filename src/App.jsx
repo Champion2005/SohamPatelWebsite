@@ -145,24 +145,29 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-3.5 shrink-0 w-full sm:w-auto">
+              <div className="flex flex-col gap-3 shrink-0 w-full sm:w-80 md:w-[380px]">
+                {/* Top Row: Lawn Sign & Volunteer */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+                  <button
+                    onClick={() => setIsLawnSignOpen(true)}
+                    className="w-full px-4 py-3.5 rounded-full bg-white text-[#0A3E88] hover:bg-slate-100 font-black text-xs uppercase tracking-wider transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
+                  >
+                    Request Lawn Sign
+                  </button>
+                  <button
+                    onClick={() => setIsVolunteerOpen(true)}
+                    className="w-full px-4 py-3.5 rounded-full bg-[#062654] border border-blue-400/40 text-white hover:bg-blue-900 font-black text-xs uppercase tracking-wider transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
+                  >
+                    Volunteer
+                  </button>
+                </div>
+
+                {/* Bottom Row: Donate Button (Under Lawn Sign and Volunteer, same width) */}
                 <button
                   onClick={() => setIsDonateOpen(true)}
-                  className="w-full sm:w-auto px-7 py-4 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                  className="w-full px-7 py-3.5 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
                 >
                   Donate
-                </button>
-                <button
-                  onClick={() => setIsLawnSignOpen(true)}
-                  className="w-full sm:w-auto px-7 py-4 rounded-full bg-white text-[#0A3E88] hover:bg-slate-100 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-                >
-                  Request Lawn Sign
-                </button>
-                <button
-                  onClick={() => setIsVolunteerOpen(true)}
-                  className="w-full sm:w-auto px-7 py-4 rounded-full bg-[#062654] border border-blue-400/40 text-white hover:bg-blue-900 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-                >
-                  Volunteer
                 </button>
               </div>
             </section>
