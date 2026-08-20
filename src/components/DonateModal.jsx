@@ -197,23 +197,32 @@ export const DonateModal = ({ isOpen, onClose }) => {
                   <li>Log in to your Canadian online banking app.</li>
                   <li>Send an Interac e-Transfer to <strong className="text-slate-900">{interacEmail}</strong> (Auto-deposit enabled).</li>
                   <li className="text-[#0A3E88] font-bold">
-                    <strong className="text-[#FF0000]">Important:</strong> In the transfer message / memo box, please include your <u>Full Legal Name</u> and <u>Residential Address</u> (required for Ontario municipal election compliance).
+                    <strong className="text-[#FF0000]">Mandatory Compliance Requirement:</strong> Under s. 88.22(1)(g) of the <em>Municipal Elections Act, 1996</em>, please include your <u>Full Legal Name</u> and <u>Residential Address</u> in the transfer memo box for official financial reporting and receipt issuance.
                   </li>
                 </ol>
               </div>
             </div>
           )}
 
-          {/* Ontario Municipal Elections Act Compliance Disclosure */}
-          <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200/80 text-amber-900 text-xs space-y-1.5">
-            <div className="flex items-center gap-1.5 font-black uppercase tracking-wider text-[11px] text-amber-800">
+          {/* Statutory Ontario Municipal Elections Act, 1996 Compliance Disclosure (s. 88.8, 88.9, 88.16, 88.22) */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-amber-50/90 border border-amber-200 text-amber-950 text-xs space-y-2">
+            <div className="flex items-center gap-1.5 font-black uppercase tracking-wider text-[11px] text-amber-900">
               <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0" />
-              <span>Ontario Municipal Campaign Rules</span>
+              <span>Statutory Campaign Contribution Rules (Municipal Elections Act, 1996)</span>
             </div>
-            <ul className="text-[11px] text-amber-800/90 space-y-1 list-disc list-inside leading-snug">
-              <li>Individual contribution limit is <strong>$1,200 CAD</strong> per candidate.</li>
-              <li>Only individuals residing in Ontario can donate.</li>
-              <li>Corporations, trade unions, and anonymous donations are prohibited by law.</li>
+            <ul className="text-[11px] text-amber-900/90 space-y-1.5 list-disc list-inside leading-relaxed">
+              <li>
+                <strong>Contribution Limits (s. 88.9, s. 88.22(1)(r)):</strong> An individual contributor may not make contributions exceeding a total of <strong>$1,200 CAD</strong> to any one candidate, and a total of <strong>$5,000 CAD</strong> to two or more candidates for office on the same council.
+              </li>
+              <li>
+                <strong>Eligibility (s. 88.8(3)):</strong> Only individuals who are normally resident in Ontario may make contributions.
+              </li>
+              <li>
+                <strong>Prohibited Contributors (s. 88.8(4)):</strong> Corporations, trade unions, federal/provincial political parties, and foreign entities are prohibited from contributing.
+              </li>
+              <li>
+                <strong>Own Funds & Traceability (s. 88.8(8), s. 88.16):</strong> Contributions must be made from the contributor's own funds. Anonymous contributions and cash contributions exceeding $25 are prohibited by law.
+              </li>
             </ul>
           </div>
 
