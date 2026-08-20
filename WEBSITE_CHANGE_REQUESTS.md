@@ -33,15 +33,15 @@ This document outlines all requested copy, text, and layout modifications transl
   2. **Email Field**:
      * **Change Label**: From `YOUR EMAIL ADDRESS *` $\rightarrow$ `"EMAIL ADDRESS *"` (remove `"YOUR"`).
   3. **Phone Number Field**:
-     * **Label**: `"PHONE NUMBER (OPTIONAL)"` (Kept as an optional field).
+     * **Action**: **REMOVE** the Phone Number input field entirely from the contact form.
   4. **Question Category / Topic Field**:
-     * **Action**: **REMOVE** the Question Category / Topic dropdown select field entirely (crossed out in PDF).
+     * **Action**: **REMOVE** the Question Category / Topic dropdown select field entirely from the contact form.
 
 ---
 
 ## 2. 🌐 Social Media Links (Site-wide)
 
-* **Action**: **DISABLE / HIDE** all social media logos and links (Twitter/X, Instagram, Facebook) across the Navbar, Footer, and Contact section (kept commented-out in code for easy restoration).
+* **Action**: **DISABLE / HIDE** all social media logos and links (Twitter/X, Instagram, Facebook) across the Navbar, Footer, and Contact section.
 
 ---
 
@@ -64,9 +64,9 @@ This document outlines all requested copy, text, and layout modifications transl
 ## 5. 🎬 Media Section & Video Reels
 
 * **Media Section (`src/components/MediaSection.jsx`)**:
-  * **Action**: **DISABLE / HIDE** the Media page tab and section view for now (kept commented-out in code for easy restoration).
+  * **Action**: **DISABLE / HIDE** the Media page tab and section view for now.
 * **Video Reels Carousel (`src/components/VideoReelsCarousel.jsx`)**:
-  * **Action**: **DISABLE / HIDE** the video reels carousel on the main home page for now (kept commented-out in code for easy restoration).
+  * **Action**: **DISABLE / HIDE** the video reels carousel on the main home page for now.
 
 ---
 
