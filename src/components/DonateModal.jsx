@@ -4,6 +4,8 @@ import { X, CreditCard, Send, Check, Copy, ShieldCheck, Heart, ExternalLink } fr
 export const DonateModal = ({ isOpen, onClose }) => {
   const [activeTab, setActiveTab] = useState('interac'); // Default to Interac e-Transfer first
   const [selectedAmount, setSelectedAmount] = useState(100);
+  const [customAmount, setCustomAmount] = useState('');
+  const [isCustom, setIsCustom] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isMemoConfirmed, setIsMemoConfirmed] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -18,6 +20,9 @@ export const DonateModal = ({ isOpen, onClose }) => {
     if (isOpen) {
       setIsConfirmed(false);
       setIsMemoConfirmed(false);
+      setIsCustom(false);
+      setCustomAmount('');
+      setSelectedAmount(100);
     }
 
     const handleKeyDown = (e) => {
@@ -48,8 +53,28 @@ export const DonateModal = ({ isOpen, onClose }) => {
     setTimeout(() => setCopied(false), 2500);
   };
 
+  const handlePresetSelect = (amt) => {
+    setSelectedAmount(amt);
+    setIsCustom(false);
+    setCustomAmount('');
+  };
+
+  const handleCustomAmountChange = (e) => {
+    const val = e.target.value;
+    setCustomAmount(val);
+    setIsCustom(true);
+    const num = parseFloat(val);
+    if (!isNaN(num)) {
+      setSelectedAmount(num);
+    } else {
+      setSelectedAmount(0);
+    }
+  };
+
+  const isAmountValid = selectedAmount >= 5 && selectedAmount <= 1200;
+
   const handleStripeRedirect = () => {
-    if (!isConfirmed) return;
+    if (!isConfirmed || !isAmountValid) return;
     window.open(stripeUrl, '_blank', 'noopener,noreferrer');
   };
 
@@ -205,7 +230,7 @@ export const DonateModal = ({ isOpen, onClose }) => {
           {/* TAB 2: CREDIT CARD / APPLE PAY (STRIPE) */}
           {activeTab === 'card' && (
             <div className="space-y-5 animate-slide-up-fade">
-              <div className="space-y-1.5">
+              <div className="space-y-2.5">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-black uppercase tracking-wider text-slate-700">
                     Select Contribution Amount
@@ -221,9 +246,9 @@ export const DonateModal = ({ isOpen, onClose }) => {
                     <button
                       key={amt}
                       type="button"
-                      onClick={() => setSelectedAmount(amt)}
+                      onClick={() => handlePresetSelect(amt)}
                       className={`py-3.5 rounded-2xl font-black text-base sm:text-lg transition-all cursor-pointer border ${
-                        selectedAmount === amt
+                        !isCustom && selectedAmount === amt
                           ? 'bg-[#0A3E88] text-white border-[#0A3E88] shadow-md scale-[1.02]'
                           : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                       }`}
@@ -231,6 +256,44 @@ export const DonateModal = ({ isOpen, onClose }) => {
                       ${amt}
                     </button>
                   ))}
+                </div>
+
+                {/* Custom Amount Field with $5 Minimum */}
+                <div className="pt-2 space-y-1.5">
+                  <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
+                    Or Enter Custom Amount (Minimum $5 CAD)
+                  </label>
+                  <div className="relative">
+                    <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500 font-black text-base">
+                      $
+                    </span>
+                    <input
+                      type="number"
+                      min="5"
+                      max="1200"
+                      step="1"
+                      value={customAmount}
+                      onChange={handleCustomAmountChange}
+                      placeholder="Custom amount (min $5)"
+                      className={`w-full pl-8 pr-4 py-3 rounded-2xl border text-sm font-bold text-slate-900 outline-none transition-all ${
+                        isCustom && (parseFloat(customAmount) < 5 || !customAmount)
+                          ? 'border-red-400 bg-red-50/50 focus:border-red-500 focus:ring-2 focus:ring-red-500/20'
+                          : isCustom
+                          ? 'border-[#0A3E88] bg-blue-50/30 focus:border-[#0A3E88] focus:ring-2 focus:ring-blue-500/20'
+                          : 'border-slate-200 bg-slate-50/50 focus:border-[#0A3E88] focus:ring-2 focus:ring-blue-500/20'
+                      }`}
+                    />
+                  </div>
+                  {isCustom && parseFloat(customAmount) < 5 && (
+                    <p className="text-xs font-bold text-[#FF0000] pt-0.5">
+                      Minimum contribution amount is $5 CAD.
+                    </p>
+                  )}
+                  {isCustom && parseFloat(customAmount) > 1200 && (
+                    <p className="text-xs font-bold text-[#FF0000] pt-0.5">
+                      Statutory maximum limit is $1,200 CAD per candidate under the Municipal Elections Act, 1996.
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -258,15 +321,16 @@ export const DonateModal = ({ isOpen, onClose }) => {
 
               {/* Action Button to Launch Stripe Checkout */}
               <button
+                type="button"
                 onClick={handleStripeRedirect}
-                disabled={!isConfirmed}
+                disabled={!isConfirmed || !isAmountValid}
                 className={`w-full py-4 rounded-full font-black text-sm uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 ${
-                  isConfirmed
+                  isConfirmed && isAmountValid
                     ? 'bg-[#FF0000] hover:bg-[#D90000] text-white hover:shadow-lg cursor-pointer'
                     : 'bg-slate-300 text-slate-500 cursor-not-allowed opacity-75'
                 }`}
               >
-                <span>Continue to Secure Checkout (${selectedAmount})</span>
+                <span>Continue to Secure Checkout (${selectedAmount || 0})</span>
                 <ExternalLink className="w-4 h-4" />
               </button>
             </div>
