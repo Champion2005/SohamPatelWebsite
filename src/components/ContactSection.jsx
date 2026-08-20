@@ -154,7 +154,7 @@ export const ContactSection = () => {
               Ask Me Questions / Share Your Voice
             </h3>
             <p className="text-xs sm:text-sm text-slate-600">
-              Submit your question directly to Soham's inbox. All inquiries are personally reviewed.
+              Submit your question directly. All inquiries are personally reviewed.
             </p>
           </div>
         </div>
@@ -168,7 +168,7 @@ export const ContactSection = () => {
               Thank You for Reaching Out, {formData.name}!
             </h4>
             <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-              Your message has been delivered to Soham. He will respond to your email at <strong className="text-slate-900">{formData.email}</strong> shortly.
+              Your message has been delivered. We will respond to your email at <strong className="text-slate-900">{formData.email}</strong> shortly.
             </p>
             <button
               onClick={handleReset}
@@ -257,7 +257,7 @@ export const ContactSection = () => {
                 required
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                placeholder="What would you like to ask Soham or discuss about Ward 9?"
+                placeholder="What would you like to ask or discuss about Ward 9?"
                 className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all resize-none"
               />
               {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
@@ -276,7 +276,7 @@ export const ContactSection = () => {
                 </>
               ) : (
                 <>
-                  <span>Send Question to Soham</span>
+                  <span>Send Question</span>
                   <Send className="w-4 h-4" />
                 </>
               )}
