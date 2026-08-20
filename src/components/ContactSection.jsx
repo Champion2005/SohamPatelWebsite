@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Phone, Mail, Send, CheckCircle2, Loader2, AlertCircle, MessageSquare } from 'lucide-react';
+import { formatPhoneNumber } from './LawnSignModal';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export const ContactSection = () => {
@@ -8,6 +9,7 @@ export const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     message: '',
     _hp_website: ''
   });
@@ -16,6 +18,11 @@ export const ContactSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState({});
+
+  const handlePhoneChange = (e) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setFormData(prev => ({ ...prev, phone: formatted }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,6 +57,7 @@ export const ContactSection = () => {
           submittedAt: new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' }),
           name: formData.name.trim(),
           email: formData.email.trim(),
+          phone: formData.phone.trim(),
           message: formData.message.trim()
         };
 
@@ -79,6 +87,7 @@ export const ContactSection = () => {
     setFormData({
       name: '',
       email: '',
+      phone: '',
       message: '',
       _hp_website: ''
     });
@@ -221,6 +230,21 @@ export const ContactSection = () => {
                 />
                 {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
               </div>
+            </div>
+
+            {/* Phone Number Field (Optional) */}
+            <div className="space-y-1.5">
+              <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
+                PHONE NUMBER <span className="text-slate-400 font-normal">(OPTIONAL)</span>
+              </label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={handlePhoneChange}
+                placeholder="(226) 555-0123"
+                maxLength={14}
+                className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
+              />
             </div>
 
             {/* Message Body */}
