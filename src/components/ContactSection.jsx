@@ -241,7 +241,7 @@ export const ContactSection = () => {
                 type="tel"
                 value={formData.phone}
                 onChange={handlePhoneChange}
-                placeholder="(226) 555-0123"
+                placeholder="(226) 260-8869"
                 maxLength={14}
                 className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:border-[#FF0000] focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
               />

@@ -8,7 +8,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
   const platformPoints = [
     {
       id: 1,
-      badge: "MAIN FOCUS 01",
+      badge: "MAIN FOCUS",
       title: "Safe, Connected & Peaceful Neighborhoods",
       summary: "Prioritizing neighborhood traffic calming, pedestrian crosswalk safety, and proactive community-focused policing to protect families and seniors throughout Ward 9.",
       bulletPoints: [
@@ -22,7 +22,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     },
     {
       id: 2,
-      badge: "MAIN FOCUS 02",
+      badge: "MAIN FOCUS",
       title: "Modern Infrastructure & Storm Drainage Resilience",
       summary: "Investing in essential road resurfacing, sidewalk accessibility, and proactive stormwater drainage upgrades to prevent residential flooding during heavy rainstorms.",
       bulletPoints: [
@@ -36,7 +36,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     },
     {
       id: 3,
-      badge: "MAIN FOCUS 03",
+      badge: "MAIN FOCUS",
       title: "Revitalized Parks, Recreation & Green Spaces",
       summary: "Preserving and expanding Ward 9's public parks, sports fields, splash pads, and recreational amenities for children, growing families, and seniors.",
       bulletPoints: [
@@ -50,7 +50,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     },
     {
       id: 4,
-      badge: "MAIN FOCUS 04",
+      badge: "MAIN FOCUS",
       title: "Transparent Governance & Fiscal Accountability",
       summary: "Ensuring every municipal property tax dollar delivers maximum value for residents, with honest representation and direct community feedback on City Council decisions.",
       bulletPoints: [

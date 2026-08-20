@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import sohamHeadshot from '../assets/soham_headshot.png';
 
-export const HeroSection = ({ onLawnSignClick, onVolunteerClick }) => {
+export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }) => {
   return (
     <section 
       id="hero" 
@@ -43,25 +43,31 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick }) => {
 
           </div>
 
-          {/* Action Buttons */}
-          <div className="animate-slide-up-fade animate-delay-300 pt-3 sm:pt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 sm:gap-5 w-full sm:w-auto">
+          {/* Action Buttons Stack (CTA layout) */}
+          <div className="animate-slide-up-fade animate-delay-300 pt-3 sm:pt-6 flex flex-col gap-3 w-full sm:w-80 md:w-[420px]">
             
-            {/* Button 1: Request a Lawn Sign (Red) */}
-            <button
-              onClick={onLawnSignClick}
-              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-black text-sm sm:text-base uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center gap-3 group text-white bg-[#FF0000] hover:bg-[#D90000] w-full sm:w-auto"
-            >
-              <span>Request a Lawn Sign</span>
-              <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1.5" />
-            </button>
+            {/* Top Row: Request Lawn Sign & Volunteer */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+              <button
+                onClick={onLawnSignClick}
+                className="w-full px-4 py-3.5 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
+              >
+                Request Lawn Sign
+              </button>
+              <button
+                onClick={onVolunteerClick}
+                className="w-full px-4 py-3.5 rounded-full bg-[#0A3E88] hover:bg-[#08326E] text-white font-black text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
+              >
+                Volunteer
+              </button>
+            </div>
 
-            {/* Button 2: Volunteer (Blue) */}
+            {/* Bottom Row: Donate Button (Under Lawn Sign and Volunteer, same width) */}
             <button
-              onClick={onVolunteerClick}
-              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-black text-sm sm:text-base uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center gap-3 group text-white bg-[#0A3E88] hover:bg-[#08326E] w-full sm:w-auto"
+              onClick={onDonateClick}
+              className="w-full px-6 py-3.5 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
             >
-              <span>Volunteer</span>
-              <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1.5" />
+              Donate
             </button>
 
           </div>
