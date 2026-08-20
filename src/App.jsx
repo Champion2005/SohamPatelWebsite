@@ -7,6 +7,7 @@ import { VideoReelsCarousel } from './components/VideoReelsCarousel';
 import { MediaSection } from './components/MediaSection';
 import { Ward9MapSection } from './components/Ward9MapSection';
 import { ContactSection } from './components/ContactSection';
+import { DonateSection } from './components/DonateSection';
 import { LawnSignModal } from './components/LawnSignModal';
 import { VolunteerModal } from './components/VolunteerModal';
 import { DonateModal } from './components/DonateModal';
@@ -14,7 +15,7 @@ import { InstagramIcon, FacebookIcon, TwitterIcon, PhoneCallIcon } from './compo
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 export default function App() {
-  // State-based Page Navigation: 'home' | 'about' | 'media' | 'ward9' | 'contact'
+  // State-based Page Navigation: 'home' | 'about' | 'media' | 'ward9' | 'contact' | 'donate'
   const [activeSection, setActiveSection] = useState('home');
   const [isLawnSignOpen, setIsLawnSignOpen] = useState(false);
   const [isVolunteerOpen, setIsVolunteerOpen] = useState(false);
@@ -32,9 +33,9 @@ export default function App() {
 
     if (targetElementId) {
       setTimeout(() => {
-        const elem = document.getElementById(targetElementId);
-        if (elem) {
-          elem.scrollIntoView({ behavior: 'smooth' });
+        const el = document.getElementById(targetElementId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
     }
@@ -44,48 +45,43 @@ export default function App() {
     <div className="min-h-screen flex flex-col font-sans text-[#0A3E88] bg-[#F8FAFC] selection:bg-[#FF0000] selection:text-white overflow-x-hidden w-full">
       
       {/* =================================================================
-         TOP STICKY NAVBAR (Solid Blue #0A3E88, White Text, Donate Action)
+         TOP NAVIGATION BAR (Solid Blue #0A3E88, Red Active Tab Indicator)
          ================================================================= */}
       <Navbar 
-        activeSection={activeSection} 
-        setActiveSection={(id) => handleNavigate(id)} 
-        onDonateClick={() => setIsDonateOpen(true)}
+        activeSection={activeSection}
+        setActiveSection={(id) => handleNavigate(id)}
+        onDonateClick={() => handleNavigate('donate')}
       />
 
       {/* =================================================================
-         PAGE CONTENT VIEWS (State-Based Navigation)
+         MAIN CONTENT ROUTER (Home, About, Media, Ward 9, Contact, Donate)
          ================================================================= */}
       <main className="flex-1 w-full overflow-x-hidden">
         
-        {/* 1. HOME PAGE VIEW: Hero -> Platform -> Video Reels Carousel -> Ward 9 Map */}
+        {/* 1. HOME PAGE VIEW */}
         {activeSection === 'home' && (
           <div className="space-y-16 sm:space-y-24 pb-16 sm:pb-24">
             
-            {/* Hero Banner */}
-            <div 
-              className="h-[calc(100dvh-5rem)] min-h-[580px] flex flex-col justify-between overflow-hidden w-full" 
-              style={{ backgroundColor: '#EEF4FC' }}
-            >
+            {/* HERO SECTION */}
+            <div className="h-[calc(100dvh-5rem)] min-h-[580px] flex flex-col justify-between overflow-hidden w-full" style={{ backgroundColor: '#EEF4FC' }}>
               <HeroSection 
                 onLawnSignClick={() => setIsLawnSignOpen(true)}
                 onVolunteerClick={() => setIsVolunteerOpen(true)}
+                onDonateClick={() => handleNavigate('donate')}
               />
             </div>
 
-            {/* Platform Priorities */}
+            {/* PLATFORM MISSION CARDS */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-              <PlatformSection 
-                onLawnSignClick={() => setIsLawnSignOpen(true)}
-                onVolunteerClick={() => setIsVolunteerOpen(true)}
-              />
+              <PlatformSection />
             </div>
 
-            {/* Auto-Shuffling Video Reels Carousel */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            {/* VIDEO REELS CONTINUOUS LOOPING CAROUSEL */}
+            <div className="w-full py-4 sm:py-8 bg-[#F8FAFC]">
               <VideoReelsCarousel />
             </div>
 
-            {/* Interactive Ward 9 Map at Bottom of Home Page */}
+            {/* WARD 9 INTERACTIVE MAP SECTION */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               <Ward9MapSection 
                 onLawnSignClick={() => setIsLawnSignOpen(true)}
@@ -96,7 +92,7 @@ export default function App() {
           </div>
         )}
 
-        {/* 2. ABOUT PAGE VIEW */}
+        {/* 2. ABOUT SOHAM PAGE VIEW */}
         {activeSection === 'about' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
             <AboutSection 
@@ -129,8 +125,15 @@ export default function App() {
           </div>
         )}
 
+        {/* 6. DONATE DEDICATED PAGE VIEW */}
+        {activeSection === 'donate' && (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
+            <DonateSection />
+          </div>
+        )}
+
         {/* Call to Action Banner (Shown on inner pages) */}
-        {activeSection !== 'home' && activeSection !== 'contact' && (
+        {activeSection !== 'home' && activeSection !== 'contact' && activeSection !== 'donate' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 w-full">
             <section className="rounded-3xl bg-gradient-to-br from-[#0A3E88] via-[#062654] to-[#041B3D] text-white p-8 sm:p-12 lg:p-16 border border-blue-800/40 shadow-2xl relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 reveal-zoom">
               <div className="space-y-3 max-w-2xl">
@@ -164,7 +167,7 @@ export default function App() {
 
                 {/* Bottom Row: Donate Button (Under Lawn Sign and Volunteer, same width) */}
                 <button
-                  onClick={() => setIsDonateOpen(true)}
+                  onClick={() => handleNavigate('donate')}
                   className="w-full px-7 py-3.5 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center"
                 >
                   Donate
@@ -230,8 +233,8 @@ export default function App() {
                 Contact
               </button>
               <button 
-                onClick={() => setIsDonateOpen(true)} 
-                className="text-[#FF0000] hover:text-white transition-colors cursor-pointer font-black"
+                onClick={() => handleNavigate('donate')} 
+                className={`hover:text-[#FF0000] transition-colors cursor-pointer ${activeSection === 'donate' ? 'text-[#FF0000]' : ''}`}
               >
                 Donate
               </button>
@@ -274,6 +277,7 @@ export default function App() {
                 <FacebookIcon className="w-4.5 h-4.5" />
               </a>
             </div>
+
           </div>
 
           {/* Legal Disclosure & Copyright */}
@@ -290,21 +294,21 @@ export default function App() {
       </footer>
 
       {/* =================================================================
-         MODAL POPUPS
+         INTERACTIVE ACTION MODALS (Lawn Sign & Volunteer)
          ================================================================= */}
       <LawnSignModal 
-        isOpen={isLawnSignOpen}
-        onClose={() => setIsLawnSignOpen(false)}
+        isOpen={isLawnSignOpen} 
+        onClose={() => setIsLawnSignOpen(false)} 
       />
 
       <VolunteerModal 
-        isOpen={isVolunteerOpen}
-        onClose={() => setIsVolunteerOpen(false)}
+        isOpen={isVolunteerOpen} 
+        onClose={() => setIsVolunteerOpen(false)} 
       />
 
       <DonateModal 
-        isOpen={isDonateOpen}
-        onClose={() => setIsDonateOpen(false)}
+        isOpen={isDonateOpen} 
+        onClose={() => setIsDonateOpen(false)} 
       />
 
     </div>

@@ -11,6 +11,7 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
     { id: 'media', label: 'Media' },
     { id: 'ward9', label: 'Ward 9' },
     { id: 'contact', label: 'Contact' },
+    { id: 'donate', label: 'Donate' },
   ];
 
   const handleNavClick = (id) => {
@@ -24,7 +25,7 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
   };
 
   const handleDonateClick = () => {
-    setMobileMenuOpen(false);
+    handleNavClick('donate');
     if (onDonateClick) onDonateClick();
   };
 
