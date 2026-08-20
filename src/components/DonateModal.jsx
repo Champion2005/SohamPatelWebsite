@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, CreditCard, Send, Check, Copy, ShieldCheck, Heart, ExternalLink, Lock } from 'lucide-react';
+import { X, CreditCard, Send, Check, Copy, ShieldCheck, Heart, ExternalLink } from 'lucide-react';
 
 export const DonateModal = ({ isOpen, onClose }) => {
   const [activeTab, setActiveTab] = useState('interac'); // Default to Interac e-Transfer first
@@ -52,8 +52,6 @@ export const DonateModal = ({ isOpen, onClose }) => {
     if (!isConfirmed) return;
     window.open(stripeUrl, '_blank', 'noopener,noreferrer');
   };
-
-  const isInteracUnlocked = isConfirmed && isMemoConfirmed;
 
   return (
     <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4 sm:p-6 bg-black/65 backdrop-blur-sm animate-slide-up-fade">
@@ -133,7 +131,7 @@ export const DonateModal = ({ isOpen, onClose }) => {
                 </p>
               </div>
 
-              {/* Mandatory Compliance Checkboxes (Placed ABOVE the email) */}
+              {/* Mandatory Compliance Checkboxes (Placed FIRST above the email) */}
               <div className="space-y-3">
                 <p className="text-xs font-black uppercase tracking-wider text-slate-700">
                   Step 1: Statutory Compliance Confirmations <span className="text-[#FF0000]">*</span>
@@ -166,60 +164,39 @@ export const DonateModal = ({ isOpen, onClose }) => {
                 </label>
               </div>
 
-              {/* Step 2: Email Display (Revealed ONLY after selecting both confirmation checkboxes) */}
+              {/* Step 2: Unlocked Campaign e-Transfer Email (Always visible) */}
               <div className="space-y-3 pt-1">
                 <p className="text-xs font-black uppercase tracking-wider text-slate-700">
-                  Step 2: Campaign e-Transfer Email
+                  Step 2: Official Campaign e-Transfer Email
                 </p>
 
-                {isInteracUnlocked ? (
-                  <div className="p-5 rounded-2xl bg-white border-2 border-[#0A3E88] shadow-md space-y-3 animate-slide-up-fade">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-black uppercase tracking-wider text-emerald-700 flex items-center gap-1">
-                        <Check className="w-4 h-4 text-emerald-600" />
-                        <span>Compliance Confirmed - Send e-Transfer To:</span>
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#EEF4FC] border border-blue-200 gap-2">
-                      <span className="font-black text-base sm:text-lg text-[#0A3E88] truncate select-all">
-                        {interacEmail}
-                      </span>
-                      <button
-                        onClick={handleCopyEmail}
-                        className="px-4 py-2.5 rounded-lg bg-[#0A3E88] hover:bg-[#08326E] text-white text-xs font-black uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 shadow-sm"
-                      >
-                        {copied ? (
-                          <>
-                            <Check className="w-4 h-4 text-emerald-400" />
-                            <span>Copied</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-4 h-4" />
-                            <span>Copy Email</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      Auto-deposit is enabled on <strong className="text-slate-900">{interacEmail}</strong>. Remember to include your legal name & residential address in your banking app's memo field.
-                    </p>
+                <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 gap-2">
+                    <span className="font-black text-base sm:text-lg text-[#0A3E88] truncate select-all">
+                      {interacEmail}
+                    </span>
+                    <button
+                      onClick={handleCopyEmail}
+                      className="px-3.5 py-2 rounded-lg bg-[#0A3E88] hover:bg-[#08326E] text-white text-xs font-black uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-4 h-4 text-emerald-400" />
+                          <span>Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          <span>Copy</span>
+                        </>
+                      )}
+                    </button>
                   </div>
-                ) : (
-                  <div className="p-5 rounded-2xl bg-slate-100 border border-dashed border-slate-300 text-center space-y-2 py-6">
-                    <div className="w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center mx-auto">
-                      <Lock className="w-5 h-5" />
-                    </div>
-                    <p className="text-xs font-bold text-slate-700">
-                      e-Transfer Email Locked
-                    </p>
-                    <p className="text-[11px] text-slate-500 max-w-xs mx-auto leading-relaxed">
-                      Please check both compliance boxes above to reveal the campaign e-Transfer email address.
-                    </p>
-                  </div>
-                )}
+
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Auto-deposit is enabled on <strong className="text-slate-900">{interacEmail}</strong>. Please ensure your legal name & residential address are entered in your banking app's memo field.
+                  </p>
+                </div>
               </div>
 
             </div>
