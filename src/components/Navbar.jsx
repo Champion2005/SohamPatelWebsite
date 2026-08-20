@@ -8,6 +8,7 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
   const navLinks = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
+    // { id: 'media', label: 'Media' }, // Hidden for now - uncomment to restore
     { id: 'ward9', label: 'Ward 9' },
     { id: 'contact', label: 'Contact' },
   ];
@@ -81,9 +82,9 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
           </div>
 
           {/* =================================================================
-             RIGHT SIDE: Donate Button
+             RIGHT SIDE: Donate Button & Social Icons (Social icons hidden for now)
              ================================================================= */}
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center gap-3">
             {/* Prominent Donate Button */}
             <button
               onClick={handleDonateClick}
@@ -92,6 +93,15 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
               <Heart className="w-3.5 h-3.5 fill-current" />
               <span>Donate</span>
             </button>
+
+            {/* Hidden Social Links - Uncomment to restore */}
+            {/* 
+            <div className="h-6 w-px bg-white/20 mx-0.5" />
+            <a href="tel:2262608869" title="Call Campaign" className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000]"><PhoneCallIcon className="w-4.5 h-4.5" /></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" title="Twitter / X" className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000]"><TwitterIcon className="w-4 h-4" /></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" title="Instagram" className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000]"><InstagramIcon className="w-4.5 h-4.5" /></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" title="Facebook" className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000]"><FacebookIcon className="w-4.5 h-4.5" /></a>
+            */}
           </div>
 
           {/* =================================================================

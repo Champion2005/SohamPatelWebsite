@@ -76,6 +76,13 @@ export default function App() {
               <PlatformSection />
             </div>
 
+            {/* VIDEO REELS CONTINUOUS LOOPING CAROUSEL (Hidden for now - uncomment to restore) */}
+            {/* 
+            <div className="w-full py-4 sm:py-8 bg-[#F8FAFC]">
+              <VideoReelsCarousel />
+            </div>
+            */}
+
             {/* WARD 9 INTERACTIVE MAP SECTION */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               <Ward9MapSection 
@@ -96,12 +103,14 @@ export default function App() {
           </div>
         )}
 
-        {/* 3. MEDIA & COMMUNITY PAGE VIEW */}
+        {/* 3. MEDIA & COMMUNITY PAGE VIEW (Hidden for now - uncomment to restore) */}
+        {/* 
         {activeSection === 'media' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
             <MediaSection />
           </div>
         )}
+        */}
 
         {/* 4. WARD 9 MAP PAGE VIEW */}
         {activeSection === 'ward9' && (
@@ -209,6 +218,7 @@ export default function App() {
               >
                 About
               </button>
+              {/* <button onClick={() => handleNavigate('media')} className={`hover:text-[#FF0000] transition-colors cursor-pointer ${activeSection === 'media' ? 'text-[#FF0000]' : ''}`}>Media</button> */}
               <button 
                 onClick={() => handleNavigate('ward9')} 
                 className={`hover:text-[#FF0000] transition-colors cursor-pointer ${activeSection === 'ward9' ? 'text-[#FF0000]' : ''}`}
@@ -229,6 +239,15 @@ export default function App() {
               </button>
             </div>
 
+            {/* Hidden Social Icons - Uncomment to restore */}
+            {/* 
+            <div className="flex items-center gap-2.5">
+              <a href="tel:2262608869" title="Phone Call" className="w-9 h-9 rounded-full bg-white/15 hover:bg-[#FF0000] text-white flex items-center justify-center"><PhoneCallIcon className="w-4.5 h-4.5" /></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="w-9 h-9 rounded-full bg-white/15 hover:bg-[#FF0000] text-white flex items-center justify-center"><TwitterIcon className="w-4 h-4" /></a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full bg-white/15 hover:bg-[#FF0000] text-white flex items-center justify-center"><InstagramIcon className="w-4.5 h-4.5" /></a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-9 h-9 rounded-full bg-white/15 hover:bg-[#FF0000] text-white flex items-center justify-center"><FacebookIcon className="w-4.5 h-4.5" /></a>
+            </div>
+            */}
           </div>
 
           {/* Legal Disclosure & Copyright */}
