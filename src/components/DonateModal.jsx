@@ -4,6 +4,7 @@ import { X, CreditCard, Send, Check, Copy, ShieldCheck, Heart, ExternalLink } fr
 export const DonateModal = ({ isOpen, onClose }) => {
   const [activeTab, setActiveTab] = useState('card'); // 'card' | 'interac'
   const [selectedAmount, setSelectedAmount] = useState(100);
+  const [isConfirmed, setIsConfirmed] = useState(false);
   const [copied, setCopied] = useState(false);
   const modalRef = useRef(null);
 
@@ -13,6 +14,10 @@ export const DonateModal = ({ isOpen, onClose }) => {
   const presetAmounts = [25, 50, 100, 250, 500];
 
   useEffect(() => {
+    if (isOpen) {
+      setIsConfirmed(false);
+    }
+
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isOpen) {
         onClose();
@@ -42,6 +47,7 @@ export const DonateModal = ({ isOpen, onClose }) => {
   };
 
   const handleStripeRedirect = () => {
+    if (!isConfirmed) return;
     window.open(stripeUrl, '_blank', 'noopener,noreferrer');
   };
 
@@ -146,10 +152,28 @@ export const DonateModal = ({ isOpen, onClose }) => {
                 </p>
               </div>
 
+              {/* Statutory Confirmation Checkbox */}
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-2xl bg-red-50/70 border border-red-200/90 transition-colors hover:bg-red-50">
+                <input
+                  type="checkbox"
+                  checked={isConfirmed}
+                  onChange={(e) => setIsConfirmed(e.target.checked)}
+                  className="mt-0.5 w-4.5 h-4.5 rounded text-[#FF0000] focus:ring-red-500 border-slate-300 cursor-pointer shrink-0"
+                />
+                <span className="text-xs font-bold text-slate-800 leading-snug">
+                  I confirm that I am an individual normally resident in Ontario, I am contributing my own funds, and my total contributions to this campaign will not exceed $1,200. <span className="text-[#FF0000]">*</span>
+                </span>
+              </label>
+
               {/* Action Button to Launch Stripe Checkout */}
               <button
                 onClick={handleStripeRedirect}
-                className="w-full py-4 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-sm uppercase tracking-wider transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2"
+                disabled={!isConfirmed}
+                className={`w-full py-4 rounded-full font-black text-sm uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 ${
+                  isConfirmed
+                    ? 'bg-[#FF0000] hover:bg-[#D90000] text-white hover:shadow-lg cursor-pointer'
+                    : 'bg-slate-300 text-slate-500 cursor-not-allowed opacity-75'
+                }`}
               >
                 <span>Continue to Secure Checkout (${selectedAmount})</span>
                 <ExternalLink className="w-4 h-4" />
@@ -192,6 +216,19 @@ export const DonateModal = ({ isOpen, onClose }) => {
                   </button>
                 </div>
               </div>
+
+              {/* Statutory Confirmation Checkbox */}
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-2xl bg-red-50/70 border border-red-200/90 transition-colors hover:bg-red-50">
+                <input
+                  type="checkbox"
+                  checked={isConfirmed}
+                  onChange={(e) => setIsConfirmed(e.target.checked)}
+                  className="mt-0.5 w-4.5 h-4.5 rounded text-[#FF0000] focus:ring-red-500 border-slate-300 cursor-pointer shrink-0"
+                />
+                <span className="text-xs font-bold text-slate-800 leading-snug">
+                  I confirm that I am an individual normally resident in Ontario, I am contributing my own funds, and my total contributions to this campaign will not exceed $1,200. <span className="text-[#FF0000]">*</span>
+                </span>
+              </label>
 
               {/* Simple Step-by-Step Instructions */}
               <div className="space-y-2.5 text-xs sm:text-sm text-slate-700">
