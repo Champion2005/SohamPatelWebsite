@@ -73,7 +73,7 @@ export default function App() {
 
             {/* PLATFORM MISSION CARDS */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-              <PlatformSection />
+              <PlatformSection onVolunteerClick={() => setIsVolunteerOpen(true)} />
             </div>
 
             {/* VIDEO REELS CONTINUOUS LOOPING CAROUSEL (Hidden for now - uncomment to restore) */}
