@@ -90,18 +90,23 @@ export const DonateModal = ({ isOpen, onClose }) => {
       >
         
         {/* Top Header (Blue #0A3E88) */}
-        <div className="p-6 sm:p-7 bg-[#0A3E88] text-white flex items-center justify-between border-b border-blue-900">
-          <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white flex items-center gap-2">
-            <span>Support Soham Patel</span>
-            <Heart className="w-5 h-5 text-[#FF0000] fill-current" />
-          </h3>
-          <button
-            onClick={onClose}
-            className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer"
-            aria-label="Close modal"
-          >
-            <X className="w-5 h-5" />
-          </button>
+        <div className="p-6 sm:p-7 bg-[#0A3E88] text-white border-b border-blue-900 space-y-1">
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white flex items-center gap-2">
+              <span>SUPPORT THE CAMPAIGN</span>
+              <Heart className="w-5 h-5 text-[#FF0000] fill-current" />
+            </h3>
+            <button
+              onClick={onClose}
+              className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer"
+              aria-label="Close modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          <p className="text-xs sm:text-sm text-blue-100 font-medium leading-snug">
+            Every dollar goes straight to reaching Ward 9 voters - signs, flyers, and boots on the ground
+          </p>
         </div>
 
         {/* Modal Body */}

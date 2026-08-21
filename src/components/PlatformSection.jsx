@@ -1,6 +1,10 @@
 import React from 'react';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import communitySpacesImg from '../assets/platform_community_spaces.jpg';
+import concession6thImg from '../assets/platform_6th_concession.jpg';
+import infrastructurePlanningImg from '../assets/platform_infrastructure_planning.jpg';
+import safeStreetsImg from '../assets/platform_safe_streets.jpg';
 
 export const PlatformSection = ({ onVolunteerClick }) => {
   useScrollReveal();
@@ -16,6 +20,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
         "New and upgraded tennis and pickleball courts",
         "Better trails, parks, and green spaces across the ward"
       ],
+      image: communitySpacesImg,
       colLeftWidth: "lg:col-span-7",
       colRightWidth: "lg:col-span-5",
       isImageRight: true
@@ -30,6 +35,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
         "Real traffic management planned ahead of new development",
         "Safer conditions for residents currently walking along the roadside"
       ],
+      image: concession6thImg,
       colLeftWidth: "lg:col-span-5",
       colRightWidth: "lg:col-span-7",
       isImageRight: false
@@ -44,6 +50,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
         "Roads and underground utilities upgraded ahead of growth, not after",
         "Growth that's planned well, so residents feel the benefits, not the disruption"
       ],
+      image: infrastructurePlanningImg,
       colLeftWidth: "lg:col-span-7",
       colRightWidth: "lg:col-span-5",
       isImageRight: true
@@ -58,6 +65,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
         "Real enforcement against speeding on residential streets",
         "Traffic calming measures to protect pedestrians, children, and seniors"
       ],
+      image: safeStreetsImg,
       colLeftWidth: "lg:col-span-5",
       colRightWidth: "lg:col-span-7",
       isImageRight: false
@@ -123,12 +131,15 @@ export const PlatformSection = ({ onVolunteerClick }) => {
             </div>
           );
 
-          // Deep Blue Card Placeholder for future image
-          const ImagePlaceholderCard = (
-            <div className="h-full min-h-[260px] sm:min-h-[300px] lg:min-h-full rounded-3xl bg-[#0A3E88] border border-blue-900 shadow-xl overflow-hidden relative flex items-center justify-center">
-              {/* Subtle Ambient Background Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#062654] via-[#0A3E88] to-[#08326E] pointer-events-none" />
-              <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF0000]/15 rounded-full blur-2xl pointer-events-none" />
+          // Realistic Image Card
+          const ImageCard = (
+            <div className="h-full min-h-[260px] sm:min-h-[300px] lg:min-h-[360px] rounded-3xl bg-slate-900 border border-slate-200/90 shadow-md overflow-hidden relative group">
+              <img 
+                src={item.image} 
+                alt={item.title} 
+                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent pointer-events-none" />
             </div>
           );
 
@@ -140,13 +151,13 @@ export const PlatformSection = ({ onVolunteerClick }) => {
                     {TextBlock}
                   </div>
                   <div className={`w-full ${item.colRightWidth} flex flex-col reveal-right delay-100`}>
-                    {ImagePlaceholderCard}
+                    {ImageCard}
                   </div>
                 </>
               ) : (
                 <>
                   <div className={`w-full ${item.colLeftWidth} order-2 lg:order-1 flex flex-col reveal-left`}>
-                    {ImagePlaceholderCard}
+                    {ImageCard}
                   </div>
                   <div className={`w-full ${item.colRightWidth} order-1 lg:order-2 flex flex-col reveal-right delay-100`}>
                     {TextBlock}

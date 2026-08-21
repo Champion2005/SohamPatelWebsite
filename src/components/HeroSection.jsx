@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import sohamHeadshot from '../assets/soham_headshot.png';
+import sohamUniform from '../assets/soham_uniform.png';
 
 export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }) => {
   return (
@@ -18,25 +18,22 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
           {/* Text Stack Block */}
           <div className="space-y-1 sm:space-y-3 w-full">
             
-            {/* SOHAM PATEL */}
-            <div className="animate-slide-up-fade w-full">
-              <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-8xl xl:text-9xl font-black uppercase tracking-tight leading-[0.92] drop-shadow-sm w-full">
-                <span className="text-[#0A3E88]">SOHAM </span>
-                <span className="text-[#FF0000]">PATEL</span>
-              </h1>
+            {/* Main Name Header "SOHAM PATEL" */}
+            <h1 className="font-black uppercase tracking-tight text-slate-900 text-5xl sm:text-7xl lg:text-8xl xl:text-[6.5rem] leading-[0.88] drop-shadow-sm">
+              <span className="text-[#0A3E88] block sm:inline">SOHAM </span>
+              <span className="text-[#FF0000] block sm:inline">PATEL</span>
+            </h1>
+
+            {/* Subtitle Line "FOR WARD 9" */}
+            <div className="pt-1 sm:pt-2">
+              <span className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-[#0A3E88] block">
+                FOR WARD <span className="text-[#FF0000]">9</span>
+              </span>
             </div>
 
-            {/* FOR WARD 9 */}
-            <div className="animate-slide-up-fade animate-delay-100 w-full pt-1">
-              <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-black uppercase tracking-tight leading-none">
-                <span className="text-[#0A3E88]">FOR WARD </span>
-                <span className="text-[#FF0000]">9</span>
-              </h2>
-            </div>
-
-            {/* Windsor, Ontario */}
-            <div className="animate-slide-up-fade animate-delay-200 pt-1 sm:pt-2">
-              <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#0A3E88] tracking-wider uppercase block">
+            {/* City Tagline "WINDSOR, ONTARIO" */}
+            <div>
+              <span className="text-sm sm:text-lg lg:text-xl font-black uppercase tracking-widest text-slate-600 block pt-0.5 sm:pt-1">
                 Windsor, Ontario
               </span>
             </div>
@@ -83,7 +80,7 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
           }}
         >
           <img 
-            src={sohamHeadshot} 
+            src={sohamUniform} 
             alt="Soham Patel Candidate Headshot" 
             className="w-full max-w-[320px] sm:max-w-md md:max-w-lg lg:w-[560px] xl:w-[660px] h-auto max-h-[48vh] sm:max-h-[52vh] lg:max-h-[90vh] object-contain object-bottom drop-shadow-2xl"
           />

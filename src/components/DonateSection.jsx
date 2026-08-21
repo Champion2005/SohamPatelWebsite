@@ -56,10 +56,10 @@ export const DonateSection = () => {
       {/* Section Header */}
       <div className="border-l-4 border-[#FF0000] pl-4 sm:pl-6 space-y-2 reveal-up">
         <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#0A3E88]">
-          Support Soham Patel
+          SUPPORT THE CAMPAIGN
         </h2>
         <p className="text-slate-600 font-medium text-base sm:text-lg max-w-3xl leading-relaxed pt-1">
-          Grassroots support fuels our mission for Windsor Ward 9. Every contribution directly funds lawn signs, door-to-door flyers, and community outreach.
+          Every dollar goes straight to reaching Ward 9 voters - signs, flyers, and boots on the ground
         </p>
       </div>
 
@@ -78,7 +78,7 @@ export const DonateSection = () => {
             }`}
           >
             <Send className="w-5 h-5 text-[#0A3E88]" />
-            <span>Interac e-Transfer (100% Free)</span>
+            <span>Interac e-Transfer</span>
           </button>
 
           <button
