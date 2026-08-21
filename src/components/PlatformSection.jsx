@@ -9,12 +9,12 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     {
       id: 1,
       badge: "MAIN FOCUS",
-      title: "Safe, Connected & Peaceful Neighborhoods",
-      summary: "Prioritizing neighborhood traffic calming, pedestrian crosswalk safety, and proactive community-focused policing to protect families and seniors throughout Ward 9.",
+      title: "Our Streets Deserve To Be Safe. Period.",
+      summary: "Residents in Ward 9 have dealt with safety concerns that shouldn't be normal in any neighbourhood. Seniors have been targeted for theft, speeding on residential streets has put families at risk, and there have been incidents of vehicles losing control near homes and schools. Safety on our streets needs to be treated as a priority.",
       bulletPoints: [
-        "Speed mitigation and smart traffic calming on residential corridors",
-        "Improved street lighting and crosswalk visibility near local schools",
-        "Active partnerships with neighborhood watch and youth community programs"
+        "Stronger police presence in high-concern areas across the ward",
+        "Real enforcement against speeding on residential streets",
+        "Traffic calming measures to protect pedestrians, children, and seniors"
       ],
       colLeftWidth: "lg:col-span-7",
       colRightWidth: "lg:col-span-5",
@@ -23,12 +23,12 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     {
       id: 2,
       badge: "MAIN FOCUS",
-      title: "Modern Infrastructure & Storm Drainage Resilience",
-      summary: "Investing in essential road resurfacing, sidewalk accessibility, and proactive stormwater drainage upgrades to prevent residential flooding during heavy rainstorms.",
+      title: "Invest In Our Spaces. Invest In Our Community.",
+      summary: "Ward 9 has been underinvested in for too long with outdated parks, aging community centres, and libraries that deserve better funding. I'll fight for real investment in our green spaces and community facilities, new and upgraded tennis and pickleball courts, better trails, and stronger backing for the community centres and libraries this ward deserves.",
       bulletPoints: [
-        "Targeted resurfacing for deteriorating residential roads and thoroughfares",
-        "Upgraded catch basins, sewer line clean-outs, and basement flooding subsidies",
-        "Expanding interconnected bike paths and accessible sidewalk networks"
+        "Real investment in community centres and libraries",
+        "New and upgraded tennis and pickleball courts",
+        "Better trails, parks, and green spaces across the ward"
       ],
       colLeftWidth: "lg:col-span-5",
       colRightWidth: "lg:col-span-7",
@@ -37,12 +37,12 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     {
       id: 3,
       badge: "MAIN FOCUS",
-      title: "Revitalized Parks, Recreation & Green Spaces",
-      summary: "Preserving and expanding Ward 9's public parks, sports fields, splash pads, and recreational amenities for children, growing families, and seniors.",
+      title: "6th Concession: No Walkways. No Bike Lanes. No Plan.",
+      summary: "6th Concession Road wasn't built with walkways, bike lanes, or real traffic management in mind. With a multi-storey apartment development expected on the street, traffic on this corridor is only going to get heavier. I'll push the city to add the walkways, bike lanes, and traffic planning this road needs now, before that growth hits.",
       bulletPoints: [
-        "Modernizing neighborhood park playground equipment and shaded seating",
-        "Preserving natural woodlots and expanding urban tree canopy coverage",
-        "Year-round community sports programming and accessible recreational facilities"
+        "Dedicated walkways and bike lanes added to the corridor",
+        "Real traffic management planned ahead of new development",
+        "Safer conditions for residents currently walking along the roadside"
       ],
       colLeftWidth: "lg:col-span-7",
       colRightWidth: "lg:col-span-5",
@@ -51,12 +51,12 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     {
       id: 4,
       badge: "MAIN FOCUS",
-      title: "Transparent Governance & Fiscal Accountability",
-      summary: "Ensuring every municipal property tax dollar delivers maximum value for residents, with honest representation and direct community feedback on City Council decisions.",
+      title: "Plan Ahead. Not After The Damage Is Done.",
+      summary: "Windsor keeps waiting until infrastructure is already overloaded before doing anything about it. Roads get dug up and underground utilities—sewer, water, gas, and electrical—get replaced after the community has already outgrown them, and residents are the ones stuck living through it. Growth is good for Ward 9, but it needs to come with a plan. With major developments like the new hospital coming to Ward 9 and the community growing rapidly, I'll push the city to plan roads and underground infrastructure ahead of growth so residents aren't the ones absorbing the impact.",
       bulletPoints: [
-        "Regular Ward 9 town halls and digital survey channels before major council votes",
-        "Disciplined city budget allocation focusing on core frontline services",
-        "Direct resident assistance and rapid response to 311 service inquiries"
+        "Infrastructure planning tied directly to upcoming major developments",
+        "Roads and underground utilities upgraded ahead of growth, not after",
+        "Growth that's planned well, so residents feel the benefits, not the disruption"
       ],
       colLeftWidth: "lg:col-span-5",
       colRightWidth: "lg:col-span-7",

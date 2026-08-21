@@ -50,28 +50,25 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
           Soham’s campaign is built on direct accountability and community engagement. He is committed to holding regular ward town halls, maintaining an open-door policy for all residents, and ensuring every municipal tax dollar is invested transparently to build a stronger future for Ward 9.
         </p>
 
-        {/* External Link: Councillor Responsibilities */}
-        <div className="pt-2">
-          <a
-            href="https://www.ontario.ca/document/ontario-municipal-councillors-guide/1-role-council-councillor-and-staff#section-2"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs sm:text-sm font-black text-[#FF0000] hover:text-[#D90000] uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors cursor-pointer group"
-          >
-            <span>Learn about what a councillors responsibilities are</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </a>
-        </div>
-
-        {/* 4. Interactive Link at the End of Body (Has hover transition) */}
-        <div className="pt-6 border-t border-slate-100 flex items-center justify-end">
+        {/* Interactive Action Links at End of Body */}
+        <div className="pt-6 border-t border-slate-100 flex flex-col items-end gap-2 sm:gap-3">
           <button
             onClick={onNavigateToPlatform}
-            className="text-sm sm:text-base font-black text-[#FF0000] hover:text-[#D90000] uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer group py-2 px-4 rounded-xl hover:bg-red-50"
+            className="text-sm sm:text-base font-black text-[#FF0000] hover:text-[#D90000] uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer group py-1.5 px-3 rounded-xl hover:bg-red-50"
           >
             <span>Click here for platform details</span>
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />
           </button>
+
+          <a
+            href="https://www.ontario.ca/document/ontario-municipal-councillors-guide/1-role-council-councillor-and-staff#section-2"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs sm:text-sm font-black text-[#FF0000] hover:text-[#D90000] uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer group py-1.5 px-3 rounded-xl hover:bg-red-50"
+          >
+            <span>Learn about what a councillor's responsibilities are</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </a>
         </div>
       </div>
 
