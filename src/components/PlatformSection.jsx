@@ -9,12 +9,12 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     {
       id: 1,
       badge: "MAIN FOCUS",
-      title: "Our Streets Deserve To Be Safe. Period.",
-      summary: "Residents in Ward 9 have dealt with safety concerns that shouldn't be normal in any neighbourhood. Seniors have been targeted for theft, speeding on residential streets has put families at risk, and there have been incidents of vehicles losing control near homes and schools. Safety on our streets needs to be treated as a priority.",
+      title: "3. INVEST IN OUR SPACES. INVEST IN OUR COMMUNITY.",
+      summary: "Ward 9 has been underinvested in for too long. Outdated parks, aging community centres, and libraries that deserve better funding. I'll fight for real investment in our green spaces and community facilities, new and upgraded tennis and pickleball courts, better trails, and stronger backing for the community centres and libraries this ward deserves.",
       bulletPoints: [
-        "Stronger police presence in high-concern areas across the ward",
-        "Real enforcement against speeding on residential streets",
-        "Traffic calming measures to protect pedestrians, children, and seniors"
+        "Real investment in community centres and libraries",
+        "New and upgraded tennis and pickleball courts",
+        "Better trails, parks, and green spaces across the ward"
       ],
       colLeftWidth: "lg:col-span-7",
       colRightWidth: "lg:col-span-5",
@@ -23,12 +23,12 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     {
       id: 2,
       badge: "MAIN FOCUS",
-      title: "Invest In Our Spaces. Invest In Our Community.",
-      summary: "Ward 9 has been underinvested in for too long with outdated parks, aging community centres, and libraries that deserve better funding. I'll fight for real investment in our green spaces and community facilities, new and upgraded tennis and pickleball courts, better trails, and stronger backing for the community centres and libraries this ward deserves.",
+      title: "4. 6TH CONCESSION: NO WALKWAYS. NO BIKE LANES. NO PLAN.",
+      summary: "6th Concession Road wasn't built with walkways, bike lanes, or real traffic management in mind. With a multi-storey apartment development expected on the street, traffic on this corridor is only going to get heavier. I'll push the city to add the walkways, bike lanes, and traffic planning this road needs now, before that growth hits.",
       bulletPoints: [
-        "Real investment in community centres and libraries",
-        "New and upgraded tennis and pickleball courts",
-        "Better trails, parks, and green spaces across the ward"
+        "Dedicated walkways and bike lanes added to the corridor",
+        "Real traffic management planned ahead of new development",
+        "Safer conditions for residents currently walking along the roadside"
       ],
       colLeftWidth: "lg:col-span-5",
       colRightWidth: "lg:col-span-7",
@@ -37,12 +37,12 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     {
       id: 3,
       badge: "MAIN FOCUS",
-      title: "6th Concession: No Walkways. No Bike Lanes. No Plan.",
-      summary: "6th Concession Road wasn't built with walkways, bike lanes, or real traffic management in mind. With a multi-storey apartment development expected on the street, traffic on this corridor is only going to get heavier. I'll push the city to add the walkways, bike lanes, and traffic planning this road needs now, before that growth hits.",
+      title: "5. PLAN AHEAD. NOT AFTER THE DAMAGE IS DONE.",
+      summary: "Windsor keeps waiting until infrastructure is already overloaded before doing anything about it. Roads get dug up and underground utilities, sewer, water, gas, and electrical, get replaced after the community has already outgrown them, and residents are the ones stuck living through it. Growth is good for Ward 9, but it needs to come with a plan. With major developments like the new hospital coming to Ward 9 and the community growing rapidly, I'll push the city to plan roads and underground infrastructure ahead of growth so residents aren't the ones absorbing the impact.",
       bulletPoints: [
-        "Dedicated walkways and bike lanes added to the corridor",
-        "Real traffic management planned ahead of new development",
-        "Safer conditions for residents currently walking along the roadside"
+        "Infrastructure planning tied directly to upcoming major developments",
+        "Roads and underground utilities upgraded ahead of growth, not after",
+        "Growth that's planned well, so residents feel the benefits, not the disruption"
       ],
       colLeftWidth: "lg:col-span-7",
       colRightWidth: "lg:col-span-5",
@@ -51,12 +51,12 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     {
       id: 4,
       badge: "MAIN FOCUS",
-      title: "Plan Ahead. Not After The Damage Is Done.",
-      summary: "Windsor keeps waiting until infrastructure is already overloaded before doing anything about it. Roads get dug up and underground utilities—sewer, water, gas, and electrical—get replaced after the community has already outgrown them, and residents are the ones stuck living through it. Growth is good for Ward 9, but it needs to come with a plan. With major developments like the new hospital coming to Ward 9 and the community growing rapidly, I'll push the city to plan roads and underground infrastructure ahead of growth so residents aren't the ones absorbing the impact.",
+      title: "OUR STREETS DESERVE TO BE SAFE. PERIOD.",
+      summary: "Residents in Ward 9 have dealt with safety concerns that shouldn't be normal in any neighbourhood. Seniors have been targeted for theft. Speeding on residential streets has put families at risk, and there have been incidents of vehicles losing control near homes and schools. Safety on our streets needs to be treated as a priority.",
       bulletPoints: [
-        "Infrastructure planning tied directly to upcoming major developments",
-        "Roads and underground utilities upgraded ahead of growth, not after",
-        "Growth that's planned well, so residents feel the benefits, not the disruption"
+        "Stronger police presence in high-concern areas across the ward",
+        "Real enforcement against speeding on residential streets",
+        "Traffic calming measures to protect pedestrians, children, and seniors"
       ],
       colLeftWidth: "lg:col-span-5",
       colRightWidth: "lg:col-span-7",
