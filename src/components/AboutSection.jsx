@@ -50,6 +50,19 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
           Soham’s campaign is built on direct accountability and community engagement. He is committed to holding regular ward town halls, maintaining an open-door policy for all residents, and ensuring every municipal tax dollar is invested transparently to build a stronger future for Ward 9.
         </p>
 
+        {/* External Link: Councillor Responsibilities */}
+        <div className="pt-2">
+          <a
+            href="https://www.ontario.ca/document/ontario-municipal-councillors-guide/1-role-council-councillor-and-staff#section-2"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs sm:text-sm font-black text-[#FF0000] hover:text-[#D90000] uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors cursor-pointer group"
+          >
+            <span>Learn about what a councillors responsibilities are</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </a>
+        </div>
+
         {/* 4. Interactive Link at the End of Body (Has hover transition) */}
         <div className="pt-6 border-t border-slate-100 flex items-center justify-end">
           <button
