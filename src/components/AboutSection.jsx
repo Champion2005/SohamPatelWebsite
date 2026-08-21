@@ -74,10 +74,10 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
         <div className="pt-6 border-t border-slate-100 flex flex-col items-end gap-2 sm:gap-3">
           <button
             onClick={onNavigateToPlatform}
-            className="text-sm sm:text-base font-black text-[#FF0000] hover:text-[#D90000] uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer group py-1.5 px-3 rounded-xl hover:bg-red-50"
+            className="text-xs sm:text-sm font-black text-[#FF0000] hover:text-[#D90000] uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer group py-1.5 px-3 rounded-xl hover:bg-red-50"
           >
             <span>Click here for platform details</span>
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
           </button>
 
           <a
@@ -87,7 +87,7 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
             className="text-xs sm:text-sm font-black text-[#FF0000] hover:text-[#D90000] uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer group py-1.5 px-3 rounded-xl hover:bg-red-50"
           >
             <span>Learn about what a councillor's responsibilities are</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
           </a>
         </div>
       </div>
