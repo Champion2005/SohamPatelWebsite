@@ -48,6 +48,59 @@ Stripe directly supports political campaigns and candidates in Canada.
 
 ---
 
+## 🛡️ Enforcing Ontario-Only Residency (Restricting Non-Ontario Donors)
+
+Under **s. 88.8(3)** of the *Municipal Elections Act, 1996*, only individuals who reside in Ontario can contribute to a municipal campaign. Here are 3 ways to stop and block non-Ontario residents from donating through Stripe:
+
+### 1. Stripe Radar Custom Block Rule (No-Code Method in Stripe Dashboard)
+If using Stripe Payment Links or Stripe Checkout, you can set up a custom **Stripe Radar Rule** to automatically decline any transaction where the card's billing address is outside Ontario:
+
+1. Log into your **Stripe Dashboard** $\rightarrow$ Search for **Radar** $\rightarrow$ **Rules**.
+2. Under **Block rules**, click **+ Add rule**.
+3. Add the following rule expression:
+   ```text
+   Block if :billing_address_country: == 'CA' and :billing_address_state: not in ('ON', 'Ontario', 'ontario', 'On')
+   ```
+4. Also add a rule to block non-Canadian countries:
+   ```text
+   Block if :billing_address_country: != 'CA'
+   ```
+5. Click **Save and test**. Stripe will now automatically block card payments from any non-Ontario billing addresses!
+
+---
+
+### 2. Website Pre-Screening Form (Front-End Gatekeeping)
+Before redirecting to Stripe or displaying the e-Transfer details, the website forces the donor to check the mandatory statutory confirmation checkbox:
+> *"I confirm that I am an individual normally resident in Ontario, I am contributing my own funds, and my total contributions to this campaign will not exceed $1,200."*
+
+If the user does not check this box, the `Donate` button remains disabled, preventing non-residents from proceeding.
+
+---
+
+### 3. Automatic Webhook Auto-Refund (Server-Side / Back-End Audit)
+If using a custom Stripe server integration (Node.js/Python), you can inspect every payment when the `charge.succeeded` webhook fires:
+
+```javascript
+// Webhook handler for charge.succeeded
+const address = charge.billing_details.address;
+const province = address.state ? address.state.toUpperCase().trim() : '';
+const country = address.country ? address.country.toUpperCase().trim() : '';
+
+// If donor resides outside Ontario or Canada, issue an immediate full refund
+if (country !== 'CA' || (province !== 'ON' && province !== 'ONTARIO')) {
+  await stripe.refunds.create({
+    charge: charge.id,
+    reason: 'requested_by_customer',
+    metadata: {
+      compliance_reason: 'Non-Ontario resident prohibited under s. 88.8(3) Municipal Elections Act'
+    }
+  });
+  console.log(`Auto-refunded prohibited donation from ${address.city}, ${province}, ${country}`);
+}
+```
+
+---
+
 ## 📱 Option 2: Interac e-Transfer (100% Free - 0% Fees)
 
 Interac e-Transfer is the most popular, zero-fee method used by Ontario municipal campaigns.
