@@ -38,16 +38,36 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
 
       {/* 3. About Me Body Directly Underneath Picture (Static text container - no hover lift) */}
       <div className="w-full p-6 sm:p-10 lg:p-12 rounded-3xl bg-white border border-slate-200/90 shadow-md space-y-6 text-slate-700 text-base sm:text-lg leading-relaxed reveal-up">
-        <p>
-          Soham Patel is a lifelong community champion and experienced project professional who believes Windsor’s Ward 9 deserves responsive, proactive, and accessible leadership at City Hall. Having worked closely with local neighborhood groups, small business owners, and active families across the ward, Soham understands the everyday priorities that make our neighborhoods safe, prosperous, and connected.
+        <p className="font-semibold text-slate-900 text-lg sm:text-xl leading-relaxed">
+          I've never been the loudest person in the room. I've just been the one who shows up.
         </p>
         
         <p>
-          With a solid background in collaborative problem-solving, municipal advocacy, and fiscal responsibility, Soham is focused on delivering tangible results: from fixing neighborhood roads and enhancing storm drainage resilience to investing in modern parks, youth recreation, and local traffic calming measures.
+          As a real estate agent here in Windsor-Essex, I've helped families through one of the biggest decisions of their lives, buying or selling a home. As an Intelligence Officer with the Royal Canadian Naval Reserve, I've served in a role built on discipline, accountability, and putting the mission ahead of yourself.
         </p>
 
         <p>
-          Soham’s campaign is built on direct accountability and community engagement. He is committed to holding regular ward town halls, maintaining an open-door policy for all residents, and ensuring every municipal tax dollar is invested transparently to build a stronger future for Ward 9.
+          Real estate and the Reserves don't look connected at first. But they've taught me the same lesson. You earn trust by doing the work, not by talking about it.
+        </p>
+
+        <p>
+          I grew up right here in Windsor, and that upbringing shaped how I see this city and what it needs.
+        </p>
+
+        <p>
+          Real estate has put me in homes across Ward 9. I've sat at kitchen tables and listened to what people actually need. Safer streets. Better parks. Housing they can afford. A council that pays attention before problems get worse, not after. The Reserves taught me how to plan, follow through, and stay accountable even when it's hard.
+        </p>
+
+        <p>
+          This goes back further than my career, too. I earned my degree in Mechanical Engineering at the University of Windsor, and that drive to contribute carried into advocacy. As the First Year Engineering Representative for the Engineering Society, I brought concerns and issues from first year students directly to faculty, student leaders, and the Dean of Engineering. Later, I represented the Faculty of Engineering at the University of Windsor Students' Alliance (UWSA), bringing forward the concerns, issues, and priorities of students, faculty, and staff to university leadership.
+        </p>
+
+        <p>
+          That instinct to show up and speak up never left me. Today, I volunteer with a non-profit community organization that brings events, programs, and fundraisers to people across Windsor-Essex.
+        </p>
+
+        <p className="font-bold text-slate-900">
+          Windsor raised me. Now I want to serve Ward 9 the same way I've served everywhere else, with real commitment, not just words.
         </p>
 
         {/* Interactive Action Links at End of Body */}
