@@ -9,7 +9,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     {
       id: 1,
       badge: "MAIN FOCUS",
-      title: "3. INVEST IN OUR SPACES. INVEST IN OUR COMMUNITY.",
+      title: "INVEST IN OUR SPACES. INVEST IN OUR COMMUNITY.",
       summary: "Ward 9 has been underinvested in for too long. Outdated parks, aging community centres, and libraries that deserve better funding. I'll fight for real investment in our green spaces and community facilities, new and upgraded tennis and pickleball courts, better trails, and stronger backing for the community centres and libraries this ward deserves.",
       bulletPoints: [
         "Real investment in community centres and libraries",
@@ -23,7 +23,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     {
       id: 2,
       badge: "MAIN FOCUS",
-      title: "4. 6TH CONCESSION: NO WALKWAYS. NO BIKE LANES. NO PLAN.",
+      title: "6TH CONCESSION: NO WALKWAYS. NO BIKE LANES. NO PLAN.",
       summary: "6th Concession Road wasn't built with walkways, bike lanes, or real traffic management in mind. With a multi-storey apartment development expected on the street, traffic on this corridor is only going to get heavier. I'll push the city to add the walkways, bike lanes, and traffic planning this road needs now, before that growth hits.",
       bulletPoints: [
         "Dedicated walkways and bike lanes added to the corridor",
@@ -37,7 +37,7 @@ export const PlatformSection = ({ onVolunteerClick }) => {
     {
       id: 3,
       badge: "MAIN FOCUS",
-      title: "5. PLAN AHEAD. NOT AFTER THE DAMAGE IS DONE.",
+      title: "PLAN AHEAD. NOT AFTER THE DAMAGE IS DONE.",
       summary: "Windsor keeps waiting until infrastructure is already overloaded before doing anything about it. Roads get dug up and underground utilities, sewer, water, gas, and electrical, get replaced after the community has already outgrown them, and residents are the ones stuck living through it. Growth is good for Ward 9, but it needs to come with a plan. With major developments like the new hospital coming to Ward 9 and the community growing rapidly, I'll push the city to plan roads and underground infrastructure ahead of growth so residents aren't the ones absorbing the impact.",
       bulletPoints: [
         "Infrastructure planning tied directly to upcoming major developments",
