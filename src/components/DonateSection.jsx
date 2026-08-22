@@ -11,7 +11,7 @@ export const DonateSection = () => {
   const [isCustom, setIsCustom] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isMemoConfirmed, setIsMemoConfirmed] = useState(false);
-  const [emailUpdates, setEmailUpdates] = useState(true);
+  const [emailUpdates, setEmailUpdates] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const stripeUrl = import.meta.env.VITE_STRIPE_DONATION_URL || 'https://buy.stripe.com';
@@ -100,14 +100,9 @@ export const DonateSection = () => {
           <div className="space-y-6 animate-slide-up-fade">
             
             <div className="p-5 rounded-2xl bg-[#EEF4FC] border border-blue-100 text-sm text-slate-700 space-y-1.5">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="font-bold text-base text-[#0A3E88]">
-                  Donate via Direct Interac e-Transfer
-                </p>
-                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
-                  100% Free (0% Processing Fees)
-                </span>
-              </div>
+              <p className="font-bold text-base text-[#0A3E88]">
+                Donate via Direct Interac e-Transfer
+              </p>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                 Every dollar donated via Interac e-Transfer deposits 100% directly into Soham's campaign account with zero processing fee deductions.
               </p>
@@ -266,15 +261,6 @@ export const DonateSection = () => {
                   </p>
                 )}
               </div>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-[#EEF4FC] border border-blue-100 text-sm text-slate-700 space-y-1">
-              <p className="font-bold text-[#0A3E88] text-base">
-                Secure Instant Online Contribution
-              </p>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                Support Soham Patel’s grassroots campaign for Windsor Ward 9. Fast, encrypted checkout supporting Visa, Mastercard, American Express, Apple Pay, and Google Pay.
-              </p>
             </div>
 
             {/* Statutory Confirmation Checkbox */}

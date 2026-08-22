@@ -8,7 +8,7 @@ export const DonateModal = ({ isOpen, onClose }) => {
   const [isCustom, setIsCustom] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isMemoConfirmed, setIsMemoConfirmed] = useState(false);
-  const [emailUpdates, setEmailUpdates] = useState(true);
+  const [emailUpdates, setEmailUpdates] = useState(false);
   const [copied, setCopied] = useState(false);
   const modalRef = useRef(null);
 
@@ -21,6 +21,7 @@ export const DonateModal = ({ isOpen, onClose }) => {
     if (isOpen) {
       setIsConfirmed(false);
       setIsMemoConfirmed(false);
+      setEmailUpdates(false);
       setIsCustom(false);
       setCustomAmount('');
       setSelectedAmount(100);
@@ -144,14 +145,9 @@ export const DonateModal = ({ isOpen, onClose }) => {
             <div className="space-y-5 animate-slide-up-fade">
               
               <div className="p-4 rounded-2xl bg-[#EEF4FC] border border-blue-100 text-xs sm:text-sm text-slate-700 space-y-1">
-                <div className="flex items-center justify-between">
-                  <p className="font-bold text-[#0A3E88]">
-                    Donate via Direct e-Transfer
-                  </p>
-                  <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                    100% Free (0% Processing Fees)
-                  </span>
-                </div>
+                <p className="font-bold text-[#0A3E88]">
+                  Donate via Direct e-Transfer
+                </p>
                 <p className="text-slate-600 text-xs leading-relaxed">
                   Every dollar donated via Interac e-Transfer deposits 100% directly into Soham's campaign account with zero fee deductions.
                 </p>
@@ -309,15 +305,6 @@ export const DonateModal = ({ isOpen, onClose }) => {
                     </p>
                   )}
                 </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#EEF4FC] border border-blue-100 text-xs sm:text-sm text-slate-700 space-y-1">
-                <p className="font-bold text-[#0A3E88]">
-                  Secure Instant Online Contribution
-                </p>
-                <p className="text-slate-600 text-xs leading-relaxed">
-                  Support Soham Patel’s grassroots campaign for Windsor Ward 9. Fast, encrypted checkout supporting Visa, Mastercard, American Express, Apple Pay, and Google Pay.
-                </p>
               </div>
 
               {/* Statutory Confirmation Checkbox */}
