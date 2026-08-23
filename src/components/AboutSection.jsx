@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import sohamHeadshot from '../assets/soham_headshot.png';
+import sohamHeadshot from '../assets/soham_about_me.jpeg';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export const AboutSection = ({ onNavigateToPlatform }) => {
@@ -9,31 +9,20 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
   return (
     <section id="about" className="scroll-mt-24 w-full max-w-5xl mx-auto space-y-8">
       
-      {/* 1. Header: Meet Soham Patel */}
+      {/* 1. Header: Meet Soham */}
       <div className="border-l-4 border-[#FF0000] pl-4 sm:pl-6 reveal-up">
         <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#0A3E88]">
-          Meet Soham Patel
+          Meet Soham
         </h2>
       </div>
 
-      {/* 2. Picture Directly Underneath Header (Static presentation - no hover lift) */}
-      <div className="w-full rounded-3xl bg-[#EEF4FC] border border-[#0A3E88]/15 shadow-lg overflow-hidden flex justify-center items-end p-6 sm:p-10 relative reveal-zoom">
-        {/* Soft Ambient Background Light */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A3E88]/10 via-transparent to-transparent pointer-events-none" />
-
-        <div 
-          className="relative z-10 flex justify-center items-end"
-          style={{
-            maskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.85) 12%, black 35%)',
-            WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.85) 12%, black 35%)'
-          }}
-        >
-          <img 
-            src={sohamHeadshot} 
-            alt="Soham Patel Candidate Portrait" 
-            className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto max-h-[360px] sm:max-h-[420px] object-contain object-bottom drop-shadow-2xl"
-          />
-        </div>
+      {/* 2. Picture Covering Entire Container */}
+      <div className="w-full rounded-3xl border border-[#0A3E88]/15 shadow-lg overflow-hidden relative reveal-zoom h-[320px] sm:h-[420px] md:h-[520px]">
+        <img 
+          src={sohamHeadshot} 
+          alt="Soham Patel Candidate Portrait" 
+          className="w-full h-full object-cover object-center"
+        />
       </div>
 
       {/* 3. About Me Body Directly Underneath Picture (Static text container - no hover lift) */}

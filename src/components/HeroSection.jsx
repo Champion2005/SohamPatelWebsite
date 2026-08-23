@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import sohamUniform from '../assets/soham_uniform.png';
+import sohamUniform from '../assets/soham_hero_img.png';
 
 export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }) => {
   return (
@@ -35,6 +35,13 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
             <div>
               <span className="text-sm sm:text-lg lg:text-xl font-black uppercase tracking-widest text-slate-600 block pt-0.5 sm:pt-1">
                 Windsor, Ontario
+              </span>
+            </div>
+
+            {/* Campaign Slogan "YOUR WARD. YOUR VOICE. YOUR CHOICE" */}
+            <div className="pt-1">
+              <span className="text-xs sm:text-base lg:text-lg font-black uppercase tracking-wider text-[#FF0000] block">
+                YOUR WARD. YOUR VOICE. YOUR CHOICE
               </span>
             </div>
 
