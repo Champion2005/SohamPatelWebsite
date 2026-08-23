@@ -77,7 +77,12 @@ export const DonateModal = ({ isOpen, onClose }) => {
 
   const handleStripeRedirect = () => {
     if (!isConfirmed || !isAmountValid) return;
-    window.open(stripeUrl, '_blank', 'noopener,noreferrer');
+    let finalUrl = stripeUrl;
+    if (selectedAmount && selectedAmount > 0) {
+      const sep = finalUrl.includes('?') ? '&' : '?';
+      finalUrl = `${finalUrl}${sep}amount=${selectedAmount}`;
+    }
+    window.open(finalUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
