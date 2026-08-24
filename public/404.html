@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Soham Patel for Ward 9</title>
+    <script type="text/javascript">
+      // Redirect SPA path back to main index.html preserving URL parameters
+      var pathSegmentsToKeep = 0;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?redirect=' +
+        encodeURIComponent(l.pathname.slice(1) + l.search + l.hash)
+      );
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

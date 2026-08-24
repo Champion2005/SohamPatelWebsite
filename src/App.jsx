@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
@@ -11,6 +11,7 @@ import { DonateSection } from './components/DonateSection';
 import { LawnSignModal } from './components/LawnSignModal';
 import { VolunteerModal } from './components/VolunteerModal';
 import { DonateModal } from './components/DonateModal';
+import { ThankYouModal } from './components/ThankYouModal';
 import { InstagramIcon, FacebookIcon, TwitterIcon, PhoneCallIcon } from './components/SocialIcons';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
@@ -20,8 +21,34 @@ export default function App() {
   const [isLawnSignOpen, setIsLawnSignOpen] = useState(false);
   const [isVolunteerOpen, setIsVolunteerOpen] = useState(false);
   const [isDonateOpen, setIsDonateOpen] = useState(false);
+  const [isThankYouOpen, setIsThankYouOpen] = useState(false);
 
   useScrollReveal(activeSection);
+
+  // Detect Stripe Checkout return URL (e.g. /cs_live_... or ?session_id=... or ?redirect=...)
+  useEffect(() => {
+    const fullUrl = window.location.href;
+    const pathname = window.location.pathname;
+    const search = window.location.search;
+
+    if (
+      pathname.includes('cs_') ||
+      search.includes('session_id') ||
+      search.includes('cs_') ||
+      fullUrl.includes('cs_live') ||
+      fullUrl.includes('cs_test') ||
+      search.includes('redirect=')
+    ) {
+      setIsThankYouOpen(true);
+      setActiveSection('donate');
+      // Clean browser URL back to root cleanly without page reload
+      try {
+        window.history.replaceState({}, document.title, window.location.origin + window.location.pathname.replace(/\/cs_[^/]+/, '') || '/');
+      } catch (err) {
+        console.log('URL cleaned:', err);
+      }
+    }
+  }, []);
 
   const handleNavigate = (pageId, targetElementId = null) => {
     setActiveSection(pageId);
@@ -279,6 +306,11 @@ export default function App() {
       <DonateModal 
         isOpen={isDonateOpen} 
         onClose={() => setIsDonateOpen(false)} 
+      />
+
+      <ThankYouModal 
+        isOpen={isThankYouOpen} 
+        onClose={() => setIsThankYouOpen(false)} 
       />
 
     </div>
