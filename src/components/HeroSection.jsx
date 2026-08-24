@@ -78,18 +78,18 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
 
         </div>
 
-        {/* Candidate Image (Extends directly to 4px under Navbar) */}
+        {/* Candidate Image */}
         <div 
-          className="w-full flex-1 flex items-end justify-center md:justify-end md:absolute md:bottom-0 md:-right-2 lg:right-0 xl:right-2 md:h-[calc(100%-0.25rem)] z-0 pointer-events-none transition-all mt-3 md:mt-0"
+          className="w-full flex-1 flex items-end justify-center md:justify-end md:absolute md:-bottom-6 lg:-bottom-8 xl:-bottom-10 md:right-0 lg:right-2 xl:right-6 md:h-[118%] lg:h-[122%] xl:h-[125%] z-0 pointer-events-none transition-all mt-3 md:mt-0"
           style={{
-            maskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.85) 10%, black 30%)',
-            WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.85) 10%, black 30%)'
+            maskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.03) 4%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.45) 18%, rgba(0,0,0,0.82) 28%, black 42%)',
+            WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.03) 4%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.45) 18%, rgba(0,0,0,0.82) 28%, black 42%)'
           }}
         >
           <img 
             src={sohamUniform} 
             alt="Soham Patel Candidate Headshot" 
-            className="w-auto h-full max-h-[48vh] sm:max-h-[54vh] md:max-h-[99%] md:h-[99%] object-contain object-bottom drop-shadow-2xl"
+            className="w-auto h-full max-h-[50vh] sm:max-h-[56vh] md:max-h-full md:h-full object-contain object-bottom drop-shadow-2xl"
           />
         </div>
 
