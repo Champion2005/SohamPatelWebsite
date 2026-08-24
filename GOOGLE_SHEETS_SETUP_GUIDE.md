@@ -46,6 +46,7 @@ function doPost(e) {
     var data = JSON.parse(e.postData.contents);
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var formType = data.formType || "General";
+    var optIn = data.periodicUpdates || data.emailUpdates || "No";
 
     // -------------------------------------------------------------
     // 1. ASK ME QUESTIONS / CONTACT FORM
@@ -54,7 +55,7 @@ function doPost(e) {
       var sheet = ss.getSheetByName("Questions & Contact");
       if (!sheet) {
         sheet = ss.insertSheet("Questions & Contact");
-        sheet.appendRow(["Timestamp", "Full Name", "Email Address", "Phone Number", "Topic", "Question / Message"]);
+        sheet.appendRow(["Timestamp", "Full Name", "Email Address", "Phone Number", "Question / Message", "Periodic Updates Subscribed"]);
         sheet.getRange(1, 1, 1, 6).setFontWeight("bold").setBackground("#EEF4FC");
       }
       sheet.appendRow([
@@ -62,21 +63,21 @@ function doPost(e) {
         data.name || "",
         data.email || "",
         data.phone || "",
-        data.topic || "",
-        data.message || ""
+        data.message || "",
+        optIn
       ]);
 
       // AUTOMATIC EMAIL NOTIFICATION TO SOHAM:
       if (CAMPAIGN_NOTIFICATION_EMAIL) {
-        var emailSubject = "🗳️ New Ward 9 Question from " + data.name + " (" + data.topic + ")";
+        var emailSubject = "🗳️ New Ward 9 Question from " + data.name;
         var emailBody = "Hello Soham,\n\n" +
           "You received a new message from your campaign website:\n\n" +
           "--------------------------------------------------\n" +
           "• Name: " + data.name + "\n" +
           "• Email: " + data.email + "\n" +
           "• Phone: " + (data.phone || "Not provided") + "\n" +
-          "• Topic: " + data.topic + "\n" +
-          "• Submitted At: " + data.submittedAt + "\n\n" +
+          "• Submitted At: " + data.submittedAt + "\n" +
+          "• Periodic Updates Subscribed: " + optIn + "\n\n" +
           "Message:\n" + data.message + "\n" +
           "--------------------------------------------------\n\n" +
           "👉 You can reply directly to this email to respond to " + data.name + " (" + data.email + ").";
@@ -97,7 +98,7 @@ function doPost(e) {
       var sheet = ss.getSheetByName("Lawn Signs");
       if (!sheet) {
         sheet = ss.insertSheet("Lawn Signs");
-        sheet.appendRow(["Timestamp", "First Name", "Last Name", "Email", "Address", "Phone Number", "Email Updates Subscribed"]);
+        sheet.appendRow(["Timestamp", "First Name", "Last Name", "Email", "Address", "Phone Number", "Periodic Updates Subscribed"]);
         sheet.getRange(1, 1, 1, 7).setFontWeight("bold").setBackground("#FFF0F0");
       }
       sheet.appendRow([
@@ -107,7 +108,7 @@ function doPost(e) {
         data.email || "",
         data.address || "",
         data.phone || "",
-        data.emailUpdates || "No"
+        optIn
       ]);
     }
 
@@ -118,8 +119,8 @@ function doPost(e) {
       var sheet = ss.getSheetByName("Volunteers");
       if (!sheet) {
         sheet = ss.insertSheet("Volunteers");
-        sheet.appendRow(["Timestamp", "First Name", "Last Name", "Email", "Phone Number", "Best Time to Call", "Comments / Ideas"]);
-        sheet.getRange(1, 1, 1, 7).setFontWeight("bold").setBackground("#EEF4FC");
+        sheet.appendRow(["Timestamp", "First Name", "Last Name", "Email", "Phone Number", "Best Time to Call", "Comments / Ideas", "Periodic Updates Subscribed"]);
+        sheet.getRange(1, 1, 1, 8).setFontWeight("bold").setBackground("#EEF4FC");
       }
       sheet.appendRow([
         data.submittedAt || new Date().toLocaleString(),
@@ -128,7 +129,24 @@ function doPost(e) {
         data.email || "",
         data.phone || "",
         data.bestTimeToCall || "",
-        data.comments || ""
+        data.comments || "",
+        optIn
+      ]);
+    }
+
+    // -------------------------------------------------------------
+    // 4. DONATE OPT-INS
+    // -------------------------------------------------------------
+    else if (formType === "Donate Opt-In") {
+      var sheet = ss.getSheetByName("Donate Opt-Ins");
+      if (!sheet) {
+        sheet = ss.insertSheet("Donate Opt-Ins");
+        sheet.appendRow(["Timestamp", "Periodic Updates Subscribed"]);
+        sheet.getRange(1, 1, 1, 2).setFontWeight("bold").setBackground("#EEF4FC");
+      }
+      sheet.appendRow([
+        data.submittedAt || new Date().toLocaleString(),
+        optIn
       ]);
     }
 
