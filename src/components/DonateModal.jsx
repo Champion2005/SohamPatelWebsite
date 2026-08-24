@@ -244,7 +244,7 @@ export const DonateModal = ({ isOpen, onClose }) => {
                   </div>
 
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Auto-deposit is enabled on <strong className="text-slate-900">{interacEmail}</strong>. Please include your legal name, residential address, & email in your banking app's memo field for official receipt issuance & campaign updates.
+                    Auto-deposit is enabled on <strong className="text-slate-900">{interacEmail}</strong>. Please include your legal name & residential address in your banking app's memo field for official receipt issuance under s. 88.22(1)(g) of the <em>Municipal Elections Act, 1996</em>.
                   </p>
                 </div>
               </div>
