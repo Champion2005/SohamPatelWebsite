@@ -14,7 +14,7 @@ export const DonateSection = () => {
   const [emailUpdates, setEmailUpdates] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const stripeUrl = import.meta.env.VITE_STRIPE_DONATION_URL || 'https://buy.stripe.com';
+  const stripeUrl = import.meta.env.VITE_STRIPE_DONATION_URL || 'https://donate.stripe.com/8x214m6fRc9H0JD9SOaVa00';
   const interacEmail = import.meta.env.VITE_INTERAC_DONATION_EMAIL || 'sohamforcouncil@gmail.com';
 
   const presetAmounts = [25, 50, 100, 250, 500];
