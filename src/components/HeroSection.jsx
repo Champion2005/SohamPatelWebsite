@@ -20,8 +20,8 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
             
             {/* Main Name Header "SOHAM PATEL" */}
             <h1 className="font-black uppercase tracking-tight text-slate-900 text-5xl sm:text-6xl md:text-6xl lg:text-8xl xl:text-[6.5rem] leading-[0.88] drop-shadow-sm">
-              <span className="text-[#0A3E88] block sm:inline">SOHAM </span>
-              <span className="text-[#FF0000] block sm:inline">PATEL</span>
+              <span className="text-[#0A3E88] sm:inline">SOHAM </span>
+              <span className="text-[#FF0000] sm:inline">PATEL</span>
             </h1>
 
             {/* Subtitle Line "FOR WARD 9" */}
