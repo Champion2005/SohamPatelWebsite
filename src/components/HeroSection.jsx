@@ -80,7 +80,7 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
 
         {/* Candidate Image */}
         <div 
-          className="w-full flex-1 flex items-end justify-center md:justify-end md:absolute md:-bottom-6 lg:-bottom-8 xl:-bottom-10 md:right-0 lg:right-2 xl:right-6 md:h-[118%] lg:h-[122%] xl:h-[125%] z-0 pointer-events-none transition-all mt-3 md:mt-0"
+          className="w-full flex-1 flex items-end justify-center md:justify-end md:absolute md:-bottom-6 lg:-bottom-8 xl:-bottom-10 md:-right-8 lg:-right-12 xl:-right-16 2xl:-right-24 md:h-[118%] lg:h-[122%] xl:h-[125%] z-0 pointer-events-none transition-all mt-3 md:mt-0"
           style={{
             maskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.03) 4%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.45) 18%, rgba(0,0,0,0.82) 28%, black 42%)',
             WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.03) 4%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.45) 18%, rgba(0,0,0,0.82) 28%, black 42%)'
