@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { CheckCircle2, Heart, X, ArrowRight, ShieldCheck } from 'lucide-react';
 
-export const ThankYouModal = ({ isOpen, onClose }) => {
+export const ThankYouModal = ({ isOpen, onClose, onNavigateHome }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -27,11 +27,18 @@ export const ThankYouModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
+  const handleHomeClick = () => {
+    onClose();
+    if (onNavigateHome) {
+      onNavigateHome();
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-[3000] flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-md animate-slide-up-fade">
       
       {/* Backdrop */}
-      <div className="absolute inset-0" onClick={onClose} />
+      <div className="absolute inset-0" onClick={handleHomeClick} />
 
       <div 
         ref={modalRef}
@@ -43,7 +50,7 @@ export const ThankYouModal = ({ isOpen, onClose }) => {
           <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF0000]/20 rounded-full blur-2xl pointer-events-none" />
           
           <button
-            onClick={onClose}
+            onClick={handleHomeClick}
             className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Close modal"
           >
@@ -57,19 +64,12 @@ export const ThankYouModal = ({ isOpen, onClose }) => {
           <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white leading-tight">
             Thank You For Your Contribution!
           </h3>
-          
-          <p className="text-xs sm:text-sm text-blue-100 font-medium">
-            Your support moves the needle in Ward 9.
-          </p>
         </div>
 
         {/* Modal Body */}
         <div className="p-6 sm:p-8 overflow-y-auto flex-1 space-y-6 text-center">
           
           <div className="space-y-3">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-              Every dollar directly funds lawn signs, door-to-door flyers, and grassroots community outreach to reach voters across Ward 9.
-            </p>
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
               An official statutory contribution receipt has been emailed to you for your financial records under Ontario’s <span className="font-semibold text-slate-800">Municipal Elections Act, 1996</span>.
             </p>
@@ -94,7 +94,7 @@ export const ThankYouModal = ({ isOpen, onClose }) => {
           {/* Action Button */}
           <div className="pt-2">
             <button
-              onClick={onClose}
+              onClick={handleHomeClick}
               className="w-full py-4 rounded-full bg-[#FF0000] hover:bg-[#D90000] text-white font-black text-sm uppercase tracking-wider transition-all shadow-lg hover:shadow-xl cursor-pointer flex items-center justify-center gap-2"
             >
               <span>Back to Campaign Home</span>

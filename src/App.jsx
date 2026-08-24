@@ -311,6 +311,7 @@ export default function App() {
       <ThankYouModal 
         isOpen={isThankYouOpen} 
         onClose={() => setIsThankYouOpen(false)} 
+        onNavigateHome={() => handleNavigate('home')}
       />
 
     </div>

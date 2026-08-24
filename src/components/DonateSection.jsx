@@ -50,7 +50,8 @@ export const DonateSection = () => {
     let finalUrl = stripeUrl;
     if (selectedAmount && selectedAmount > 0) {
       const sep = finalUrl.includes('?') ? '&' : '?';
-      finalUrl = `${finalUrl}${sep}amount=${selectedAmount}`;
+      const cents = Math.round(selectedAmount * 100);
+      finalUrl = `${finalUrl}${sep}prefilled_amount=${cents}&amount=${selectedAmount}`;
     }
     window.open(finalUrl, '_blank', 'noopener,noreferrer');
   };
