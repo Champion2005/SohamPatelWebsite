@@ -80,16 +80,16 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
 
         {/* Candidate Image */}
         <div 
-          className="w-full flex-1 flex items-end justify-center lg:justify-end lg:absolute lg:bottom-0 lg:right-4 xl:right-10 lg:h-[75%] z-0 pointer-events-none transition-all mt-4 lg:mt-0"
+          className="w-full flex-1 flex items-end justify-center lg:justify-end lg:absolute lg:bottom-0 lg:right-2 xl:right-6 lg:h-full z-0 pointer-events-none transition-all mt-3 lg:mt-0"
           style={{
-            maskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.85) 15%, black 40%)',
-            WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.85) 15%, black 40%)'
+            maskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.85) 12%, black 35%)',
+            WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.85) 12%, black 35%)'
           }}
         >
           <img 
             src={sohamUniform} 
             alt="Soham Patel Candidate Headshot" 
-            className="w-auto h-full max-h-[45vh] sm:max-h-[50vh] lg:max-h-[75vh] lg:h-full object-contain object-bottom drop-shadow-2xl"
+            className="w-auto h-full max-h-[50vh] sm:max-h-[56vh] lg:max-h-[95%] lg:h-[95%] object-contain object-bottom drop-shadow-2xl"
           />
         </div>
 
