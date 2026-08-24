@@ -13,7 +13,7 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
         {/* =================================================================
            TOP FLEX CONTAINER: Text Stack & Action Buttons
            ================================================================= */}
-        <div className="w-full lg:max-w-3xl xl:max-w-4xl space-y-4 sm:space-y-6 pt-2 sm:pt-6">
+        <div className="w-full md:max-w-xl lg:max-w-3xl xl:max-w-4xl space-y-4 sm:space-y-6 pt-2 sm:pt-4 lg:pt-6">
           
           {/* Text Stack Block */}
           <div className="space-y-1 sm:space-y-3 w-full">
@@ -38,9 +38,9 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
               </span>
             </div>
 
-            {/* Campaign Slogan "YOUR WARD. YOUR VOICE. YOUR CHOICE" */}
-            <div className="pt-1">
-              <span className="text-xs sm:text-base lg:text-lg font-black uppercase tracking-wider text-[#FF0000] block">
+            {/* Campaign Slogan "YOUR WARD. YOUR VOICE. YOUR CHOICE" (Matched to Ward 9 size) */}
+            <div className="pt-1 sm:pt-2">
+              <span className="text-xl sm:text-3xl lg:text-4xl xl:text-5xl font-black uppercase tracking-tight text-[#FF0000] block leading-tight">
                 YOUR WARD. YOUR VOICE. YOUR CHOICE
               </span>
             </div>
@@ -80,7 +80,7 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
 
         {/* Candidate Image */}
         <div 
-          className="w-full flex-1 flex items-end justify-center lg:justify-end lg:absolute lg:bottom-0 lg:right-2 xl:right-6 lg:h-full z-0 pointer-events-none transition-all mt-3 lg:mt-0"
+          className="w-full flex-1 flex items-end justify-center md:justify-end md:absolute md:bottom-0 md:right-1 lg:right-4 xl:right-8 md:h-[calc(100%-0.5rem)] z-0 pointer-events-none transition-all mt-3 md:mt-0"
           style={{
             maskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.85) 12%, black 35%)',
             WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.85) 12%, black 35%)'
@@ -89,7 +89,7 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
           <img 
             src={sohamUniform} 
             alt="Soham Patel Candidate Headshot" 
-            className="w-auto h-full max-h-[50vh] sm:max-h-[56vh] lg:max-h-[95%] lg:h-[95%] object-contain object-bottom drop-shadow-2xl"
+            className="w-auto h-full max-h-[48vh] sm:max-h-[54vh] md:max-h-[98%] md:h-[98%] object-contain object-bottom drop-shadow-2xl"
           />
         </div>
 
