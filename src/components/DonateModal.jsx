@@ -212,21 +212,9 @@ export const DonateModal = ({ isOpen, onClose }) => {
                   </span>
                 </label>
 
-                {/* Checkbox 3: Periodic Campaign Updates */}
-                <label className="flex items-start gap-3 cursor-pointer p-4 rounded-2xl bg-slate-50 border border-slate-200 transition-colors hover:bg-slate-100">
-                  <input
-                    type="checkbox"
-                    checked={emailUpdates}
-                    onChange={(e) => setEmailUpdates(e.target.checked)}
-                    className="mt-0.5 w-4.5 h-4.5 rounded text-[#FF0000] focus:ring-red-500 border-slate-300 cursor-pointer shrink-0"
-                  />
-                  <span className="text-xs text-slate-700 leading-snug font-medium">
-                    Send me periodic campaign updates, community announcements, and election day reminders.
-                  </span>
-                </label>
               </div>
 
-              {/* Step 2: Unlocked Campaign e-Transfer Email (Always visible) */}
+              {/* Step 2: Unlocked Campaign e-Transfer Email */}
               <div className="space-y-3 pt-1">
                 <p className="text-xs font-black uppercase tracking-wider text-slate-700">
                   Step 2: Official Campaign e-Transfer Email
@@ -256,7 +244,7 @@ export const DonateModal = ({ isOpen, onClose }) => {
                   </div>
 
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Auto-deposit is enabled on <strong className="text-slate-900">{interacEmail}</strong>. Please ensure your legal name & residential address are entered in your banking app's memo field.
+                    Auto-deposit is enabled on <strong className="text-slate-900">{interacEmail}</strong>. Please include your legal name, residential address, & email in your banking app's memo field for official receipt issuance & campaign updates.
                   </p>
                 </div>
               </div>
@@ -286,19 +274,6 @@ export const DonateModal = ({ isOpen, onClose }) => {
                 />
                 <span className="text-xs font-bold text-slate-800 leading-snug">
                   I confirm that I am an individual normally resident in Ontario, I am contributing my own funds, and my total contributions to this campaign will not exceed $1,200. <span className="text-[#FF0000]">*</span>
-                </span>
-              </label>
-
-              {/* Periodic Campaign Updates Checkbox */}
-              <label className="flex items-start gap-2.5 cursor-pointer p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 transition-colors hover:bg-slate-100/80">
-                <input
-                  type="checkbox"
-                  checked={emailUpdates}
-                  onChange={(e) => setEmailUpdates(e.target.checked)}
-                  className="mt-0.5 w-4 h-4 rounded text-[#0A3E88] focus:ring-blue-500 border-slate-300 cursor-pointer shrink-0"
-                />
-                <span className="text-xs text-slate-700 font-medium leading-snug">
-                  Send me periodic campaign updates, community announcements, and election day reminders. <span className="text-slate-400 font-normal">(Optional)</span>
                 </span>
               </label>
 
