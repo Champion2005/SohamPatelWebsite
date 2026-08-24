@@ -91,7 +91,8 @@ export const VolunteerModal = ({ isOpen, onClose }) => {
           email: formData.email.trim(),
           phone: formData.phone.trim(),
           bestTimeToCall: formData.bestTimeToCall,
-          comments: formData.comments.trim()
+          comments: formData.comments.trim(),
+          periodicUpdates: formData.emailUpdates ? 'Yes' : 'No'
         };
 
         await fetch(webhookUrl, {

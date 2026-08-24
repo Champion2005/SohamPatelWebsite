@@ -58,7 +58,8 @@ export const ContactSection = () => {
           name: formData.name.trim(),
           email: formData.email.trim(),
           phone: formData.phone.trim(),
-          message: formData.message.trim()
+          message: formData.message.trim(),
+          periodicUpdates: formData.emailUpdates ? 'Yes' : 'No'
         };
 
         await fetch(webhookUrl, {

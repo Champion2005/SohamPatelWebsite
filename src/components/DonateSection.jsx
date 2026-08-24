@@ -46,7 +46,28 @@ export const DonateSection = () => {
   const isAmountValid = selectedAmount >= 5 && selectedAmount <= 1200;
 
   const handleStripeRedirect = () => {
-    if (!isConfirmed || !isAmountValid) return;
+    if (!isConfirmed) return;
+
+    // Send opt-in consent to Google Sheets Webhook
+    const webhookUrl = 
+      import.meta.env.VITE_GOOGLE_SHEETS_DONATE_URL || 
+      import.meta.env.VITE_GOOGLE_SHEETS_WEBHOOK_URL;
+
+    if (webhookUrl) {
+      const payload = {
+        formType: 'Donate Opt-In',
+        submittedAt: new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' }),
+        periodicUpdates: emailUpdates ? 'Yes' : 'No'
+      };
+
+      fetch(webhookUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      }).catch((err) => console.error('[DonateSection] Webhook error:', err));
+    }
+
     let finalUrl = stripeUrl;
     if (selectedAmount && selectedAmount > 0) {
       const sep = finalUrl.includes('?') ? '&' : '?';
