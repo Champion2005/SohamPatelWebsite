@@ -46,7 +46,7 @@ const ReelEmbedItem = ({ reelUrl, title }) => {
 
   return (
     <div 
-      className="w-full max-w-[420px] min-h-[580px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200/90 bg-white relative flex flex-col items-center justify-center"
+      className="w-full max-w-[340px] py-3.5 px-1 min-h-[560px] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200/90 bg-white relative flex flex-col items-center justify-center"
       style={{
         transform: 'translateZ(0)',
         WebkitMaskImage: '-webkit-radial-gradient(white, black)',
@@ -55,7 +55,7 @@ const ReelEmbedItem = ({ reelUrl, title }) => {
     >
       {/* 1. Clear, Pretty Loading Skeleton State (Displayed while Instagram loads) */}
       <div 
-        className={`absolute inset-0 z-20 flex flex-col items-center justify-between p-6 bg-gradient-to-b from-[#F8FAFC] via-[#EEF4FC]/80 to-[#F8FAFC] transition-opacity duration-700 pointer-events-none select-none ${
+        className={`absolute inset-0 z-20 flex flex-col items-center justify-between p-5 bg-gradient-to-b from-[#F8FAFC] via-[#EEF4FC]/80 to-[#F8FAFC] transition-opacity duration-700 pointer-events-none select-none ${
           isLoaded ? 'opacity-0' : 'opacity-100'
         }`}
       >
@@ -118,11 +118,11 @@ const ReelEmbedItem = ({ reelUrl, title }) => {
           style={{
             background: '#FFFFFF',
             border: 0,
-            borderRadius: '24px',
+            borderRadius: '16px',
             boxShadow: 'none',
             margin: '0 auto',
-            maxWidth: '540px',
-            minWidth: '320px',
+            maxWidth: '340px',
+            minWidth: '280px',
             padding: 0,
             width: '100%'
           }}
