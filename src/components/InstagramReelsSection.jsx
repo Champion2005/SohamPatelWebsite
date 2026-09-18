@@ -15,7 +15,6 @@ const ReelEmbedItem = ({ reelUrl, title }) => {
     const checkIframe = () => {
       const iframe = container.querySelector('iframe');
       if (iframe) {
-        // Allow brief moment for internal Instagram render to complete
         setTimeout(() => setIsLoaded(true), 300);
         return true;
       }
@@ -47,7 +46,7 @@ const ReelEmbedItem = ({ reelUrl, title }) => {
 
   return (
     <div 
-      className="w-[328px] h-[580px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200/90 bg-white relative flex items-center justify-center"
+      className="w-full max-w-[420px] min-h-[580px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200/90 bg-white relative flex flex-col items-center justify-center"
       style={{
         transform: 'translateZ(0)',
         WebkitMaskImage: '-webkit-radial-gradient(white, black)',
@@ -108,7 +107,7 @@ const ReelEmbedItem = ({ reelUrl, title }) => {
       {/* 2. Instagram Embed Blockquote (Hidden with opacity-0 while loading to prevent top line flicker & layout jump) */}
       <div 
         ref={containerRef}
-        className={`w-[328px] h-[580px] flex items-center justify-center overflow-hidden transition-opacity duration-700 ${
+        className={`w-full flex items-center justify-center overflow-hidden transition-opacity duration-700 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
       >
@@ -122,10 +121,10 @@ const ReelEmbedItem = ({ reelUrl, title }) => {
             borderRadius: '24px',
             boxShadow: 'none',
             margin: '0 auto',
-            maxWidth: '328px',
-            minWidth: '328px',
+            maxWidth: '540px',
+            minWidth: '320px',
             padding: 0,
-            width: '328px'
+            width: '100%'
           }}
         >
           <div style={{ padding: '16px', textAlign: 'center' }}>
@@ -195,7 +194,7 @@ export const InstagramReelsSection = () => {
 
   return (
     <div className="w-full">
-      {/* 2 Vertical Reels side by side, identical width & height without captions or black bars */}
+      {/* 2 Vertical Reels side by side, natural proportional sizing */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto justify-items-center items-start">
         
         {/* Reel 1 */}
