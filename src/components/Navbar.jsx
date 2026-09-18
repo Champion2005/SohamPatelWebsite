@@ -8,7 +8,7 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
   const navLinks = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
-    // { id: 'media', label: 'Media' }, // Hidden for now - uncomment to restore
+    { id: 'media', label: 'Media' },
     { id: 'ward9', label: 'Ward 9' },
     { id: 'contact', label: 'Contact' },
   ];
@@ -82,9 +82,9 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
           </div>
 
           {/* =================================================================
-             RIGHT SIDE: Donate Button & Social Icons (Social icons hidden for now)
+             RIGHT SIDE: Donate Button & Social Icons (Instagram & Facebook)
              ================================================================= */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2.5">
             {/* Prominent Donate Button */}
             <button
               onClick={handleDonateClick}
@@ -94,14 +94,27 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
               <span>Donate</span>
             </button>
 
-            {/* Hidden Social Links - Uncomment to restore */}
-            {/* 
             <div className="h-6 w-px bg-white/20 mx-0.5" />
-            <a href="tel:2262608869" title="Call Campaign" className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000]"><PhoneCallIcon className="w-4.5 h-4.5" /></a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" title="Twitter / X" className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000]"><TwitterIcon className="w-4 h-4" /></a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" title="Instagram" className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000]"><InstagramIcon className="w-4.5 h-4.5" /></a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" title="Facebook" className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000]"><FacebookIcon className="w-4.5 h-4.5" /></a>
-            */}
+            <a 
+              href="https://www.instagram.com/Vote.4Soham/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="Instagram (@Vote.4Soham)" 
+              aria-label="Instagram"
+              className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000] transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <InstagramIcon className="w-4.5 h-4.5" />
+            </a>
+            <a 
+              href="https://www.facebook.com/Vote4Soham" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="Facebook (Vote4Soham)" 
+              aria-label="Facebook"
+              className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000] transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <FacebookIcon className="w-4.5 h-4.5" />
+            </a>
           </div>
 
           {/* =================================================================
@@ -166,6 +179,31 @@ export const Navbar = ({ activeSection, setActiveSection, onDonateClick }) => {
               <Heart className="w-4 h-4 fill-current" />
               <span>Make a Campaign Contribution</span>
             </button>
+
+            {/* Mobile Social Links: Instagram & Facebook */}
+            <div className="flex items-center justify-center gap-3 pt-3">
+              <span className="text-xs uppercase tracking-wider text-slate-300 font-bold">Follow Soham:</span>
+              <a 
+                href="https://www.instagram.com/Vote.4Soham/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title="Instagram (@Vote.4Soham)" 
+                aria-label="Instagram"
+                className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000] transition-colors"
+              >
+                <InstagramIcon className="w-4.5 h-4.5" />
+              </a>
+              <a 
+                href="https://www.facebook.com/Vote4Soham" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title="Facebook (Vote4Soham)" 
+                aria-label="Facebook"
+                className="w-9 h-9 rounded-full flex items-center justify-center bg-white/15 text-white hover:bg-[#FF0000] transition-colors"
+              >
+                <FacebookIcon className="w-4.5 h-4.5" />
+              </a>
+            </div>
           </div>
         </div>
       )}

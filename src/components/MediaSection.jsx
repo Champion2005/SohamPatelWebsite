@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image as ImageIcon, MapPin } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { VideoReelsCarousel } from './VideoReelsCarousel';
+import { InstagramReelsSection } from './InstagramReelsSection';
 
 // Import Campaign Photos
 import eventPhoto1 from '../assets/soham_community_event_1786409209158.jpg';
@@ -77,70 +77,60 @@ export const MediaSection = () => {
           Community & Media
         </h2>
         <p className="text-slate-600 font-medium text-base sm:text-lg max-w-3xl leading-relaxed pt-1">
-          Highlights from recent neighborhood town halls, community events, and video reels from Soham Patel’s campaign across Windsor Ward 9.
+          Highlights from recent neighborhood town halls, community events, and reels from Soham Patel’s campaign across Windsor Ward 9.
         </p>
       </div>
 
       {/* =================================================================
-         1. FEATURED CAMPAIGN VIDEOS & REELS (Reusing VideoReelsCarousel with infinite continuous loop)
+         1. FEATURED CAMPAIGN REELS (Vertical aspect ratio Instagram Reels)
          ================================================================= */}
       <div className="w-full">
-        <VideoReelsCarousel 
-          title="Featured Videos & Reels" 
-          subtitle="Watch recent campaign updates, neighborhood tours, and town hall discussions with Soham Patel."
-        />
+        <InstagramReelsSection />
       </div>
 
       {/* =================================================================
-         2. ORGANIC BENTO MASONRY PHOTO GRID (Date badges removed)
+         2. COMMUNITY EVENTS & PHOTO GALLERY (Hidden for now until real images are ready)
          ================================================================= */}
+      {/* 
       <div className="space-y-6 pt-8 border-t border-slate-200/80">
         <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#FF0000]">
           <ImageIcon className="w-4 h-4" />
           <span>Community Events & Photo Gallery</span>
         </div>
 
-        {/* Organic Bento Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-[240px] sm:auto-rows-[260px]">
           {photoBlocks.map((block) => (
             <div 
               key={block.id}
               className={`rounded-3xl bg-[#062654] border border-slate-200/80 shadow-md overflow-hidden relative group flex flex-col justify-end ${block.gridSpan}`}
             >
-              {/* Background Image */}
               <img 
                 src={block.image} 
                 alt={block.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90"
               />
-
-              {/* Gradient Overlay for Readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#062654] via-[#062654]/40 to-transparent pointer-events-none" />
-
-              {/* Content Overlay at Bottom */}
               <div className="relative z-10 p-5 sm:p-6 space-y-2 text-white">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-red-400">
                   <MapPin className="w-3.5 h-3.5 shrink-0 text-[#FF0000]" />
                   <span className="truncate">{block.location}</span>
                 </div>
-
                 <h3 className={`font-black uppercase leading-snug tracking-tight text-white ${
                   block.isHero ? 'text-xl sm:text-2xl lg:text-3xl' : 'text-base sm:text-lg'
                 }`}>
                   {block.title}
                 </h3>
-
                 <p className={`text-slate-300 leading-relaxed line-clamp-2 ${
                   block.isHero ? 'text-xs sm:text-sm' : 'text-xs'
                 }`}>
                   {block.caption}
                 </p>
               </div>
-
             </div>
           ))}
         </div>
       </div>
+      */}
 
     </section>
   );
