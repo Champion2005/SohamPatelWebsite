@@ -196,3 +196,28 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #FF0000;
 }
+
+/* ==========================================================================
+   INSTAGRAM EMBED ENHANCEMENTS & LOADING SHIMMER
+   ========================================================================== */
+iframe.instagram-media,
+.instagram-media,
+.instagram-media-rendered {
+  border-radius: 24px !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  width: 328px !important;
+  min-width: 328px !important;
+  max-width: 328px !important;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+

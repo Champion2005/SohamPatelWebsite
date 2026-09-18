@@ -5,6 +5,7 @@ import communitySpacesImg from '../assets/platform_community_spaces.jpg';
 import concession6thImg from '../assets/platform_6th_concession.jpg';
 import infrastructurePlanningImg from '../assets/platform_infrastructure_planning.jpg';
 import safeStreetsImg from '../assets/platform_safe_streets.jpg';
+import { ImageLoader } from './ImageLoader';
 
 export const PlatformSection = ({ onVolunteerClick }) => {
   useScrollReveal();
@@ -134,12 +135,14 @@ export const PlatformSection = ({ onVolunteerClick }) => {
           // Realistic Image Card
           const ImageCard = (
             <div className="h-full min-h-[260px] sm:min-h-[300px] lg:min-h-[360px] rounded-3xl bg-slate-900 border border-slate-200/90 shadow-md overflow-hidden relative group">
-              <img 
+              <ImageLoader 
                 src={item.image} 
                 alt={item.title} 
+                label={`Loading ${item.title}...`}
+                containerClassName="w-full h-full"
                 className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent pointer-events-none z-10" />
             </div>
           );
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import sohamHeadshot from '../assets/soham_about_me.jpeg';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { ImageLoader } from './ImageLoader';
 
 export const AboutSection = ({ onNavigateToPlatform }) => {
   useScrollReveal();
@@ -16,11 +17,13 @@ export const AboutSection = ({ onNavigateToPlatform }) => {
         </h2>
       </div>
 
-      {/* 2. Picture Covering Entire Container */}
+      {/* 2. Picture Covering Entire Container with Clear Loader */}
       <div className="w-full rounded-3xl border border-[#0A3E88]/15 shadow-lg overflow-hidden relative reveal-zoom h-[320px] sm:h-[420px] md:h-[520px]">
-        <img 
+        <ImageLoader 
           src={sohamHeadshot} 
           alt="Soham Patel Candidate Portrait" 
+          label="Loading Soham's Portrait..."
+          containerClassName="w-full h-full"
           className="w-full h-full object-cover object-center"
         />
       </div>
