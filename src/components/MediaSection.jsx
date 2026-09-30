@@ -77,12 +77,12 @@ export const MediaSection = () => {
           Community & Media
         </h2>
         <p className="text-slate-600 font-medium text-base sm:text-lg max-w-3xl leading-relaxed pt-1">
-          Highlights from recent neighborhood town halls, community events, and reels from Soham Patel’s campaign across Windsor Ward 9.
+          Highlights from recent neighborhood town halls, community events, and social media posts & reels from Soham Patel’s campaign across Windsor Ward 9.
         </p>
       </div>
 
       {/* =================================================================
-         1. FEATURED CAMPAIGN REELS (Vertical aspect ratio Instagram Reels)
+         1. FEATURED CAMPAIGN SOCIAL FEED & REELS (Bento Box Grid)
          ================================================================= */}
       <div className="w-full">
         <InstagramReelsSection />
