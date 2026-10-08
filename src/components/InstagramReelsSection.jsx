@@ -201,9 +201,9 @@ export const InstagramReelsSection = () => {
   return (
     <div className="w-full">
       {/* Tightly packed Bento Grid (Masonry columns: 3 cols on desktop, 2 cols on tablet, 1 col on mobile) */}
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-6 lg:gap-8 max-w-6xl mx-auto [column-fill:_balance]">
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-3.5 sm:gap-4 lg:gap-4 max-w-6xl mx-auto [column-fill:_balance]">
         {CAMPAIGN_SOCIAL_ITEMS.map((item) => (
-          <div key={item.id} className="break-inside-avoid mb-6 lg:mb-8 flex justify-center">
+          <div key={item.id} className="break-inside-avoid mb-3.5 sm:mb-4 lg:mb-4 flex justify-center">
             <InstagramEmbedItem url={item.url} />
           </div>
         ))}

@@ -3,7 +3,6 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
 import { PlatformSection } from './components/PlatformSection';
-import { VideoReelsCarousel } from './components/VideoReelsCarousel';
 import { MediaSection } from './components/MediaSection';
 import { Ward9MapSection } from './components/Ward9MapSection';
 import { ContactSection } from './components/ContactSection';
