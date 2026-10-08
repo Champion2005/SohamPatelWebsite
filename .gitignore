@@ -24,6 +24,9 @@ inspo/
 scratch/
 *.plan
 
+# Internal SMS Broadcast Tool (Private, standalone)
+sms_tool/
+
 # Editor Directories and Files
 .vscode/*
 !.vscode/extensions.json
