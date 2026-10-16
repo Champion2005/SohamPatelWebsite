@@ -145,15 +145,12 @@ export const VotingHeroCard = ({ simulatedDate = null }) => {
                       <div className="mt-2 pt-2 border-t border-slate-100 text-[11px] animate-fadeIn">
                         <div className="flex items-start justify-between gap-2 bg-blue-50/60 p-2 rounded-md border border-blue-100">
                           <div className="space-y-0.5 text-slate-700 min-w-0">
-                            <div className="font-bold text-[#0A3E88] flex items-center gap-1 text-xs">
-                              <MapPin className="w-3 h-3 text-[#FF0000] shrink-0" />
-                              <span className="truncate">{item.locationName}</span>
-                            </div>
-                            <div className="text-slate-900 font-semibold pl-4 text-[11px]">
-                              {item.address}
+                            <div className="font-semibold text-slate-900 flex items-start gap-1.5 text-xs">
+                              <MapPin className="w-3.5 h-3.5 text-[#FF0000] shrink-0 mt-0.5" />
+                              <span>{item.address}</span>
                             </div>
                             {item.specialBadge && (
-                              <div className="text-[10px] text-amber-800 pl-4 font-medium">
+                              <div className="text-[10px] text-amber-800 pl-5 font-medium">
                                 Drive-Thru voting available from {item.time}
                               </div>
                             )}
