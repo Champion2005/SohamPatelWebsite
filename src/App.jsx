@@ -89,7 +89,7 @@ export default function App() {
           <div className="space-y-16 sm:space-y-24 pb-16 sm:pb-24">
             
             {/* HERO SECTION */}
-            <div className="h-[calc(100dvh-5rem)] min-h-[580px] flex flex-col justify-between overflow-hidden w-full" style={{ backgroundColor: '#EEF4FC' }}>
+            <div className="min-h-[calc(100dvh-5rem)] flex flex-col justify-between overflow-hidden w-full" style={{ backgroundColor: '#EEF4FC' }}>
               <HeroSection 
                 onLawnSignClick={() => setIsLawnSignOpen(true)}
                 onVolunteerClick={() => setIsVolunteerOpen(true)}

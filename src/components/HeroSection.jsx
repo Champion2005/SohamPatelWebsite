@@ -1,46 +1,46 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
 import sohamUniform from '../assets/soham_hero_img.png';
+import { VotingHeroCard } from './VotingHeroCard';
 
 export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }) => {
   return (
     <section 
       id="hero" 
-      className="flex-1 flex flex-col justify-between w-full h-full relative overflow-hidden text-left py-4 sm:py-6 lg:py-8"
+      className="flex-1 flex flex-col justify-between w-full h-full relative overflow-hidden text-left py-3 sm:py-4 lg:py-5"
     >
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-between relative z-10">
         
         {/* =================================================================
            TOP FLEX CONTAINER: Text Stack & Action Buttons
            ================================================================= */}
-        <div className="w-full md:w-[52%] lg:w-[55%] xl:w-[58%] max-w-full space-y-3 sm:space-y-4 lg:space-y-6 pt-1 sm:pt-3 lg:pt-4 z-10 relative">
+        <div className="w-full md:w-[52%] lg:w-[55%] xl:w-[58%] max-w-full space-y-2 sm:space-y-2.5 lg:space-y-3 pt-1 sm:pt-1.5 lg:pt-2 z-10 relative">
           
           {/* Text Stack Block */}
-          <div className="space-y-1 sm:space-y-2.5 w-full">
+          <div className="space-y-1 sm:space-y-1.5 w-full">
             
             {/* Main Name Header "SOHAM PATEL" */}
-            <h1 className="font-black uppercase tracking-tight text-slate-900 text-5xl sm:text-6xl md:text-6xl lg:text-8xl xl:text-[6.5rem] leading-[0.88] drop-shadow-sm">
+            <h1 className="font-black uppercase tracking-tight text-slate-900 text-4xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 2xl:text-[6.5rem] leading-[0.88] drop-shadow-sm">
               <span className="text-[#0A3E88] sm:inline">SOHAM </span>
               <span className="text-[#FF0000] sm:inline">PATEL</span>
             </h1>
 
             {/* Subtitle Line "FOR WARD 9" */}
-            <div className="pt-1 sm:pt-1.5">
-              <span className="text-2xl sm:text-3xl md:text-3xl lg:text-5xl font-black uppercase tracking-tight text-[#0A3E88] block">
+            <div className="pt-0.5 sm:pt-1">
+              <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black uppercase tracking-tight text-[#0A3E88] block">
                 FOR WARD <span className="text-[#FF0000]">9</span>
               </span>
             </div>
 
             {/* City Tagline "WINDSOR, ONTARIO" */}
             <div>
-              <span className="text-xs sm:text-base md:text-base lg:text-xl font-black uppercase tracking-widest text-slate-600 block pt-0.5">
+              <span className="text-xs sm:text-sm md:text-sm lg:text-base xl:text-lg font-black uppercase tracking-widest text-slate-600 block pt-0.5">
                 Windsor, Ontario
               </span>
             </div>
 
             {/* Campaign Slogan "YOUR WARD. YOUR VOICE. YOUR CHOICE" */}
-            <div className="pt-1">
-              <span className="text-base sm:text-2xl md:text-2xl lg:text-4xl xl:text-5xl font-black uppercase tracking-tight text-[#FF0000] block leading-tight">
+            <div className="pt-0.5 sm:pt-1">
+              <span className="text-sm sm:text-xl md:text-xl lg:text-2xl xl:text-3xl font-black uppercase tracking-tight text-[#FF0000] block leading-tight">
                 YOUR WARD. YOUR VOICE. YOUR CHOICE
               </span>
             </div>
@@ -48,7 +48,7 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
           </div>
 
           {/* Action Buttons Stack (Exact CTA layout & styling) */}
-          <div className="animate-slide-up-fade animate-delay-300 pt-2 sm:pt-4 flex flex-col gap-2.5 w-full sm:w-80 md:w-[340px] lg:w-[380px]">
+          <div className="animate-slide-up-fade animate-delay-300 pt-1 sm:pt-2 flex flex-col gap-2 w-full sm:w-80 md:w-[340px] lg:w-[380px]">
             
             {/* Top Row: Request Lawn Sign & Volunteer */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full">
@@ -74,6 +74,11 @@ export const HeroSection = ({ onLawnSignClick, onVolunteerClick, onDonateClick }
               Donate
             </button>
 
+          </div>
+
+          {/* Advance & Election Day Voting Information */}
+          <div className="pt-1">
+            <VotingHeroCard />
           </div>
 
         </div>
